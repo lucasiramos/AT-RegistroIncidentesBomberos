@@ -1,0 +1,25 @@
+* Tabla Personas (¿Asegurados?) - Involucrados en el siniestro, ¿debería estar precargado?
+	* Nombre
+	* RUT
+	* Es conductor: Si/No (¿o todos en esta tabla son conductores?)
+	* Tipo conductor
+	(... demás datos)
+
+* ¿El que carga lo tengo que registrar como "Asegurado" o puedo cargar en nombre de otro? / ¿A qué hace referencia este campo asegurado?
+	RESPUESTA // Siempre es el mismo: "Junta Nacional de Cuerpos de Bomberos de Chile", RUT: 70.073.800-0
+
+* Tablas base precargadas:
+	- Asegurados
+	- Vehículos
+		* El proceso informa: Adjuntar foto del padrón:  Se puede solicitar después, si es que liquidador lo necesita
+			PREGUNTA: ¿No se puede tener precargada la información del Padrón para no adjuntarlo cada vez? ¿Qué es Padrón?
+	- Marcas / Modelos?
+	- Conductores
+
+* ¿Quién recibe la notificación en Corredor de seguros?
+
+
+* Al tener los datos de contacto del tercero afectado, es la corredora de seguros quien informa al tercero de los pasos a seguir frente a la compañía de seguros, llevando la comunicación con este y liberando de esta tarea al asegurado
+	* ¿Este proceso lo debemos desarrollar nosotros desde la plataforma o es una acción interna desde la propia compañía?
+
+* ¿Quién puede cerrar casos en Cuerpo de Bomberos? ¿Cada usuario cierra el suyo? ¿Existe un Admin que puede cerrar casos? ¿Cualquiera cierra cualquiera?

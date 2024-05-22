@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "14.21.2",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.18.2",
+    "libraryName": "registro-incidentes-bomberos",
+    "libraryId": "f074aefa-3fbe-4f06-aeb6-49954b819c6b",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "Registro Incidentes Bomberos",
+    "solutionShortDescription": "Registro Incidentes Bomberos description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

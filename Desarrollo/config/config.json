@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "registro-incidentes-bomberos-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/registroIncidentesBomberos/RegistroIncidentesBomberosWebPart.js",
+          "manifest": "./src/webparts/registroIncidentesBomberos/RegistroIncidentesBomberosWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "RegistroIncidentesBomberosWebPartStrings": "lib/webparts/registroIncidentesBomberos/loc/{locale}.js"
+  }
+}
