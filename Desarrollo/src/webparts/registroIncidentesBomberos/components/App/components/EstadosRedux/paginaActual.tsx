@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    pagina: "Mis casos en curso"
+    pagina: "Mis siniestros en curso"
 }
 
 export const paginaActualSlice = createSlice({

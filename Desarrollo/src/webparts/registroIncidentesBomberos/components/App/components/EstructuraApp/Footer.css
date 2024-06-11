@@ -1,0 +1,20 @@
+.LinkedIn-container a:link,
+.LinkedIn-container a:visited,
+.LinkedIn-container a:hover,
+.LinkedIn-container a:active
+{
+    color: white !important;
+}
+
+a.lnkAT:link,
+a.lnkAT:visited
+{
+    color: white !important;
+    text-decoration: none;
+}
+
+a.lnkAT:active,
+a.lnkAT:hover{
+    color: white !important;
+    text-decoration: underline;
+}

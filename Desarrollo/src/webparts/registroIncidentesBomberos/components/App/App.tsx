@@ -9,14 +9,29 @@ import { store } from './components/EstadosRedux/store'
 import { ContextSharePoint } from '../RegistroIncidentesBomberos'
 
 import { Cuerpo } from './components/EstructuraApp/Cuerpo'
+import { Footer } from './components/EstructuraApp/Footer'
+
+import { spfi, SPFx } from "@pnp/sp"
+import { Caching } from "@pnp/queryable"
+import "@pnp/sp/batching"
+
+import styled from 'styled-components'
+
+const StyledContenedorApp = styled.div`
+    height: 100vh
+`
 
 export const App: React.FunctionComponent<{}> = () => {
     const [stUrlConEmbedded, setUrlConEmbedded] = useState(false)
 
     const { Context }: any = React.useContext<any>(ContextSharePoint)
 
+    console.log("-----------")
+    console.log(stUrlConEmbedded)
+    console.log("-----------")
+
     useEffect(() =>{
-        InicializarFormulario(Context, setUrlConEmbedded)
+        InicializarFormulario(Context, setUrlConEmbedded, stUrlConEmbedded)
     }, [])
 
     return (
@@ -25,7 +40,10 @@ export const App: React.FunctionComponent<{}> = () => {
                 stUrlConEmbedded && 
                     <>
                         <Provider store={store}>
-                            <Cuerpo/>
+                            <StyledContenedorApp>
+                                <Cuerpo/>
+                                <Footer/>
+                            </StyledContenedorApp>
                         </Provider>
                     </>
             }
@@ -33,23 +51,9 @@ export const App: React.FunctionComponent<{}> = () => {
     )
 }
 
-/*
-{
-               stUrlConEmbedded && 
-                    <>
-                        <Provider store={store}>
-                            <TimerCierreSesion/>
-                            <Header/>
-                            <Cuerpo/>
-                        </Provider>
-                        <Footer/>
-                    </>
-            }
-*/
-
 //////////////////////////////////////////////////////////////////////////////////////////
 
-const InicializarFormulario:() => Promise<void> = async(Context, setUrlConEmbedded) =>{
+const InicializarFormulario:() => Promise<void> = async(Context, setUrlConEmbedded, stUrlConEmbedded) =>{
     setUrlConEmbedded(true)
 
     // ------------------------------------------------------------------------------------------------
@@ -74,14 +78,14 @@ const InicializarFormulario:() => Promise<void> = async(Context, setUrlConEmbedd
     //     //--------------------------------------------------------------------
     //     // Limpio la url
 
-    //     window.history.replaceState({}, document.title, Context.pageContext.web.absoluteUrl + "/SitePages/Emision.aspx")
+    //     window.history.replaceState({}, document.title, Context.pageContext.web.absoluteUrl + "/SitePages/Siniestros-bomberos.aspx")
     // }else{
     //     // No tiene el parámetro de Embedded, lo redirijo a ese parámetro para quitar los elementos sobrantes
 
-    //     window.location.replace(Context.pageContext.web.absoluteUrl + "/SitePages/Emision.aspx?env=Embedded");
+    //     window.location.replace(Context.pageContext.web.absoluteUrl + "/SitePages/Siniestros-bomberos.aspx?env=Embedded");
     // }
 
-    // console.log("v08/05/24 14:52")
+    // console.log("v10/06/24 13:50")
 }
 
 function ValorParametro(name) {

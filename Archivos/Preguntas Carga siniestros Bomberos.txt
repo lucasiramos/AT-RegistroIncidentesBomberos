@@ -9,7 +9,6 @@
 	RESPUESTA // Siempre es el mismo: "Junta Nacional de Cuerpos de Bomberos de Chile", RUT: 70.073.800-0
 
 * Tablas base precargadas:
-	- Asegurados
 	- Vehículos
 		* El proceso informa: Adjuntar foto del padrón:  Se puede solicitar después, si es que liquidador lo necesita
 			PREGUNTA: ¿No se puede tener precargada la información del Padrón para no adjuntarlo cada vez? ¿Qué es Padrón?
@@ -23,3 +22,14 @@
 	* ¿Este proceso lo debemos desarrollar nosotros desde la plataforma o es una acción interna desde la propia compañía?
 
 * ¿Quién puede cerrar casos en Cuerpo de Bomberos? ¿Cada usuario cierra el suyo? ¿Existe un Admin que puede cerrar casos? ¿Cualquiera cierra cualquiera?
+
+______________________________________________________________________________________________________________________________________________________________
+
+Padrón no va
+
+El mail a terceros va por nuestra cuenta
+
+
+6.- La aseguradora carga taller, hora y fecha
+	Estado: Pendiente de inspección (mandar mail a asegurado, creado por)
+	Cuando pasa esto, mail a creador

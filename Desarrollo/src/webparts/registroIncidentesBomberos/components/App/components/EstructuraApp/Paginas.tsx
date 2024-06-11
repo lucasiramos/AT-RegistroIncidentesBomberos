@@ -5,12 +5,20 @@ import * as React from 'react'
 import { useSelector } from "react-redux"
 
 import { BomberosMisCasosCerrados } from '../Paginas/Bomberos/BomberosMisCasosCerrados'
-import { BomberosMisCasosEnCurso } from '../Paginas/Bomberos/BomberosMisCasosEnCurso'
+import { BomberosMisSiniestrosEnCurso } from '../Paginas/Bomberos/BomberosMisSiniestrosEnCurso'
+import { FormularioNuevoSiniestro } from '../Paginas/FormularioNuevoSiniestro'
 
 import { BotonRegistrarNuevoIncidente } from './BotonRegistrarNuevoIncidente'
 import { TituloPagina } from './TituloPagina'
 
 import styled from 'styled-components'
+
+const StyledContenedorPagina = styled.div`
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    margin: 0px;
+`
 
 export const Paginas: React.FunctionComponent<{}> = ({children}: any) => {
     const rdxPaginaActual = useSelector((state:any) => state.PaginaActual.pagina)
@@ -21,17 +29,24 @@ export const Paginas: React.FunctionComponent<{}> = ({children}: any) => {
 
     const BuscarPagina = () => {
         switch (rdxPaginaActual) {
-            case "Mis casos en curso":
+            case "Mis siniestros en curso":
                 return <>
                         <BotonRegistrarNuevoIncidente/>
                         <TituloPagina/>
-                        <BomberosMisCasosEnCurso/>
+                        <BomberosMisSiniestrosEnCurso/>
                     </>
         
-            case "Mis casos cerrados":
+            case "Mis siniestros cerrados":
                 return <>
+                    <BotonRegistrarNuevoIncidente/>
                     <TituloPagina/>
                     <BomberosMisCasosCerrados/>
+                </>
+
+            case "Informar nuevo siniestro":
+                return <>
+                    <TituloPagina/>
+                    <FormularioNuevoSiniestro/>
                 </>
         }
     }
@@ -45,9 +60,3 @@ export const Paginas: React.FunctionComponent<{}> = ({children}: any) => {
         </StyledContenedorPagina>
     )
 }
-
-const StyledContenedorPagina = styled.div`
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-`

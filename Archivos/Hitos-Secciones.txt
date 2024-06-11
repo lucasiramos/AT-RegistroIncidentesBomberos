@@ -1,0 +1,33 @@
+Diseño general
+Acceso a datos Azure SQL
+
+Usuario bomberos
+	Bandeja Mis casos en curso
+	Bandeja Mis casos cerrados
+	Carga de nuevo incidente
+
+Usuario bomberos Administrador
+	ABM Usuarios bomberos
+	ABM vehículos
+	ABM marcas y modelos
+	¿Algún otro ABM?
+
+Usuario corredor de seguros
+	Bandeja Mis casos en curso
+	Bandeja Mis casos cerrados
+	Formulario Tomar caso
+		Cargar información de terceros (si es el caso)
+		Si tiene daños propios cargar fecha y hora de inspección
+	Formulario post inspección
+		Si no amerita reparación: Cierra caso
+		Si amerita reparación: Cargar fecha y hora de reparación, taller y ¿orden de trabajo?
+	Cierre de caso
+
+Usuario corredor de seguros Administrador
+	Bandeja casos sin asignar/Acción Asignar caso a usuario
+	ABM Usuarios corredor de seguros
+	¿ABM Talleres?
+
+Procesos
+	Envío de correos (Lista Mail Delivery y en nuevo registro creado, que dispare un flujo que mande el correo)
+	Establecer estado En reparación para los incidentes que en el día de la fecha tengan reparación 
