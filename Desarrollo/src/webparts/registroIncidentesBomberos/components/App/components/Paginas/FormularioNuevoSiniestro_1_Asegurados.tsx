@@ -26,17 +26,17 @@ export const FormularioNuevoSiniestro_1_Asegurados: React.FunctionComponent<{}> 
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
-                <Grid item xs={4}>
-                    &nbsp;
-                </Grid>
-                <Grid item xs={7}>
-                    <h2 style={{...H2AT, marginTop: "0px", marginBottom: "10px"}}>Información de asegurados</h2>
-                </Grid>
-                <Grid item xs={1}>
-                    &nbsp;
-                </Grid>
-
                 <Grid container spacing={1}>
+                    <Grid item xs={4}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={7}>
+                        <h2 style={{...H2AT, marginTop: "0px", marginBottom: "10px"}}>Información de asegurados</h2>
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                
                     <Grid item xs={4}>
                         <span style={RotuloFormulario}>Vehículo asegurado</span>
                     </Grid>

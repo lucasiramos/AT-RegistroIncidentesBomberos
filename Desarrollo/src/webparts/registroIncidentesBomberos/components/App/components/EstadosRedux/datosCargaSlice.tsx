@@ -18,9 +18,15 @@ const initialState = {
         Fecha: null,
         Hora: null,
         Lugar: null,
-        Comuna: null,
-        IdTipoSiniestro: null,
-        TipoSiniestro: null,
+        Comuna: {
+            Id: null,
+            Nombre: null
+        },
+        TipoSiniestro: {
+            Id: null,
+            Nombre: null,
+            Tercero: null
+        },
         Relato: null,
         DaniosVehiculoAsegurado: null,
         NumeroPartePolicial: null
@@ -28,12 +34,17 @@ const initialState = {
     Tercero: {
         Nombre: null,
         RUT: null,
+        RUTDigitoVerificador: null,
         Telefono: null,
         Email: null,
-        IdMarca: null,
-        Marca: null,
-        IdModelo: null,
-        Modelo: null,
+        Marca: {
+            Id: null,
+            Nombre: null
+        },
+        Modelo: {
+            Id: null,
+            Nombre: null
+        },
         Patente: null,
         DaniosVehiculoTercero: null
     }

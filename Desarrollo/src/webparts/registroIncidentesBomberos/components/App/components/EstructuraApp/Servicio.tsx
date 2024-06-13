@@ -8,6 +8,8 @@ export function ObtenerDatos(pLista, pParametros, pContexto, pSitio = ""){
     var pObtenerDatos = new Promise(async (resolve, reject) => {
         let ResultadosFinales = []
 
+        console.log(pContexto.pageContext.web)
+
         if(!pSitio){
             pSitio = pContexto.pageContext.web.title
         }
@@ -143,4 +145,12 @@ export function BorrarDatos(pLista, pId, pContexto){
     })
     
     return pBorrarDatos
+}
+
+export const CalcularDigitoVerificador = (pValor) => {
+    let M=0,S=1,T=pValor
+        for(;T;T=Math.floor(T/10))
+            S=(S+T%10*(9-M++%6))%11;
+  
+    return S?S-1:'K'
 }

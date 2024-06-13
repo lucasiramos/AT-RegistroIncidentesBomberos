@@ -1,4 +1,10 @@
+// @ts-nocheck
+
 import * as React from 'react'
+
+import { useEffect } from 'react'
+import { ObtenerDatos, ModificarDatos } from './Servicio'
+import { ContextSharePoint } from '../../../RegistroIncidentesBomberos'
 
 import styled from 'styled-components'
 
@@ -33,6 +39,51 @@ const StyledContenidoDinamico = styled.div`
 `
 
 export const Cuerpo: React.FunctionComponent<{}> = () => {
+    const { Context }: any = React.useContext<any>(ContextSharePoint)
+
+    // useEffect(() =>{
+    //     ProcesarDatos(Context)
+    // }, [])
+
+    // const ProcesarDatos:() => Promise<void> = async(Context) =>{
+    //     let dataCNTs = await ObtenerDatos("CNTNaviera_EER", "$select=Id, bSOC&$orderby=Id", Context)
+
+    //     console.log("--------------------------------------------")
+
+    //     console.log(dataCNTs)
+
+    //     dataCNTs = dataCNTs.filter(x => x.bSOC)
+
+    //     console.log(dataCNTs)
+
+    //     let dataBSOC = {
+    //         bSOC: false
+    //     }
+
+    //     for (let i = 0; i < dataCNTs.length; i++) {
+    //         console.log(`Actualizando ${(i+1)} de ${dataCNTs.length}... | Id: ${dataCNTs[i].Id}`)
+
+    //         await ModificarDatos("CNTnaviera_EER", dataCNTs[i].Id, dataBSOC, Context)
+    //         await Esperar(250)
+
+    //         console.log("Listo Id: " + dataCNTs[i].Id)
+    //     }
+
+    //     console.log("--------------------------------------")
+    //     console.log("--------------------------------------")
+
+    //     console.log("Proceso finalizado")
+    // }
+
+    // function Esperar(pTiempo){
+    //     var pEsperar = new Promise((resolve, reject) => {
+    //         setTimeout(function(){
+    //             resolve()
+    //         }, pTiempo)
+    //     })
+    //     return pEsperar
+    // }
+
     return (
         <StyledContenedorCuerpo>
             <StyledMarcoGrisContenedor>
@@ -47,3 +98,4 @@ export const Cuerpo: React.FunctionComponent<{}> = () => {
         </StyledContenedorCuerpo>
     )
 }
+

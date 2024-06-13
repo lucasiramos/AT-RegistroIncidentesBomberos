@@ -2,7 +2,14 @@
 
 import * as React from 'react'
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { useEffect } from 'react'
+
+import { ContextSharePoint } from '../../../RegistroIncidentesBomberos'
+
+import { ObtenerDatos } from '../EstructuraApp/Servicio'
+
+import { CambiarComunasDisponibles } from '../EstadosRedux/comunasDisponiblesSlice'
 
 import styled from 'styled-components'
 
@@ -13,9 +20,29 @@ import { FormularioNuevoSiniestro_3_Terceros } from './FormularioNuevoSiniestro_
 import { FormularioNuevoSiniestro_4_ResumenCarga } from './FormularioNuevoSiniestro_4_ResumenCarga'
 
 export const FormularioNuevoSiniestro: React.FunctionComponent<{}> = ({children}: any) => {
-    const DatosCarga = useSelector((state:any) => state.DatosCarga)
+    const rdxComunasDisponibles = useSelector((state:any) => state.ComunasDisponibles)
 
-    console.log(DatosCarga)
+    const { Context }: any = React.useContext<any>(ContextSharePoint)
+
+    const dispatch = useDispatch()
+
+    console.log(rdxComunasDisponibles)
+
+    // ---------------------------------------------------------------------------------------------
+    // Inicializar formulario
+    useEffect(() =>{
+        BuscarDatosParaCargaFormulario(Context, dispatch)
+    }, [])
+
+    const BuscarDatosParaCargaFormulario:() => Promise<void> = async(Context, dispatch) =>{
+        if(rdxComunasDisponibles.comunas.length == 0){    
+            let dataComunas = await ObtenerDatos("Comunas", `$select=Id, cNombre&$orderby=cNombre`, Context, "SolucionContenedoresProd")
+
+            dataComunas.map(x => x.Nombre = x.cNombre)
+
+            dispatch(CambiarComunasDisponibles(dataComunas))
+        }
+    }
 
     // ------------------------------------------------------------------------------------------------------------------------
     // useStates

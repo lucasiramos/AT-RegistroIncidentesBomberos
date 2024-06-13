@@ -6,13 +6,16 @@ const initialState = {
     siniestros: [
         {
             Id: 1,
-            Nombre: "Choque"
+            Nombre: "Choque",
+            Terceros: true
         },{
             Id: 2,
-            Nombre: "Incendio"
+            Nombre: "Incendio",
+            Terceros: false
         },{
             Id: 3,
-            Nombre: "Vuelco"
+            Nombre: "Vuelco",
+            Terceros: false
         }
     ]
 }

@@ -6,6 +6,9 @@ import datosCarga from "./datosCargaSlice"
 import vehiculosAseguradosDisponibles from "./vehiculosAseguradosDisponiblesSlice"
 import conductoresAseguradosDisponibles from "./conductoresAseguradosDisponiblesSlice"
 import tiposSiniestrosDisponibles from "./tiposSiniestrosDisponiblesSlice"
+import comunasDisponibles from "./comunasDisponiblesSlice"
+import marcasDisponibles from "./marcasDisponiblesSlice"
+import modelosDisponibles from "./modelosDisponiblesSlice"
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +17,9 @@ export const store = configureStore({
         DatosCarga: datosCarga,
         VehiculosAseguradosDisponibles: vehiculosAseguradosDisponibles,
         ConductoresAseguradosDisponibles: conductoresAseguradosDisponibles,
-        TiposSiniestrosDisponibles: tiposSiniestrosDisponibles
+        TiposSiniestrosDisponibles: tiposSiniestrosDisponibles,
+        ComunasDisponibles: comunasDisponibles,
+        MarcasDisponibles: marcasDisponibles,
+        ModelosDisponibles: modelosDisponibles
     }
 })

@@ -35,4 +35,3 @@ export const FormularioNuevoSiniestro_Steps: React.FunctionComponent<{}> = ({chi
         </div>
     )
 }
-
