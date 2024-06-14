@@ -13,6 +13,7 @@ import { CambiarComunasDisponibles } from '../EstadosRedux/comunasDisponiblesSli
 
 import styled from 'styled-components'
 
+import { FormularioNuevoSiniestro_ControlesFooter } from './FormularioNuevoSiniestro_ControlesFooter'
 import { FormularioNuevoSiniestro_Steps } from './FormularioNuevoSiniestro_Steps';
 import { FormularioNuevoSiniestro_1_Asegurados } from './FormularioNuevoSiniestro_1_Asegurados'
 import { FormularioNuevoSiniestro_2_Siniestro } from './FormularioNuevoSiniestro_2_Siniestro'
@@ -26,7 +27,7 @@ export const FormularioNuevoSiniestro: React.FunctionComponent<{}> = ({children}
 
     const dispatch = useDispatch()
 
-    console.log(rdxComunasDisponibles)
+    const RefTituloFormulario = React.useRef<HTMLInputElement>(null)
 
     // ---------------------------------------------------------------------------------------------
     // Inicializar formulario
@@ -64,8 +65,7 @@ export const FormularioNuevoSiniestro: React.FunctionComponent<{}> = ({children}
                 return <FormularioNuevoSiniestro_3_Terceros/>
 
             case 3:
-                return <FormularioNuevoSiniestro_4_ResumenCarga/>
-                
+                return <FormularioNuevoSiniestro_4_ResumenCarga/>    
         }
     }
 
@@ -73,11 +73,12 @@ export const FormularioNuevoSiniestro: React.FunctionComponent<{}> = ({children}
     // Render
 
     return (
-        <>
+        <div ref={RefTituloFormulario}>
             <FormularioNuevoSiniestro_Steps children={{ stPasoActivo, setPasoActivo }}/>
             {
                 DevolverStepCarga()
             }
-        </>
+            <FormularioNuevoSiniestro_ControlesFooter children={{ stPasoActivo, setPasoActivo, RefTituloFormulario }} />
+        </div>
     )
 }

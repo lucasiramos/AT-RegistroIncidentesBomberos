@@ -2,6 +2,12 @@ export const FontSegoe = {
   fontFamily: "Segoe UI !important"
 }
 
+export const BotonAT = {
+  backgroundColor: "rgb(0 164 255)",
+  fontSize: "14px",
+  fontFamily: "Segoe UI Semibold",
+}
+
 export const H2AT = {
   color: "#777777",
   fontFamily: "Segoe UI Light",
@@ -38,4 +44,29 @@ export const SpAmarillo = {
   padding: "3px 8px",
   borderRadius: "10px",
   border: "1px solid #ffeeba"
+}
+
+export const ContenedorMensaje = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  width: "80%"
+}
+
+export const TituloMensaje = {
+  fontSize: "35px",
+  color: "white",
+  fontFamily: "Segoe UI Semibold !important",
+  marginBottom: "10px"
+}
+
+export const CuerpoMensaje = {
+  fontSize: "22px",
+  color: "white",
+  fontFamily: "Segoe UI !important",
+  marginTop: "0px"
+}
+
+export const BotoneraMensaje = {
+  textAlign: "right"
 }

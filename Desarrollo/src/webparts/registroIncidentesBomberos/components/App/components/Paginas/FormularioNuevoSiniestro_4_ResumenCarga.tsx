@@ -166,6 +166,77 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                             }
                         </span>
                     </Grid>
+
+                    {/* /////////////////////////////////////////////// */}
+                    {/* Datos del Terceros */}
+
+                    <Grid item xs={4}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={8}>
+                        <h3 style={{...H3AT, marginTop: "40px", marginBottom: "10px", textDecoration: "underline"}}>Datos de Terceros</h3>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                        <span style={RotuloFormulario}>Nombre</span>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <span style={rdxDatosCarga.Tercero.Nombre ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Tercero.Nombre || "-Sin dato-"}</span>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                        <span style={RotuloFormulario}>RUT</span>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <span style={rdxDatosCarga.Tercero.RUT ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Tercero.RUT ? `${rdxDatosCarga.Tercero.RUT}-${rdxDatosCarga.Tercero.RUTDigitoVerificador}` : "-Sin dato-"}</span>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                        <span style={RotuloFormulario}>Teléfono</span>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <span style={rdxDatosCarga.Tercero.Telefono ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Tercero.Telefono || "-Sin dato-"}</span>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                        <span style={RotuloFormulario}>Email</span>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <span style={rdxDatosCarga.Tercero.Email ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Tercero.Email || "-Sin dato-"}</span>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                        <span style={RotuloFormulario}>Marca vehículo</span>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <span style={rdxDatosCarga.Tercero.Marca.Nombre ? ResumenFormulario : SpAmarillo}>
+                            {rdxDatosCarga.Tercero.Marca.Nombre || "-Sin dato-"}
+                        </span>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                        <span style={RotuloFormulario}>Modelo vehículo</span>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <span style={rdxDatosCarga.Tercero.Modelo.Nombre ? ResumenFormulario : SpAmarillo}>
+                            {rdxDatosCarga.Tercero.Modelo.Nombre || "-Sin dato-"}
+                        </span>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                        <span style={RotuloFormulario}>Patente</span>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <span style={rdxDatosCarga.Tercero.Patente ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Tercero.Patente || "-Sin dato-"}</span>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                        <span style={RotuloFormulario}>Daños vehículo tercero
+                        </span>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <span style={rdxDatosCarga.Tercero.DaniosVehiculoTercero ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Tercero.DaniosVehiculoTercero || "-Sin dato-"}</span>
+                    </Grid>
                 </Grid>
             </Box>
         </>

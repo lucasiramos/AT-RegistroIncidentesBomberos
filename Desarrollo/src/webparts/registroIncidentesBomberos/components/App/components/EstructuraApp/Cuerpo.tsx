@@ -64,7 +64,7 @@ export const Cuerpo: React.FunctionComponent<{}> = () => {
     //         console.log(`Actualizando ${(i+1)} de ${dataCNTs.length}... | Id: ${dataCNTs[i].Id}`)
 
     //         await ModificarDatos("CNTnaviera_EER", dataCNTs[i].Id, dataBSOC, Context)
-    //         await Esperar(250)
+    //         // await Esperar(250)
 
     //         console.log("Listo Id: " + dataCNTs[i].Id)
     //     }

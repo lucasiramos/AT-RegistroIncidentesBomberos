@@ -14,7 +14,7 @@ export function ObtenerDatos(pLista, pParametros, pContexto, pSitio = ""){
             pSitio = pContexto.pageContext.web.title
         }
 
-        const vSitio = `${window.location.protocol}//${window.location.host}/sites/${pSitio}`
+        const vSitio = `${window.location.protocol}//${window.location.host}/sites/${pSitio}` // pContexto.pageContext.web.absoluteUrl // 
 
         function RealizarQuery(pConsulta){
             pContexto.spHttpClient.get(pConsulta, SPHttpClient.configurations.v1)
