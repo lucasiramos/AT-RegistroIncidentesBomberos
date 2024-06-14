@@ -15,9 +15,9 @@ import styled from 'styled-components'
 
 const StyledContenedorPagina = styled.div`
     background: white;
-    padding: 30px;
+    margin: 25px;
+    padding: 25px;
     border-radius: 20px;
-    margin: 0px;
 `
 
 export const Paginas: React.FunctionComponent<{}> = ({children}: any) => {

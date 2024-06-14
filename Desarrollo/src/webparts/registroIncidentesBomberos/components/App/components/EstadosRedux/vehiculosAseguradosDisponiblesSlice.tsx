@@ -5,26 +5,27 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     vehiculos: [
         {
-            Id: 1,
-            IdMarca: 1,
-            Marca: "Seagrave",
-            IdModelo: 1,
-            Modelo: "H1",
-            Patente: "AA-1111"
-        },{
             Id: 2,
             IdMarca: 2,
-            Marca: "Scania",
+            Marca: "Freightliner",
             IdModelo: 2,
-            Modelo: "F03",
-            Patente: "BB-2222"
+            Modelo: "Business Class",
+            Patente: "JPYG79"
         },{
             Id: 3,
-            IdMarca: 2,
-            Marca: "Scania",
+            IdMarca: 3,
+            Marca: "Mercedez Benz",
             IdModelo: 3,
-            Modelo: "B04",
-            Patente: "CC-3333"
+            Modelo: "Actros 1846",
+            Patente: "KVYP20"
+        },
+        {
+            Id: 1,
+            IdMarca: 1,
+            Marca: "Mitsubishi",
+            IdModelo: 1,
+            Modelo: "Montero Sport 2.4",
+            Patente: "LVVP79"
         }
     ]
 }

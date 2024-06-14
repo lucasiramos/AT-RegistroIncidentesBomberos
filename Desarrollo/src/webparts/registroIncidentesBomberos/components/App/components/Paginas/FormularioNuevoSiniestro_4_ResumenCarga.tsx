@@ -6,6 +6,13 @@ import { useSelector, useDispatch } from "react-redux"
 
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
+import Dialog from '@mui/material/Dialog'
+import DialogTitle from '@mui/material/DialogTitle'
+import DialogContent from '@mui/material/DialogContent'
+import DialogActions from '@mui/material/DialogActions'
+import {IconButton} from '@mui/material'
+import { Close } from '@mui/icons-material'
+import {Typography} from '@mui/material'
 
 import { RotuloFormulario, H2AT, H3AT, ResumenFormulario, SpAmarillo } from '../EstructuraApp/EstilosGlobales'
 
@@ -13,6 +20,12 @@ import styled from 'styled-components'
 
 export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}> = ({children}: any) => {
     const rdxDatosCarga = useSelector((state:any) => state.DatosCarga)
+
+    const [stVerMasRelato, setVerMasRelato] = React.useState(false)
+
+    const ClickVerMasRelato = () => {
+        setVerMasRelato(true)
+    }
 
     return (
         <>
@@ -131,7 +144,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         <span style={rdxDatosCarga.Siniestro.Relato ? ResumenFormulario : SpAmarillo}>
                             {rdxDatosCarga.Siniestro.Relato ? 
                                 rdxDatosCarga.Siniestro.Relato.length > 200 ? 
-                                    <span>{rdxDatosCarga.Siniestro.Relato.substring(0, 200)}... <a href="#">Ver mas...</a></span>
+                                    <span>{rdxDatosCarga.Siniestro.Relato.substring(0, 200)}... <a href="#" style={{color: "rgb(0, 0, 238)"}} onClick={ () => ClickVerMasRelato()}>Ver mas...</a></span>
                                      
                                 : 
                                     rdxDatosCarga.Siniestro.Relato
@@ -239,6 +252,53 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                     </Grid>
                 </Grid>
             </Box>
+
+            {/* /////////////////////////////////////////////////////////////////////////////////////////// */}
+            {/* Modal ver relato */}
+
+            <Dialog
+                aria-labelledby="customized-dialog-title"
+                open={stVerMasRelato}
+                fullWidth={true}
+                maxWidth={"lg"}
+                scroll={"paper"}
+            >
+                <DialogTitle sx={{ m: 0, p: 2, fontFamily: "Segoe UI Semibold" }} id="customized-dialog-title">
+                    Relato
+                </DialogTitle>
+                <IconButton
+                    aria-label="close"
+                    onClick={() => setVerMasRelato(false)}
+                    sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }}
+                >
+                    <Close />
+                </IconButton>
+
+                <DialogContent dividers>
+                    <Typography gutterBottom sx={{fontFamily: "Segoe UI"}}>
+                        <Box sx={{ flexGrow: 1 }}>
+                            <Grid container spacing={1}>
+                                {rdxDatosCarga.Siniestro.Relato}
+                            </Grid>
+                        </Box>
+                    </Typography>
+                </DialogContent>
+            </Dialog>
+
         </>
     )
 }
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogContent-root': {
+        padding: theme.spacing(2),
+    },
+    '& .MuiDialogActions-root': {
+        padding: theme.spacing(1),
+    },
+}))

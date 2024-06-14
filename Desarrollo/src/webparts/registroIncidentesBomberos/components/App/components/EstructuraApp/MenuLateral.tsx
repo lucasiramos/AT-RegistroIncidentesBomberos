@@ -59,7 +59,7 @@ const ContenedorLogoAT = styled.div`
 `
 
 const ImgLogo = styled.img`
-    max-height: 100px;
+    max-height: 75px;
 `
 
 const StackOpcionesMenu = styled.div`

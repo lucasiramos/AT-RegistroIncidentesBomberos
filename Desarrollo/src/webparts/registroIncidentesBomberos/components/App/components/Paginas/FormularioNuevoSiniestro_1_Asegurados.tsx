@@ -47,7 +47,7 @@ export const FormularioNuevoSiniestro_1_Asegurados: React.FunctionComponent<{}> 
                             fullWidth
                             id="cboVehiculosAsegurados"
                             options={rdxVehiculosAseguradosDisponibles.vehiculos}
-                            getOptionLabel={vehiculo => `${vehiculo.Marca} ${vehiculo.Modelo} (${vehiculo.Patente})`}
+                            getOptionLabel={vehiculo => `Patente: ${vehiculo.Patente} - ${vehiculo.Marca} ${vehiculo.Modelo}`}
                             renderInput={(params) => <TextField {...params} label="Seleccione un vehículo" />}
                             size="small"
                             sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
@@ -74,7 +74,7 @@ export const FormularioNuevoSiniestro_1_Asegurados: React.FunctionComponent<{}> 
                             fullWidth
                             id="cboConductoresAsegurados"
                             options={rdxConductoresAseguradosDisponibles.conductores}
-                            getOptionLabel={conductor => conductor.Nombre}
+                            getOptionLabel={conductor => `${conductor.Nombre} - RUT ${conductor.RUT}`}
                             renderInput={(params) => <TextField {...params} label="Seleccione un conductor" />}
                             size="small"
                             sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}

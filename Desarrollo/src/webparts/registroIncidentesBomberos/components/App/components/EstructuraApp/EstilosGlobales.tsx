@@ -26,12 +26,18 @@ export const RotuloFormulario = {
   marginTop: "8px"
 }
 
+export const RotuloVerCertificado = {
+  fontSize: "18px",
+  display: "block",
+  marginTop: "8px"
+}
+
 export const ResumenFormulario = {
   marginTop: "8px",
   display: "inline-block",
   fontSize: "16px",
   color: "black",
-  fontFamily: "Segoe UI Semibold",
+  fontFamily: "Segoe UI Semibold"
 }
 
 export const SpAmarillo = {
@@ -69,4 +75,30 @@ export const CuerpoMensaje = {
 
 export const BotoneraMensaje = {
   textAlign: "right"
+}
+
+export const SpVerde = {
+  display: "inline-block",
+  fontSize: "16px",
+  color: "#dbf0dc",
+  fontFamily: "Segoe UI Semibold",
+  background: "#139819",
+  padding: "3px 8px",
+  borderRadius: "10px",
+  border: "1px solid #139819",
+  minWidth: "40px",
+  textAlign: "center"
+}
+
+export const SpRojo = {
+  display: "inline-block",
+  fontSize: "16px",
+  color: "#ffdede",
+  fontFamily: "Segoe UI Semibold",
+  background: "#CC0000",
+  padding: "3px 8px",
+  borderRadius: "10px",
+  border: "1px solid #CC0000",
+  minWidth: "40px",
+  textAlign: "center"
 }

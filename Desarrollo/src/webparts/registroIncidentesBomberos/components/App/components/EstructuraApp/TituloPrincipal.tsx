@@ -4,6 +4,8 @@ import * as React from 'react';
 
 import styled from 'styled-components'
 
+import ImgHeader from '../../img/Header.jpg'
+
 export const TituloPrincipal: React.FunctionComponent<{}> = ({children}: any) => {
     return (
         <StyledTitulo>
@@ -16,9 +18,15 @@ export const TituloPrincipal: React.FunctionComponent<{}> = ({children}: any) =>
 }
 
 const StyledTitulo = styled.div`
-    height: 100px;
+    height: 105px;
     margin-bottom: 20px;
     display: flex;
+    background-image: url(${ImgHeader});
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 12px;
+    background-position: 50% 50%;
+    border-top-right-radius: 20px;
 `
 
 const ImgLogo = styled.img`
