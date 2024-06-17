@@ -19,6 +19,10 @@ import { esES } from '@mui/x-date-pickers'
 import "dayjs/locale/es"
 import { TimeField } from '@mui/x-date-pickers/TimeField'
 
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
 import { RotuloFormulario, H2AT } from '../EstructuraApp/EstilosGlobales'
 
 import styled from 'styled-components'
@@ -44,6 +48,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
     const rdxDatosCarga = useSelector((state:any) => state.DatosCarga)
     const rdxComunasDisponibles = useSelector((state:any) => state.ComunasDisponibles)
     const rdxTiposSiniestrosDisponibles = useSelector((state:any) => state.TiposSiniestrosDisponibles)
+    const rdxComisariasDisponibles = useSelector((state:any) => state.ComisariasDisponibles)
 
     console.log(rdxDatosCarga)
 
@@ -56,6 +61,13 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
         dispatch(CambiarSiniestro({
             ...rdxDatosCarga.Siniestro,
             [pTxt.name]: pTxt.value,
+        }))
+    }
+
+    const ChangeOpt = (event: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(CambiarSiniestro({
+            ...rdxDatosCarga.Siniestro,
+            [event.target.name]: (event.target as HTMLInputElement).value,
         }))
     }
 
@@ -76,10 +88,13 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Fecha del siniestro</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='es' localeText={esES.components.MuiLocalizationProvider.defaultProps.localeText}>
                             <DemoContainer components={['DatePicker']}>
                                 <DatePicker 
@@ -99,11 +114,17 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                             </DemoContainer>
                         </LocalizationProvider>
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Hora del siniestro</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['TimeField']}>
                             <TimeField
@@ -123,11 +144,17 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                             </DemoContainer>
                         </LocalizationProvider>
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Lugar</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <TextField
                             value={rdxDatosCarga.Siniestro.Lugar || null} 
                             defaultValue={rdxDatosCarga.Siniestro.Lugar || null}
@@ -139,11 +166,17 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                             onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Comuna</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <Autocomplete
                             disablePortal
                             value={rdxDatosCarga.Siniestro.Comuna.Id ? rdxDatosCarga.Siniestro.Comuna : null}
@@ -167,11 +200,17 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                             }}
                         />
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Siniestro</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <Autocomplete
                             disablePortal
                             value={rdxDatosCarga.Siniestro.TipoSiniestro.Id ? rdxDatosCarga.Siniestro.TipoSiniestro : null}
@@ -196,11 +235,17 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                             }}
                         />
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Relato</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <TextareaAutosize
                             value={rdxDatosCarga.Siniestro.Relato || ""}
                             name="Relato"
@@ -208,11 +253,17 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                             onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Daños del vehículo asegurado</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <TextareaAutosize
                             value={rdxDatosCarga.Siniestro.DaniosVehiculoAsegurado || ""}
                             name="DaniosVehiculoAsegurado"
@@ -220,11 +271,51 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                             onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
                     </Grid>
-
-                    <Grid item xs={4}>
-                        <span style={RotuloFormulario}>N° Parte policial, Comisaría, Juzgado</span>
+                    <Grid item xs={1}>
+                        &nbsp;
                     </Grid>
-                    <Grid item xs={8}>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
+                        <span style={RotuloFormulario}>Comisaria</span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <Autocomplete
+                            disablePortal
+                            value={rdxDatosCarga.Siniestro.Comisaria.Id ? rdxDatosCarga.Siniestro.Comisaria : null}
+                            fullWidth
+                            id="cboComisaria"
+                            options={rdxComisariasDisponibles.comisarias}
+                            getOptionLabel={comisaria => comisaria.Nombre}
+                            renderInput={(params) => <TextField {...params} label="Seleccione una comisaria" />}
+                            size="small"
+                            sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
+                            onChange={(event, ComisariaSeleccionada) => {
+                                console.log(ComisariaSeleccionada)
+
+                                dispatch(CambiarSiniestro({
+                                    ...rdxDatosCarga.Siniestro,
+                                    Comisaria: {
+                                        Id: ComisariaSeleccionada?.Id || null,
+                                        Nombre: ComisariaSeleccionada?.Nombre || null
+                                    }
+                                }))
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
+                        <span style={RotuloFormulario}>N° Parte policial</span>
+                    </Grid>
+                    <Grid item xs={7}>
                         <TextField
                             value={rdxDatosCarga.Siniestro.NumeroPartePolicial || null} 
                             defaultValue={rdxDatosCarga.Siniestro.NumeroPartePolicial || null}
@@ -236,6 +327,58 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                             onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
+                        <span style={RotuloFormulario}>¿Hubo terceros involucrados?</span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <RadioGroup
+                            row
+                            aria-labelledby="demo-row-radio-buttons-group-label"
+                            name="TercerosInvolucrados"
+                            value={rdxDatosCarga.Siniestro.TercerosInvolucrados}
+                            onChange={ChangeOpt}
+                        >
+                            <FormControlLabel value="Sí" control={<Radio />} label="Sí" />
+                            <FormControlLabel value="No" control={<Radio />} label="No" />
+                        </RadioGroup>
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    {
+                        rdxDatosCarga.Siniestro.TercerosInvolucrados == "Sí" && 
+                            <>
+                                <Grid item xs={1}>
+                                    &nbsp;
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <span style={RotuloFormulario}>Responsable del siniestro</span>
+                                </Grid>
+                                <Grid item xs={7}>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="ResponsableSiniestro"
+                                        value={rdxDatosCarga.Siniestro.ResponsableSiniestro}
+                                        onChange={ChangeOpt}
+                                    >
+                                        <FormControlLabel value="Tercero" control={<Radio />} label="Tercero" />
+                                        <FormControlLabel value="Bomberos" control={<Radio />} label="Bomberos" />
+                                    </RadioGroup>
+                                </Grid>
+                                <Grid item xs={1}>
+                                    &nbsp;
+                                </Grid>
+                            </>
+                    }
                 </Grid>
             </Box>
         </>

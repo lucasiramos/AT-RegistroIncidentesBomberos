@@ -86,10 +86,13 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                         &nbsp;
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Nombre</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <TextField
                             value={rdxDatosCarga.Tercero.Nombre || null} 
                             defaultValue={rdxDatosCarga.Tercero.Nombre || null}
@@ -101,11 +104,17 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                             onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>RUT</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <div>
                             <TextField 
                                 fullWidth 
@@ -140,11 +149,17 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                         </div>
                         <div>Ingrese RUT sin puntos ni guiones</div>
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Teléfono</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <TextField
                             value={rdxDatosCarga.Tercero.Telefono || null} 
                             defaultValue={rdxDatosCarga.Tercero.Telefono || null}
@@ -156,11 +171,17 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                             onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
                     </Grid>
-
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Email</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <TextField
                             value={rdxDatosCarga.Tercero.Email || null} 
                             defaultValue={rdxDatosCarga.Tercero.Email || null}
@@ -172,11 +193,17 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                             onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Marca vehículo</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <Autocomplete
                             disablePortal
                             value={rdxDatosCarga.Tercero.Marca.Id ? rdxDatosCarga.Tercero.Marca : null}
@@ -204,11 +231,17 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                             }}
                         />
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Modelo vehículo</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <Autocomplete
                             disablePortal
                             value={rdxDatosCarga.Tercero.Modelo.Id ? rdxDatosCarga.Tercero.Modelo : null}
@@ -236,11 +269,17 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                             }}
                         />
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Patente</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <TextField
                             value={rdxDatosCarga.Tercero.Patente || null} 
                             defaultValue={rdxDatosCarga.Tercero.Patente || null}
@@ -252,17 +291,26 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                             onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Daños vehículo tercero</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <TextareaAutosize
                             value={rdxDatosCarga.Tercero.DaniosVehiculoTercero || ""}
                             name="DaniosVehiculoTercero"
                             minRows={4}
                             onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
                     </Grid>
                 </Grid>
             </Box>

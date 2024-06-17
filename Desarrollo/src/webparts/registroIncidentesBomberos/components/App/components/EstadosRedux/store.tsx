@@ -9,6 +9,7 @@ import tiposSiniestrosDisponibles from "./tiposSiniestrosDisponiblesSlice"
 import comunasDisponibles from "./comunasDisponiblesSlice"
 import marcasDisponibles from "./marcasDisponiblesSlice"
 import modelosDisponibles from "./modelosDisponiblesSlice"
+import comisariasDisponibles from "./comisariasDisponiblesSlice"
 
 export const store = configureStore({
     reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
         TiposSiniestrosDisponibles: tiposSiniestrosDisponibles,
         ComunasDisponibles: comunasDisponibles,
         MarcasDisponibles: marcasDisponibles,
-        ModelosDisponibles: modelosDisponibles
+        ModelosDisponibles: modelosDisponibles,
+        ComisariasDisponibles: comisariasDisponibles
     }
 })

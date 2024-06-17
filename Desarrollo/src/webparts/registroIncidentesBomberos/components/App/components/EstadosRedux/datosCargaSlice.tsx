@@ -28,8 +28,19 @@ const initialState = {
             Tercero: null
         },
         Relato: null,
+        Grabacion: {
+            PuedeGrabar: null,
+            MicrofonoPrendido: null,
+            Relato: null
+        },
         DaniosVehiculoAsegurado: null,
-        NumeroPartePolicial: null
+        NumeroPartePolicial: null,
+        Comisaria: {
+            Id: null,
+            Nombre: null
+        },
+        TercerosInvolucrados: null,
+        ResponsableSiniestro: null
     },
     Tercero: {
         Nombre: null,

@@ -38,7 +38,9 @@ export const DataMisSiniestrosEnCurso = [
                 Nunc hendrerit viverra nisl ut cursus. Ut pharetra erat eu risus elementum dapibus. Suspendisse finibus placerat risus, at sollicitudin ipsum viverra a. Donec ex enim, iaculis non luctus quis, bibendum a est. Aliquam nulla arcu, molestie sit amet accumsan ac, faucibus quis arcu. Aenean faucibus non neque pretium congue. Suspendisse ullamcorper lacinia neque et iaculis. Ut urna massa, congue laoreet malesuada vitae, semper eu neque. Mauris ac mi consequat, imperdiet nisi quis, fermentum elit. Nunc nisi eros, tincidunt et leo ac, bibendum pretium sem. Sed non justo a diam interdum suscipit. Suspendisse in volutpat est. Maecenas venenatis elementum nulla in faucibus. Praesent auctor viverra mi in vestibulum. Pellentesque vulputate odio quis ante blandit molestie. Aenean tincidunt pharetra sem in hendrerit.`,
                 DaniosVehiculoAsegurado: "Golpe importante en el parachoques delantero, luces delanteras dañadas",
                 Comisaria: "1° Comisaría Santiago",
-                NumeroPartePolicial: "11-5678"
+                NumeroPartePolicial: "11-5678",
+                TercerosInvolucrados: true,
+                ResponsableSiniestro: "Tercero"
             },
             Tercero: {
                 Nombre: "Mónica Acuña",
@@ -98,7 +100,9 @@ export const DataMisSiniestrosEnCurso = [
                 Mauris fringilla posuere semper. Donec vitae leo sit amet ex accumsan accumsan. Etiam at eros a leo vulputate scelerisque. Sed porta turpis a sem porttitor, sit amet pharetra enim molestie. Nulla ultrices ut neque bibendum sollicitudin. Vestibulum vel augue id ex euismod tristique. Sed non arcu congue, convallis nulla nec, varius lacus. Fusce rhoncus eget dui at hendrerit.`,
                 DaniosVehiculoAsegurado: "Se registraron daños en ...",
                 Comisaria: "3° Comisaría Los Andes",
-                NumeroPartePolicial: "13-9876"
+                NumeroPartePolicial: "13-9876",
+                TercerosInvolucrados: false,
+                ResponsableSiniestro: null
             },
             Tercero: {
                 Nombre: null,
@@ -156,7 +160,9 @@ export const DataMisSiniestrosEnCurso = [
                 Relato: "Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur quis egestas leo, eu euismod lacus. Cras varius tempus nisi vel sollicitudin. Maecenas interdum ex quis purus imperdiet auctor. Proin blandit ultricies purus eu vulputate. Quisque pharetra velit vitae massa sollicitudin consequat. Duis placerat mi nec blandit blandit. Ut semper consequat justo, non ultrices ligula aliquet vitae. Curabitur aliquam imperdiet tempor. Curabitur sit amet dolor eros. Nunc tincidunt dui a orci blandit hendrerit.",
                 DaniosVehiculoAsegurado: "Se registraron daños menores en parachoques, y luz delantera izquierda dañada",
                 Comisaria: "3° Comisaría Lota",
-                NumeroPartePolicial: "33-1234"
+                NumeroPartePolicial: "33-1234",
+                TercerosInvolucrados: true,
+                ResponsableSiniestro: "Bomberos"
             },
             Tercero: {
                 Nombre: "Gonzalo Álvarez",
@@ -219,7 +225,9 @@ export const DataMisSiniestrosCerrados = [
                 Nunc hendrerit viverra nisl ut cursus. Ut pharetra erat eu risus elementum dapibus. Suspendisse finibus placerat risus, at sollicitudin ipsum viverra a. Donec ex enim, iaculis non luctus quis, bibendum a est. Aliquam nulla arcu, molestie sit amet accumsan ac, faucibus quis arcu. Aenean faucibus non neque pretium congue. Suspendisse ullamcorper lacinia neque et iaculis. Ut urna massa, congue laoreet malesuada vitae, semper eu neque. Mauris ac mi consequat, imperdiet nisi quis, fermentum elit. Nunc nisi eros, tincidunt et leo ac, bibendum pretium sem. Sed non justo a diam interdum suscipit. Suspendisse in volutpat est. Maecenas venenatis elementum nulla in faucibus. Praesent auctor viverra mi in vestibulum. Pellentesque vulputate odio quis ante blandit molestie. Aenean tincidunt pharetra sem in hendrerit.`,
                 DaniosVehiculoAsegurado: "Golpe importante en el parachoques delantero, luces delanteras dañadas",
                 Comisaria: "1° Comisaría Santiago",
-                NumeroPartePolicial: "11-5678"
+                NumeroPartePolicial: "11-5678",
+                TercerosInvolucrados: true,
+                ResponsableSiniestro: "Tercero"
             },
             Tercero: {
                 Nombre: "Mónica Acuña",
@@ -279,7 +287,9 @@ export const DataMisSiniestrosCerrados = [
                 Mauris fringilla posuere semper. Donec vitae leo sit amet ex accumsan accumsan. Etiam at eros a leo vulputate scelerisque. Sed porta turpis a sem porttitor, sit amet pharetra enim molestie. Nulla ultrices ut neque bibendum sollicitudin. Vestibulum vel augue id ex euismod tristique. Sed non arcu congue, convallis nulla nec, varius lacus. Fusce rhoncus eget dui at hendrerit.`,
                 DaniosVehiculoAsegurado: "Se registraron daños en ...",
                 Comisaria: "3° Comisaría Los Andes",
-                NumeroPartePolicial: "13-9876"
+                NumeroPartePolicial: "13-9876",
+                TercerosInvolucrados: false,
+                ResponsableSiniestro: null
             },
             Tercero: {
                 Nombre: null,
@@ -337,7 +347,9 @@ export const DataMisSiniestrosCerrados = [
                 Relato: "Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur quis egestas leo, eu euismod lacus. Cras varius tempus nisi vel sollicitudin. Maecenas interdum ex quis purus imperdiet auctor. Proin blandit ultricies purus eu vulputate. Quisque pharetra velit vitae massa sollicitudin consequat. Duis placerat mi nec blandit blandit. Ut semper consequat justo, non ultrices ligula aliquet vitae. Curabitur aliquam imperdiet tempor. Curabitur sit amet dolor eros. Nunc tincidunt dui a orci blandit hendrerit.",
                 DaniosVehiculoAsegurado: "Se registraron daños menores en parachoques, y luz delantera izquierda dañada",
                 Comisaria: "3° Comisaría Lota",
-                NumeroPartePolicial: "33-1234"
+                NumeroPartePolicial: "33-1234",
+                TercerosInvolucrados: true,
+                ResponsableSiniestro: "Bomberos"
             },
             Tercero: {
                 Nombre: "Gonzalo Álvarez",

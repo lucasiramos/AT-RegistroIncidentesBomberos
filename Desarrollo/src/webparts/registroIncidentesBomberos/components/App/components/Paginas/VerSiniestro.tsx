@@ -15,7 +15,7 @@ import {Typography} from '@mui/material'
 import {Tab} from '@mui/material'
 import {Tabs} from '@mui/material'
 
-import { H3AT, RotuloVerCertificado, ResumenFormulario, SpRojo } from '../EstructuraApp/EstilosGlobales'
+import { H3AT, RotuloVerCertificado, ResumenFormulario, SpRojo, SpVerde } from '../EstructuraApp/EstilosGlobales'
 
 export default function VerSiniestro({children}: any) {
     const {stVerSiniestro, CerrarVerSiniestro} = children
@@ -134,12 +134,6 @@ export default function VerSiniestro({children}: any) {
                                             <Grid item xs={4}>
                                                 <div style={RotuloVerCertificado}>Tipo siniestro</div>
                                                 <span style={ResumenFormulario}>{stVerSiniestro.Datos.Siniestro.TipoSiniestro.Nombre}
-                                                    {
-                                                        stVerSiniestro.Datos.Siniestro.TipoSiniestro.Tercero && 
-                                                            <>
-                                                                <span style={{...SpRojo, fontSize: "14px", padding: "0px 5px", marginLeft: "10px"}}>Daños a terceros</span>
-                                                            </>
-                                                    }
                                                 </span>
                                             </Grid>
                                             <Grid item xs={4}>
@@ -150,6 +144,23 @@ export default function VerSiniestro({children}: any) {
                                                 <div style={RotuloVerCertificado}>Comisaría y N° de Parte policial</div>
                                                 <span style={ResumenFormulario}>{stVerSiniestro.Datos.Siniestro.Comisaria}, n° parte: {stVerSiniestro.Datos.Siniestro.NumeroPartePolicial}</span>
                                             </Grid>
+                                        </Grid>
+
+                                        <Grid container spacing={1} sx={{marginTop: "20px"}}>
+                                            <Grid item xs={4}>
+                                                <div style={RotuloVerCertificado}>¿Hubo terceros involucrados?</div>
+                                                <span style={stVerSiniestro.Datos.Siniestro.TercerosInvolucrados ? SpRojo : SpVerde}>{stVerSiniestro.Datos.Siniestro.TercerosInvolucrados ? "Sí" : "No"}</span>
+                                            </Grid>
+
+                                            {
+                                                stVerSiniestro.Datos.Siniestro.TercerosInvolucrados && 
+                                                    <>
+                                                        <Grid item xs={4}>
+                                                            <div style={RotuloVerCertificado}>Responsable del siniestro</div>
+                                                            <span style={ResumenFormulario}>{stVerSiniestro.Datos.Siniestro.ResponsableSiniestro}</span>
+                                                        </Grid>
+                                                    </>
+                                            }
                                         </Grid>
 
                                         <Grid container spacing={1} sx={{marginTop: "20px"}}>

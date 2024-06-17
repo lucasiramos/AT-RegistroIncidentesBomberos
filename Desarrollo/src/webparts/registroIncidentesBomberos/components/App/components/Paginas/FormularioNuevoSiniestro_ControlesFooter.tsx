@@ -88,8 +88,19 @@ export const FormularioNuevoSiniestro_ControlesFooter: React.FunctionComponent<{
                 Tercero: null
             },
             Relato: null,
+            Grabacion: {
+                PuedeGrabar: null,
+                MicrofonoPrendido: null,
+                Relato: null
+            },
             DaniosVehiculoAsegurado: null,
-            NumeroPartePolicial: null
+            NumeroPartePolicial: null,
+            Comisaria: {
+                Id: null,
+                Nombre: null
+            },
+            TercerosInvolucrados: null,
+            ResponsableSiniestro: null
         }))
 
         dispatch(CambiarTercero({

@@ -12,8 +12,8 @@
     "test": "gulp test"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@fluentui/react": "^7.199.1",
     "@microsoft/sp-component-base": "1.17.4",
     "@microsoft/sp-core-library": "1.17.4",
@@ -22,7 +22,7 @@
     "@microsoft/sp-property-pane": "1.17.4",
     "@microsoft/sp-webpart-base": "1.17.4",
     "@mui/icons-material": "^5.15.1",
-    "@mui/joy": "^5.0.0-beta.21",
+    "@mui/joy": "^5.0.0-beta.36",
     "@mui/material": "^5.15.1",
     "@mui/x-date-pickers": "^6.18.5",
     "@pnp/sp": "^4.0.1",

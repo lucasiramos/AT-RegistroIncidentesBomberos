@@ -37,10 +37,13 @@ export const FormularioNuevoSiniestro_1_Asegurados: React.FunctionComponent<{}> 
                         &nbsp;
                     </Grid>
                 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Vehículo asegurado</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <Autocomplete
                             disablePortal
                             value={rdxDatosCarga.VehiculoAsegurado?.Id ? rdxDatosCarga.VehiculoAsegurado : null}
@@ -63,11 +66,17 @@ export const FormularioNuevoSiniestro_1_Asegurados: React.FunctionComponent<{}> 
                             }}
                         />
                     </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Conductor asegurado</span>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <Autocomplete
                             disablePortal
                             value={rdxDatosCarga.ConductorAsegurado?.Id ? rdxDatosCarga.ConductorAsegurado : null}
@@ -86,6 +95,9 @@ export const FormularioNuevoSiniestro_1_Asegurados: React.FunctionComponent<{}> 
                                 }))
                             }}
                         />
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
                     </Grid>
                 </Grid>
             </Box>

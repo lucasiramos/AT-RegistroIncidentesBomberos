@@ -85,7 +85,7 @@ const InicializarFormulario:() => Promise<void> = async(Context, setUrlConEmbedd
         window.location.replace(Context.pageContext.web.absoluteUrl + "/SitePages/Siniestros-bomberos.aspx?env=Embedded");
     }
 
-    console.log("v14/06/24 16:10")
+    console.log("v17/06/24 15:10")
 }
 
 function ValorParametro(name) {
