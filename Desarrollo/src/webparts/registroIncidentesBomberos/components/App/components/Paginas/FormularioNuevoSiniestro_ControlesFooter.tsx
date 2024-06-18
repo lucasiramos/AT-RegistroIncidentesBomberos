@@ -91,7 +91,11 @@ export const FormularioNuevoSiniestro_ControlesFooter: React.FunctionComponent<{
             Grabacion: {
                 PuedeGrabar: null,
                 MicrofonoPrendido: null,
-                Relato: null
+                Grabando: null,
+                Relato: null,
+                RelatoHTML: null,
+                TranscripcionTemporal: null,
+                TranscripcionFinal: null
             },
             DaniosVehiculoAsegurado: null,
             NumeroPartePolicial: null,

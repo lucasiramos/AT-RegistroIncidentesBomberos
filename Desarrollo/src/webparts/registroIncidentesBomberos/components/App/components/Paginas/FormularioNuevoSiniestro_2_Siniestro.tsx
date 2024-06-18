@@ -18,12 +18,22 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { esES } from '@mui/x-date-pickers'
 import "dayjs/locale/es"
 import { TimeField } from '@mui/x-date-pickers/TimeField'
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import MicIcon from '@mui/icons-material/Mic'
+import MicOffIcon from '@mui/icons-material/MicOff'
+import { Button } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import Dialog from '@mui/material/Dialog'
+import DialogTitle from '@mui/material/DialogTitle'
+import DialogContent from '@mui/material/DialogContent'
+import DialogActions from '@mui/material/DialogActions'
+import { Close } from '@mui/icons-material'
+import {IconButton} from '@mui/material'
+import {Typography} from '@mui/material'
 
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-
-import { RotuloFormulario, H2AT } from '../EstructuraApp/EstilosGlobales'
+import { RotuloFormulario, H2AT, BotonAT } from '../EstructuraApp/EstilosGlobales'
 
 import styled from 'styled-components'
 
@@ -50,9 +60,17 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
     const rdxTiposSiniestrosDisponibles = useSelector((state:any) => state.TiposSiniestrosDisponibles)
     const rdxComisariasDisponibles = useSelector((state:any) => state.ComisariasDisponibles)
 
-    console.log(rdxDatosCarga)
+    console.log(rdxDatosCarga.Siniestro.Grabacion)
 
     const dispatch = useDispatch()
+
+    // ------------------------------------------------------------------------------------------------------------
+    // useStates
+
+    const [stModalGrabarAbierto, setModalGrabarAbierto] = React.useState(false)
+    const [stSpeechRecognizer, setSpeechRecognizer] = React.useState(new webkitSpeechRecognition())
+
+    // console.log(stSpeechRecognizer)
 
     // ------------------------------------------------------------------------------------------------------------
     // Funciones varias
@@ -71,13 +89,119 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
         }))
     }
 
+    const AbrirGrabarRelato = () => {
+        setModalGrabarAbierto(true)
+
+        // Verifico si tiene encendido el micrófono
+
+        try {
+            navigator.getUserMedia({ audio: true }, TieneMicrofonoPrendido, TieneMicrofonoApagado);
+        }
+        catch(err) {
+            // document.getElementById("demo").innerHTML = err.message;
+            console.log("Errorrrr catch: " + err.message)
+        }
+    }
+
+    const TieneMicrofonoPrendido = () => {
+        dispatch(CambiarSiniestro({
+            ...rdxDatosCarga.Siniestro,
+            Grabacion: {
+                ...rdxDatosCarga.Siniestro.Grabacion,
+                MicrofonoPrendido: true
+            },
+        }))
+    }
+
+    const TieneMicrofonoApagado = () => {
+        dispatch(CambiarSiniestro({
+            ...rdxDatosCarga.Siniestro,
+            Grabacion: {
+                ...rdxDatosCarga.Siniestro.Grabacion,
+                MicrofonoPrendido: false
+            },
+        }))
+    }
+
+    const CerrarGrabarRelato = () => {
+        setModalGrabarAbierto(false)
+    }
+
+    const ComenzarAGrabar = () => {
+        console.log("1")
+
+        stSpeechRecognizer.continuous = true
+        stSpeechRecognizer.interimResults = true
+        stSpeechRecognizer.lang = "es-AR"
+
+        dispatch(CambiarSiniestro({
+            ...rdxDatosCarga.Siniestro,
+            Grabacion: {
+                PuedeGrabar: true,
+                MicrofonoPrendido: true,
+                Grabando: true,
+                Relato: '',
+                RelatoHTML: '',
+                TranscripcionTemporal: '',
+                TranscripcionFinal: ''
+            }
+        }))
+
+        stSpeechRecognizer.start()
+
+        stSpeechRecognizer.onresult = function(event){
+            var interimTranscripts = ""
+            var finalTranscripts = ""
+
+            for(var i=event.resultIndex; i<event.results.length; i++){
+                var transcript = event.results[i][0].transcript
+                transcript.replace("\n", "<br>")
+
+                if(event.results[i].isFinal){
+                    console.log("----------------------")
+                    console.log("FINAL:")
+                    console.log(rdxDatosCarga)
+                    console.log(rdxDatosCarga.Siniestro)
+                    console.log(rdxDatosCarga.Siniestro.Grabacion)
+                    console.log(rdxDatosCarga.Siniestro.Grabacion.Relato)
+                    console.log("----------------------")
+
+                    finalTranscripts += rdxDatosCarga.Siniestro.Grabacion.Relato + PrimeraLetraMayuscula(transcript.trim()) + ". "
+                }else{
+                    interimTranscripts += transcript
+                }
+
+                dispatch(CambiarSiniestro({
+                    ...rdxDatosCarga.Siniestro,
+                    Grabacion: {
+                        PuedeGrabar: true,
+                        MicrofonoPrendido: true,
+                        Grabando: true,
+                        Relato: finalTranscripts + interimTranscripts,
+                        RelatoHTML: finalTranscripts + '<span style="color: #999;">' + interimTranscripts + '</span>',
+                        TranscripcionTemporal: interimTranscripts,
+                        TranscripcionFinal: finalTranscripts
+                    }
+                }))
+
+                // r.innerHTML = finalTranscripts + '<span style="color: #999;">' + interimTranscripts + '</span>'
+            }
+        }
+
+        console.log("2")
+    }
+
+    const PrimeraLetraMayuscula = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1)
+    }
+
     // ------------------------------------------------------------------------------------------------------------
     // Render
 
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={1}>
+                <Grid container spacing={2}>
                     <Grid item xs={4}>
                         &nbsp;
                     </Grid>
@@ -252,6 +376,14 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                             minRows={4}
                             onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
+                        {
+                            rdxDatosCarga.Siniestro.Grabacion.PuedeGrabar && 
+                                <>
+                                    <Button startIcon={<MicIcon sx={{color: "#cc0e28"}}/>} size='small' style={{...BotonAT, backgroundColor: "rgb(226 226 226)", color: "#454545"}} onClick={() => AbrirGrabarRelato()} variant="contained">
+                                        Grabar relato
+                                    </Button>
+                                </>
+                        }
                     </Grid>
                     <Grid item xs={1}>
                         &nbsp;
@@ -381,6 +513,92 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                     }
                 </Grid>
             </Box>
+
+            {/* *********************************************************************************************** */}
+            {/* Modal grabación relato */}
+
+            <BootstrapDialog
+                aria-labelledby="customized-dialog-title"
+                open={stModalGrabarAbierto}
+                fullWidth={true}
+                maxWidth={"lg"}
+                scroll={"paper"}
+            >
+                <DialogTitle sx={{ m: 0, p: 2, fontFamily: "Segoe UI Semibold" }} id="customized-dialog-title">
+                    Grabación de Relato
+                </DialogTitle>
+                <IconButton
+                    aria-label="close"
+                    sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }}
+                    onClick={() => CerrarGrabarRelato()}
+                >
+                    <Close />
+                </IconButton>
+
+                <DialogContent dividers>
+                    <Typography gutterBottom sx={{fontFamily: "Segoe UI"}}>
+                        <Box sx={{ flexGrow: 1 }}>
+                            <Grid container spacing={1}>
+                                <Grid item xs={12}>
+                                    {
+                                        rdxDatosCarga.Siniestro.Grabacion.MicrofonoPrendido == false ?
+                                            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                                <div style={{display: "flex", width: "75%", flexDirection: "column", alignItems: "center"}}>
+                                                    <MicOffIcon 
+                                                        fontSize='100px'
+                                                        sx={{color: "#CCC", fontSize: "100px"}}
+                                                    />
+                                                    <p style={{color: "#333", fontSize: "20px", textAlign: "center"}}>No se ha detectado un micrófono activo. Por favor verifique que exista un dispositivo conectado y que esté encendido para realizar la grabación.</p>
+                                                </div>
+                                            </div>
+                                        :
+                                            rdxDatosCarga.Siniestro.Grabacion.MicrofonoPrendido == true ?
+                                                !rdxDatosCarga.Siniestro.Grabacion.Grabando ?
+                                                    <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                                        <div style={{display: "flex", width: "75%", flexDirection: "column", alignItems: "center"}}>
+                                                            <MicIcon 
+                                                                fontSize='100px'
+                                                                sx={{color: "#1976D2", fontSize: "100px"}}
+                                                            />
+                                                            <p style={{color: "#333", fontSize: "20px", textAlign: "center"}}>
+                                                                A continuación podrá grabar el relato del siniestro para poder informar los detalles del hecho. Para comenzar presione el siguiente botón <span style={{fontFamily: "Segoe UI Semibold"}}>Comenzar a grabar relato</span>
+                                                            </p>
+                                                            <Button variant="contained" startIcon={<MicIcon />} size="large" onClick={() => ComenzarAGrabar()}>
+                                                                Comenzar a grabar relato
+                                                            </Button>
+                                                        </div>
+                                                    </div>
+                                                :
+                                                    <div>GRABANDOOOO....</div>
+                                            :
+                                                ""
+                                    }
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    </Typography>
+                </DialogContent>
+
+                <DialogActions>
+                    <Button autoFocus variant='contained' onClick={() => CerrarGrabarRelato()}>
+                        Cerrar
+                    </Button>
+                </DialogActions>
+            </BootstrapDialog>
         </>
     )
 }
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogContent-root': {
+        padding: theme.spacing(2),
+    },
+    '& .MuiDialogActions-root': {
+        padding: theme.spacing(1),
+    },
+}))

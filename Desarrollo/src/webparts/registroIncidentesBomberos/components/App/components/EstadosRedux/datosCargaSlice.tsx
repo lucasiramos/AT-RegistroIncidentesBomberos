@@ -31,7 +31,11 @@ const initialState = {
         Grabacion: {
             PuedeGrabar: null,
             MicrofonoPrendido: null,
-            Relato: null
+            Grabando: null,
+            Relato: null,
+            RelatoHTML: null,
+            TranscripcionTemporal: null,
+            TranscripcionFinal: null
         },
         DaniosVehiculoAsegurado: null,
         NumeroPartePolicial: null,

@@ -26,7 +26,7 @@ export const FormularioNuevoSiniestro_1_Asegurados: React.FunctionComponent<{}> 
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={1}>
+                <Grid container spacing={2}>
                     <Grid item xs={4}>
                         &nbsp;
                     </Grid>

@@ -3,6 +3,10 @@
 import * as React from 'react'
 
 import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { CambiarSiniestro } from '../EstadosRedux/datosCargaSlice'
+
 import { ObtenerDatos, ModificarDatos } from './Servicio'
 import { ContextSharePoint } from '../../../RegistroIncidentesBomberos'
 
@@ -39,6 +43,53 @@ const StyledContenidoDinamico = styled.div`
 
 export const Cuerpo: React.FunctionComponent<{}> = () => {
     const { Context }: any = React.useContext<any>(ContextSharePoint)
+
+    const rdxDatosCarga = useSelector((state:any) => state.DatosCarga)
+
+    const dispatch = useDispatch()
+
+    console.log("*************************************************")
+    console.log(rdxDatosCarga)
+    console.log("*************************************************")
+
+    // -------------------------------------------------------------------------------------------
+    // Verificar micrófono
+
+    useEffect(() =>{
+        VerificarMicrofono(dispatch)
+    }, [])
+
+    const VerificarMicrofono:() => Promise<void> = async(dispatch) =>{
+        // Intento verificar permisos del micrófono
+
+        var vPuedeGrabar = false
+
+        try{
+            var PermisosMicrofono = await navigator.permissions.query({name: 'microphone'})
+
+            console.log("OK")
+            console.log(PermisosMicrofono)
+
+            if(PermisosMicrofono?.state == "granted" || PermisosMicrofono?.state == "prompt"){
+                vPuedeGrabar = true
+            }
+        }catch(err){
+            console.log("ERROR")
+            console.log(err)
+        }
+
+        dispatch(CambiarSiniestro({
+            ...rdxDatosCarga.Siniestro,
+            Grabacion: {
+                PuedeGrabar: vPuedeGrabar,
+                MicrofonoPrendido: null,
+                Relato: null
+            }
+        }))
+    }
+
+    // -------------------------------------------------------------------------------------------
+    // Render
 
     return (
         <StyledContenedorCuerpo>
