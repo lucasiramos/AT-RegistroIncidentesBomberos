@@ -10,6 +10,7 @@ import comunasDisponibles from "./comunasDisponiblesSlice"
 import marcasDisponibles from "./marcasDisponiblesSlice"
 import modelosDisponibles from "./modelosDisponiblesSlice"
 import comisariasDisponibles from "./comisariasDisponiblesSlice"
+import regionesDisponibles from "./regionesDisponiblesSlice"
 
 export const store = configureStore({
     reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
         ComunasDisponibles: comunasDisponibles,
         MarcasDisponibles: marcasDisponibles,
         ModelosDisponibles: modelosDisponibles,
-        ComisariasDisponibles: comisariasDisponibles
+        ComisariasDisponibles: comisariasDisponibles,
+        RegionesDisponibles: regionesDisponibles
     }
 })

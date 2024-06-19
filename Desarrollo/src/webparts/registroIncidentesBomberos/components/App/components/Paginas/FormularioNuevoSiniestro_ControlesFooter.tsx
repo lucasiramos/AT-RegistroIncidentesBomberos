@@ -82,6 +82,10 @@ export const FormularioNuevoSiniestro_ControlesFooter: React.FunctionComponent<{
                 Id: null,
                 Nombre: null
             },
+            Region: {
+                Id: null,
+                Nombre: null
+            },
             TipoSiniestro: {
                 Id: null,
                 Nombre: null,

@@ -10,6 +10,7 @@ import { ContextSharePoint } from '../../../RegistroIncidentesBomberos'
 import { ObtenerDatos } from '../EstructuraApp/Servicio'
 
 import { CambiarComunasDisponibles } from '../EstadosRedux/comunasDisponiblesSlice'
+import { CambiarRegionesDisponibles } from '../EstadosRedux/regionesDisponiblesSlice'
 
 import styled from 'styled-components'
 
@@ -22,6 +23,9 @@ import { FormularioNuevoSiniestro_4_ResumenCarga } from './FormularioNuevoSinies
 
 export const FormularioNuevoSiniestro: React.FunctionComponent<{}> = ({children}: any) => {
     const rdxComunasDisponibles = useSelector((state:any) => state.ComunasDisponibles)
+    const rdxRegionesDisponibles = useSelector((state:any) => state.RegionesDisponibles)
+
+    console.log(rdxRegionesDisponibles)
 
     const { Context }: any = React.useContext<any>(ContextSharePoint)
 

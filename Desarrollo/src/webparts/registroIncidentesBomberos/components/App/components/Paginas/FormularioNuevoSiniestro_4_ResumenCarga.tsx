@@ -179,6 +179,19 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
+                        <span style={RotuloFormulario}>Región</span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <span style={rdxDatosCarga.Siniestro.Region.Nombre ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Siniestro.Region.Nombre || "-Sin dato-"}</span>
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Siniestro</span>
                     </Grid>
                     <Grid item xs={7}>

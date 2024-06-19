@@ -154,3 +154,25 @@ export const CalcularDigitoVerificador = (pValor) => {
   
     return S?S-1:'K'
 }
+
+export const CapitalizarNombre = (pNombre) => {
+	let devuelvo = ""
+	let arrNoCapitalizo = ["de", "del", "la", "las", "lo", "los", "y"]
+
+	let Nombre = pNombre.toLowerCase()
+	let arrNombre = Nombre.split(" ")
+
+	arrNombre.map(function(item){
+		if(devuelvo != ""){
+			devuelvo += " "
+		}
+
+		if(arrNoCapitalizo.indexOf(item) == -1){
+			devuelvo += item.charAt(0).toUpperCase() + item.slice(1)
+		}else{
+			devuelvo += item
+		}
+	})
+
+	return devuelvo
+}

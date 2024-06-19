@@ -1,0 +1,18 @@
+LISTO // Validar que no se pueda ingresar fecha y hora posterior a la actual
+Agregar campo "Región" (desplegable)
+Buscar y agregar iconos en los steps del formulario u otras secciones.
+Investigar si es factible agregar geolocalización
+Moni nos envía URL, usuario y contraseña para hacer comparativas
+Agregar confirmación final (responsabilidad de datos ingresados. Ver imagen que mando Diego)
+Agregar campo para adjuntar archivos
+
+///////////////////////////////////////////////////////////////////////
+
+PREGUNTAS:
+	Comunas vinculadas con regiones? Hoy no tenemos ese campo que las une
+
+
+_______________________________________________________________________
+
+Diego: ¿Agregar para Chubb 40FQ?
+40FQ

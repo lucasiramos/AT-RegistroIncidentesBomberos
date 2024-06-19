@@ -48,9 +48,9 @@ export const Cuerpo: React.FunctionComponent<{}> = () => {
 
     const dispatch = useDispatch()
 
-    console.log("*************************************************")
-    console.log(rdxDatosCarga)
-    console.log("*************************************************")
+    // console.log("*************************************************")
+    // console.log(rdxDatosCarga)
+    // console.log("*************************************************")
 
     // -------------------------------------------------------------------------------------------
     // Verificar micrófono
@@ -81,6 +81,7 @@ export const Cuerpo: React.FunctionComponent<{}> = () => {
         dispatch(CambiarSiniestro({
             ...rdxDatosCarga.Siniestro,
             Grabacion: {
+                ...rdxDatosCarga.Siniestro.Grabacion,
                 PuedeGrabar: vPuedeGrabar,
                 MicrofonoPrendido: null,
                 Relato: null

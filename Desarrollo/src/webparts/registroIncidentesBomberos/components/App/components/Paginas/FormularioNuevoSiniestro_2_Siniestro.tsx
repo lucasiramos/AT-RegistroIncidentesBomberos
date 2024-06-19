@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux"
 
 import { CambiarSiniestro } from '../EstadosRedux/datosCargaSlice'
 
+import { CapitalizarNombre } from '../EstructuraApp/Servicio'
+
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Autocomplete from '@mui/material/Autocomplete'
@@ -17,6 +19,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { esES } from '@mui/x-date-pickers'
 import "dayjs/locale/es"
+import * as dayjs from 'dayjs'
 import { TimeField } from '@mui/x-date-pickers/TimeField'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
@@ -32,6 +35,7 @@ import DialogActions from '@mui/material/DialogActions'
 import { Close } from '@mui/icons-material'
 import {IconButton} from '@mui/material'
 import {Typography} from '@mui/material'
+import { ReportProblem } from '@mui/icons-material'
 
 import { RotuloFormulario, H2AT, BotonAT } from '../EstructuraApp/EstilosGlobales'
 
@@ -57,20 +61,46 @@ const TextareaAutosize = styled(BaseTextareaAutosize)(
 export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> = () => {
     const rdxDatosCarga = useSelector((state:any) => state.DatosCarga)
     const rdxComunasDisponibles = useSelector((state:any) => state.ComunasDisponibles)
+    const rdxRegionesDisponibles = useSelector((state:any) => state.RegionesDisponibles)
     const rdxTiposSiniestrosDisponibles = useSelector((state:any) => state.TiposSiniestrosDisponibles)
     const rdxComisariasDisponibles = useSelector((state:any) => state.ComisariasDisponibles)
 
-    console.log(rdxDatosCarga.Siniestro.Grabacion)
-
     const dispatch = useDispatch()
+
+    console.log(rdxDatosCarga)
 
     // ------------------------------------------------------------------------------------------------------------
     // useStates
 
+    
     const [stModalGrabarAbierto, setModalGrabarAbierto] = React.useState(false)
+    /*
     const [stSpeechRecognizer, setSpeechRecognizer] = React.useState(new webkitSpeechRecognition())
+    const [stGrabacion, setGrabacion] = React.useState({
+        Relato: 'INICIAL',
+        RelatoHTML: '',
+        TranscripcionTemporal: '',
+        TranscripcionFinal: ''
+    })
+    const [stAcumulado, setAcumulado] = React.useState('1) ')
 
+
+    console.log(stAcumulado)
+    */ 
     // console.log(stSpeechRecognizer)
+
+    // console.log("----------------------------------------------")
+    // console.log(rdxDatosCarga.Siniestro.Fecha)
+    // console.log(rdxDatosCarga.Siniestro.Hora)
+    // console.log(rdxDatosCarga.Siniestro.Fecha ? rdxDatosCarga.Siniestro.Fecha.format("DD/MM/YYYY") == dayjs().format("DD/MM/YYYY") : "-")
+    // console.log(rdxDatosCarga.Siniestro.Hora ? rdxDatosCarga.Siniestro.Hora.isAfter(dayjs()) : "-")
+    // console.log("----------------------------------------------")
+
+    /*
+    rdxDatosCarga.Siniestro.Fecha && rdxDatosCarga.Siniestro.Hora &&
+    rdxDatosCarga.Siniestro.Fecha.isSame(dayjs()) && rdxDatosCarga.Siniestro.Hora.isAfter(dayjs())
+    
+    */
 
     // ------------------------------------------------------------------------------------------------------------
     // Funciones varias
@@ -89,6 +119,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
         }))
     }
 
+    /* 
     const AbrirGrabarRelato = () => {
         setModalGrabarAbierto(true)
 
@@ -153,36 +184,64 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
             var interimTranscripts = ""
             var finalTranscripts = ""
 
+            // console.log("Durante (fuera del bucle): " + stGrabacion.Relato)
+
             for(var i=event.resultIndex; i<event.results.length; i++){
                 var transcript = event.results[i][0].transcript
-                transcript.replace("\n", "<br>")
+                // transcript.replace("\n", "<br>")
 
                 if(event.results[i].isFinal){
                     console.log("----------------------")
-                    console.log("FINAL:")
-                    console.log(rdxDatosCarga)
-                    console.log(rdxDatosCarga.Siniestro)
-                    console.log(rdxDatosCarga.Siniestro.Grabacion)
-                    console.log(rdxDatosCarga.Siniestro.Grabacion.Relato)
-                    console.log("----------------------")
+                    // console.log("FINAL:")
+                    // console.log(rdxDatosCarga)
+                    // console.log(rdxDatosCarga.Siniestro)
+                    // console.log(rdxDatosCarga.Siniestro.Grabacion)
+                    // console.log(rdxDatosCarga.Siniestro.Grabacion.Relato)
+                    
 
-                    finalTranscripts += rdxDatosCarga.Siniestro.Grabacion.Relato + PrimeraLetraMayuscula(transcript.trim()) + ". "
+                    // finalTranscripts += (rdxDatosCarga.Siniestro.Grabacion.Relato || '') + PrimeraLetraMayuscula(transcript.trim()) + ". "
+                    finalTranscripts += PrimeraLetraMayuscula(transcript.trim()) + ". "
+
+                    // console.log("FINAL: " + stGrabacion.Relato)
+                    // console.log(stGrabacion)
+                    // (stGrabacion.Relato || '') + finalTranscripts + interimTranscripts
+
+                    TranscribirAEstado(finalTranscripts, interimTranscripts)
+
+                    // setGrabacion({
+                    //     Relato: "Coso 2....",
+                    //     RelatoHTML: (stGrabacion.Relato || '') + finalTranscripts + '<span style="color: #999;">' + interimTranscripts + '</span>',
+                    //     TranscripcionTemporal: interimTranscripts,
+                    //     TranscripcionFinal: finalTranscripts
+                    // })
+
+                    console.log("----------------------")
                 }else{
                     interimTranscripts += transcript
                 }
 
-                dispatch(CambiarSiniestro({
-                    ...rdxDatosCarga.Siniestro,
-                    Grabacion: {
-                        PuedeGrabar: true,
-                        MicrofonoPrendido: true,
-                        Grabando: true,
-                        Relato: finalTranscripts + interimTranscripts,
-                        RelatoHTML: finalTranscripts + '<span style="color: #999;">' + interimTranscripts + '</span>',
-                        TranscripcionTemporal: interimTranscripts,
-                        TranscripcionFinal: finalTranscripts
-                    }
-                }))
+
+                // const [stGrabacion, setGrabacion] = React.useState({
+                //     Relato: '',
+                //     RelatoHTML: '',
+                //     TranscripcionTemporal: '',
+                //     TranscripcionFinal: ''
+                // })
+                
+               
+
+                // dispatch(CambiarSiniestro({
+                //     ...rdxDatosCarga.Siniestro,
+                //     Grabacion: {
+                //         PuedeGrabar: true,
+                //         MicrofonoPrendido: true,
+                //         Grabando: true,
+                //         Relato: (rdxDatosCarga.Siniestro.Grabacion.Relato || '') + finalTranscripts + interimTranscripts,
+                //         RelatoHTML:(rdxDatosCarga.Siniestro.Grabacion.Relato || '') + finalTranscripts + '<span style="color: #999;">' + interimTranscripts + '</span>',
+                //         TranscripcionTemporal: interimTranscripts,
+                //         TranscripcionFinal: finalTranscripts
+                //     }
+                // }))
 
                 // r.innerHTML = finalTranscripts + '<span style="color: #999;">' + interimTranscripts + '</span>'
             }
@@ -194,6 +253,26 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
     const PrimeraLetraMayuscula = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1)
     }
+
+    const TranscribirAEstado = (finalTranscripts, interimTranscripts) => {
+        console.log("______________________________________")
+        // console.log("@" + stGrabacion.Relato + "@")
+        console.log(finalTranscripts, interimTranscripts)
+        // setGrabacion({
+        //     Relato: (stGrabacion.Relato || '') + finalTranscripts + interimTranscripts,
+        //     RelatoHTML: (stGrabacion.Relato || '') + finalTranscripts + '<span style="color: #999;">' + interimTranscripts + '</span>',
+        //     TranscripcionTemporal: interimTranscripts,
+        //     TranscripcionFinal: finalTranscripts
+        // })
+
+        console.log("Acumulado: " + stAcumulado)
+
+        setAcumulado(`${stAcumulado}${finalTranscripts}${interimTranscripts}`)
+
+        console.log("______________________________________")
+
+    }
+    */ 
 
     // ------------------------------------------------------------------------------------------------------------
     // Render
@@ -232,11 +311,24 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                                         dispatch(CambiarSiniestro({
                                             ...rdxDatosCarga.Siniestro,
                                             Fecha: FechaElegida,
+                                            Hora: null
                                         }))
                                     }}
+                                    maxDate={dayjs()}
                                 />
                             </DemoContainer>
                         </LocalizationProvider>
+                        {
+                            rdxDatosCarga.Siniestro.Fecha && rdxDatosCarga.Siniestro.Fecha.isAfter(dayjs()) &&
+                                <div style={{display: "flex", marginTop: "10px", gap: "10px"}}>
+                                    <div>
+                                        <ReportProblem sx={{color: "#CC0000"}} />
+                                    </div>
+                                    <div style={{fontWeight: "bold", position: "relative", top: "2px"}}>
+                                        La fecha debe ser menor o igual al día actual
+                                    </div>
+                                </div>
+                        }
                     </Grid>
                     <Grid item xs={1}>
                         &nbsp;
@@ -264,31 +356,30 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                                         Hora: HoraIngresada,
                                     }))
                                 }}
+                                maxTime={
+                                    rdxDatosCarga.Siniestro.Fecha ?
+                                        rdxDatosCarga.Siniestro.Fecha.format("DD/MM/YYYY") == dayjs().format("DD/MM/YYYY") ? 
+                                            dayjs().set('hour', dayjs().hour()).set('minute', dayjs().minute())
+                                        :
+                                            dayjs().set('hour', 23).set('minute', 59)
+                                    :
+                                        dayjs().set('hour', 23).set('minute', 59)
+                                }
                             />
                             </DemoContainer>
                         </LocalizationProvider>
-                    </Grid>
-                    <Grid item xs={1}>
-                        &nbsp;
-                    </Grid>
-
-                    <Grid item xs={1}>
-                        &nbsp;
-                    </Grid>
-                    <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Lugar</span>
-                    </Grid>
-                    <Grid item xs={7}>
-                        <TextField
-                            value={rdxDatosCarga.Siniestro.Lugar || null} 
-                            defaultValue={rdxDatosCarga.Siniestro.Lugar || null}
-                            fullWidth 
-                            name="Lugar"
-                            size="small" 
-                            variant="outlined" 
-                            sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
-                            onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
-                        />
+                        {
+                            rdxDatosCarga.Siniestro.Fecha && rdxDatosCarga.Siniestro.Hora &&
+                            rdxDatosCarga.Siniestro.Fecha.format("DD/MM/YYYY") == dayjs().format("DD/MM/YYYY") && rdxDatosCarga.Siniestro.Hora.isAfter(dayjs()) &&
+                                <div style={{display: "flex", marginTop: "10px", gap: "10px"}}>
+                                    <div>
+                                        <ReportProblem sx={{color: "#CC0000"}} />
+                                    </div>
+                                    <div style={{fontWeight: "bold", position: "relative", top: "2px"}}>
+                                        La fecha y hora del incidente debe ser menor al momento actual
+                                    </div>
+                                </div>
+                        }
                     </Grid>
                     <Grid item xs={1}>
                         &nbsp;
@@ -322,6 +413,60 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                                     }
                                 }))
                             }}
+                        />
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
+                        <span style={RotuloFormulario}>Región</span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <Autocomplete
+                            disablePortal
+                            value={rdxDatosCarga.Siniestro.Region.Id ? rdxDatosCarga.Siniestro.Region : null}
+                            fullWidth
+                            id="cboComuna"
+                            options={rdxRegionesDisponibles.regiones}
+                            getOptionLabel={region => CapitalizarNombre(region.Nombre)}
+                            renderInput={(params) => <TextField {...params} label="Seleccione una región" />}
+                            size="small"
+                            sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
+                            onChange={(event, RegionSeleccionada) => {
+                                dispatch(CambiarSiniestro({
+                                    ...rdxDatosCarga.Siniestro,
+                                    Region: {
+                                        Id: RegionSeleccionada?.Id || null,
+                                        Nombre: RegionSeleccionada?.Nombre ? CapitalizarNombre(RegionSeleccionada.Nombre) : null
+                                    }
+                                }))
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
+                        <span style={RotuloFormulario}>Lugar</span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <TextField
+                            value={rdxDatosCarga.Siniestro.Lugar || null} 
+                            defaultValue={rdxDatosCarga.Siniestro.Lugar || null}
+                            fullWidth 
+                            name="Lugar"
+                            size="small" 
+                            variant="outlined" 
+                            sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
+                            onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
                     </Grid>
                     <Grid item xs={1}>
@@ -377,7 +522,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                             onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
                         {
-                            rdxDatosCarga.Siniestro.Grabacion.PuedeGrabar && 
+                            rdxDatosCarga.Siniestro.Grabacion.PuedeGrabar && false &&
                                 <>
                                     <Button startIcon={<MicIcon sx={{color: "#cc0e28"}}/>} size='small' style={{...BotonAT, backgroundColor: "rgb(226 226 226)", color: "#454545"}} onClick={() => AbrirGrabarRelato()} variant="contained">
                                         Grabar relato
