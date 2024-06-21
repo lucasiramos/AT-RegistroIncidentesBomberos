@@ -4,6 +4,10 @@ import * as React from 'react'
 
 import { useSelector, useDispatch } from "react-redux"
 
+import { AsteriscoCargaObligatoria } from '../EstructuraApp/AsteriscoCargaObligatoria'
+
+import { CambiarAceptoDeclaracionJurada } from '../EstadosRedux/datosCargaSlice'
+
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Dialog from '@mui/material/Dialog'
@@ -13,6 +17,9 @@ import DialogActions from '@mui/material/DialogActions'
 import {IconButton} from '@mui/material'
 import { Close } from '@mui/icons-material'
 import {Typography} from '@mui/material'
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
 
 import { RotuloFormulario, H2AT, H3AT, ResumenFormulario, SpAmarillo, SpRojo, SpVerde } from '../EstructuraApp/EstilosGlobales'
 
@@ -22,6 +29,8 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
     const rdxDatosCarga = useSelector((state:any) => state.DatosCarga)
 
     const [stVerMasRelato, setVerMasRelato] = React.useState(false)
+
+    const dispatch = useDispatch()
 
     const ClickVerMasRelato = () => {
         setVerMasRelato(true)
@@ -61,7 +70,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Marca vehículo asegurado</span>
+                        <span style={RotuloFormulario}>Marca vehículo asegurado<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.VehiculoAsegurado.Marca ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.VehiculoAsegurado.Marca || "-Sin dato-"}</span>
@@ -74,7 +83,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Modelo vehículo asegurado</span>
+                        <span style={RotuloFormulario}>Modelo vehículo asegurado<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.VehiculoAsegurado.Modelo ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.VehiculoAsegurado.Modelo || "-Sin dato-"}</span>
@@ -87,7 +96,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Nombre conductor asegurado</span>
+                        <span style={RotuloFormulario}>Nombre conductor asegurado<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.ConductorAsegurado.Nombre ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.ConductorAsegurado.Nombre || "-Sin dato-"}</span>
@@ -100,7 +109,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>RUT conductor asegurado</span>
+                        <span style={RotuloFormulario}>RUT conductor asegurado<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.ConductorAsegurado.RUT ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.ConductorAsegurado.RUT || "-Sin dato-"}</span>
@@ -129,7 +138,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Fecha y hora</span>
+                        <span style={RotuloFormulario}>Fecha y hora<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.Siniestro.Fecha ? ResumenFormulario : SpAmarillo}>
@@ -153,7 +162,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Lugar</span>
+                        <span style={RotuloFormulario}>Lugar<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.Siniestro.Lugar ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Siniestro.Lugar || "-Sin dato-"}</span>
@@ -166,7 +175,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Comuna</span>
+                        <span style={RotuloFormulario}>Comuna<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.Siniestro.Comuna.Nombre ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Siniestro.Comuna.Nombre || "-Sin dato-"}</span>
@@ -179,7 +188,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Región</span>
+                        <span style={RotuloFormulario}>Región<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.Siniestro.Region.Nombre ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Siniestro.Region.Nombre || "-Sin dato-"}</span>
@@ -192,7 +201,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Siniestro</span>
+                        <span style={RotuloFormulario}>Siniestro<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.Siniestro.TipoSiniestro.Nombre ? ResumenFormulario : SpAmarillo}>
@@ -211,7 +220,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Relato</span>
+                        <span style={RotuloFormulario}>Relato<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.Siniestro.Relato ? ResumenFormulario : SpAmarillo}>
@@ -234,7 +243,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Daños del vehículo asegurado</span>
+                        <span style={RotuloFormulario}>Daños del vehículo asegurado<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.Siniestro.DaniosVehiculoAsegurado ? ResumenFormulario : SpAmarillo}>
@@ -253,7 +262,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Comisaria</span>
+                        <span style={RotuloFormulario}>Comisaria<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.Siniestro.Comisaria.Nombre ? ResumenFormulario : SpAmarillo}>
@@ -272,7 +281,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>N° Parte policial</span>
+                        <span style={RotuloFormulario}>N° Parte policial<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.Siniestro.NumeroPartePolicial ? ResumenFormulario : SpAmarillo}>
@@ -291,7 +300,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>¿Hubo terceros involucrados?</span>
+                        <span style={RotuloFormulario}>¿Hubo terceros involucrados?<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span 
@@ -320,7 +329,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                                     &nbsp;
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <span style={RotuloFormulario}>Responsable del siniestro</span>
+                                    <span style={RotuloFormulario}>Responsable del siniestro<AsteriscoCargaObligatoria/></span>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <span style={rdxDatosCarga.Siniestro.ResponsableSiniestro ? ResumenFormulario : SpAmarillo}>
@@ -355,7 +364,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                                     &nbsp;
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <span style={RotuloFormulario}>Nombre</span>
+                                    <span style={RotuloFormulario}>Nombre<AsteriscoCargaObligatoria/></span>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <span style={rdxDatosCarga.Tercero.Nombre ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Tercero.Nombre || "-Sin dato-"}</span>
@@ -368,7 +377,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                                     &nbsp;
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <span style={RotuloFormulario}>RUT</span>
+                                    <span style={RotuloFormulario}>RUT<AsteriscoCargaObligatoria/></span>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <span style={rdxDatosCarga.Tercero.RUT ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Tercero.RUT ? `${rdxDatosCarga.Tercero.RUT}-${rdxDatosCarga.Tercero.RUTDigitoVerificador}` : "-Sin dato-"}</span>
@@ -381,7 +390,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                                     &nbsp;
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <span style={RotuloFormulario}>Teléfono</span>
+                                    <span style={RotuloFormulario}>Teléfono<AsteriscoCargaObligatoria/></span>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <span style={rdxDatosCarga.Tercero.Telefono ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Tercero.Telefono || "-Sin dato-"}</span>
@@ -394,7 +403,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                                     &nbsp;
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <span style={RotuloFormulario}>Email</span>
+                                    <span style={RotuloFormulario}>Email<AsteriscoCargaObligatoria/></span>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <span style={rdxDatosCarga.Tercero.Email ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Tercero.Email || "-Sin dato-"}</span>
@@ -407,7 +416,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                                     &nbsp;
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <span style={RotuloFormulario}>Marca vehículo</span>
+                                    <span style={RotuloFormulario}>Marca vehículo<AsteriscoCargaObligatoria/></span>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <span style={rdxDatosCarga.Tercero.Marca.Nombre ? ResumenFormulario : SpAmarillo}>
@@ -422,7 +431,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                                     &nbsp;
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <span style={RotuloFormulario}>Modelo vehículo</span>
+                                    <span style={RotuloFormulario}>Modelo vehículo<AsteriscoCargaObligatoria/></span>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <span style={rdxDatosCarga.Tercero.Modelo.Nombre ? ResumenFormulario : SpAmarillo}>
@@ -437,7 +446,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                                     &nbsp;
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <span style={RotuloFormulario}>Patente</span>
+                                    <span style={RotuloFormulario}>Patente<AsteriscoCargaObligatoria/></span>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <span style={rdxDatosCarga.Tercero.Patente ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Tercero.Patente || "-Sin dato-"}</span>
@@ -450,8 +459,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                                     &nbsp;
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <span style={RotuloFormulario}>Daños vehículo tercero
-                                    </span>
+                                    <span style={RotuloFormulario}>Daños vehículo tercero<AsteriscoCargaObligatoria/></span>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <span style={rdxDatosCarga.Tercero.DaniosVehiculoTercero ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Tercero.DaniosVehiculoTercero || "-Sin dato-"}</span>
@@ -461,6 +469,52 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                                 </Grid>
                             </>
                     }
+
+                    {/* /////////////////////////////////////////////// */}
+                    {/* Acepta DDJJ */}
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={7}>
+                        <h3 style={{...H3AT, marginTop: "40px", marginBottom: "10px", textDecoration: "underline"}}>Declaración Jurada de información</h3>
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
+                        <span style={RotuloFormulario}>Aceptar información ingresada<AsteriscoCargaObligatoria/></span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <FormGroup>
+                            <FormControlLabel 
+                                control={
+                                    <Checkbox 
+                                        checked={rdxDatosCarga.AceptoDeclaracionJurada}
+                                        sx={{fontFamily: "Segoe UI !important", fontSize: "18px"}}
+                                        onChange={() => {
+                                            dispatch(CambiarAceptoDeclaracionJurada(
+                                                !rdxDatosCarga.AceptoDeclaracionJurada
+                                            ))
+                                        }}
+                                    />
+                                } 
+                                label={<span style={{ fontSize: '16px', fontFamily: "Segoe UI", position: "relative", top: "7px" }}>{"Declaro bajo juramento la veracidad de los antecedentes y circunstancias entregadas en la presente denuncia de siniestro."}</span>}
+                                sx={{fontFamily: "Segoe UI !important", fontSize: "18px", alignItems: "flex-start"}}
+                            />
+                        </FormGroup>
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
                 </Grid>
             </Box>
 

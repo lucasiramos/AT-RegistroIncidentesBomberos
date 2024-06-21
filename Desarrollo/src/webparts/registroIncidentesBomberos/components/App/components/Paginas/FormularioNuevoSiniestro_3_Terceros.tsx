@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux"
 
 import { CambiarTercero } from '../EstadosRedux/datosCargaSlice'
 
+import { AsteriscoCargaObligatoria } from '../EstructuraApp/AsteriscoCargaObligatoria'
+
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Autocomplete from '@mui/material/Autocomplete'
@@ -90,7 +92,7 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Nombre</span>
+                        <span style={RotuloFormulario}>Nombre<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <TextField
@@ -112,7 +114,7 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>RUT</span>
+                        <span style={RotuloFormulario}>RUT<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <div>
@@ -157,7 +159,7 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Teléfono</span>
+                        <span style={RotuloFormulario}>Teléfono<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <TextField
@@ -179,7 +181,7 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Email</span>
+                        <span style={RotuloFormulario}>Email<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <TextField
@@ -201,7 +203,7 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Marca vehículo</span>
+                        <span style={RotuloFormulario}>Marca vehículo<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <Autocomplete
@@ -239,7 +241,7 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Modelo vehículo</span>
+                        <span style={RotuloFormulario}>Modelo vehículo<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <Autocomplete
@@ -277,7 +279,7 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Patente</span>
+                        <span style={RotuloFormulario}>Patente<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <TextField
@@ -299,7 +301,7 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Daños vehículo tercero</span>
+                        <span style={RotuloFormulario}>Daños vehículo tercero<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <TextareaAutosize

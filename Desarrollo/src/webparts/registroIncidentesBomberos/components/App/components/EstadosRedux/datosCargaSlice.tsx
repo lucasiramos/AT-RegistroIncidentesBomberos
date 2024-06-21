@@ -66,7 +66,8 @@ const initialState = {
         },
         Patente: null,
         DaniosVehiculoTercero: null
-    }
+    },
+    AceptoDeclaracionJurada: false
 }
 
 export const miUsuarioSlice = createSlice({
@@ -84,10 +85,13 @@ export const miUsuarioSlice = createSlice({
         },
         CambiarTercero: (state, action) => {
             state.Tercero = action.payload
+        },
+        CambiarAceptoDeclaracionJurada: (state, action) => {
+            state.AceptoDeclaracionJurada = action.payload
         }
     }
 })
 
-export const { CambiarVehiculoAsegurado, CambiarConductorAsegurado, CambiarSiniestro, CambiarTercero } = miUsuarioSlice.actions
+export const { CambiarVehiculoAsegurado, CambiarConductorAsegurado, CambiarSiniestro, CambiarTercero, CambiarAceptoDeclaracionJurada } = miUsuarioSlice.actions
 
 export default miUsuarioSlice.reducer

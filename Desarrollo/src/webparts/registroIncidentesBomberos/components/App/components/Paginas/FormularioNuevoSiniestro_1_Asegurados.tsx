@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { CambiarVehiculoAsegurado } from '../EstadosRedux/datosCargaSlice'
 import { CambiarConductorAsegurado } from '../EstadosRedux/datosCargaSlice'
 
+import { AsteriscoCargaObligatoria } from '../EstructuraApp/AsteriscoCargaObligatoria'
+
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Autocomplete from '@mui/material/Autocomplete'
@@ -41,7 +43,7 @@ export const FormularioNuevoSiniestro_1_Asegurados: React.FunctionComponent<{}> 
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Vehículo asegurado</span>
+                        <span style={RotuloFormulario}>Vehículo asegurado<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <Autocomplete
@@ -74,7 +76,7 @@ export const FormularioNuevoSiniestro_1_Asegurados: React.FunctionComponent<{}> 
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Conductor asegurado</span>
+                        <span style={RotuloFormulario}>Conductor asegurado<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <Autocomplete

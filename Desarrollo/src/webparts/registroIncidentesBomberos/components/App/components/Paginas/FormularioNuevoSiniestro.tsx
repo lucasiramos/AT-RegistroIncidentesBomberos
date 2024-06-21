@@ -25,8 +25,6 @@ export const FormularioNuevoSiniestro: React.FunctionComponent<{}> = ({children}
     const rdxComunasDisponibles = useSelector((state:any) => state.ComunasDisponibles)
     const rdxRegionesDisponibles = useSelector((state:any) => state.RegionesDisponibles)
 
-    console.log(rdxRegionesDisponibles)
-
     const { Context }: any = React.useContext<any>(ContextSharePoint)
 
     const dispatch = useDispatch()

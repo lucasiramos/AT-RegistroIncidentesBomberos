@@ -8,6 +8,8 @@ import { CambiarSiniestro } from '../EstadosRedux/datosCargaSlice'
 
 import { CapitalizarNombre } from '../EstructuraApp/Servicio'
 
+import { AsteriscoCargaObligatoria } from '../EstructuraApp/AsteriscoCargaObligatoria'
+
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Autocomplete from '@mui/material/Autocomplete'
@@ -295,7 +297,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Fecha del siniestro</span>
+                        <span style={RotuloFormulario}>Fecha del siniestro<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='es' localeText={esES.components.MuiLocalizationProvider.defaultProps.localeText}>
@@ -338,7 +340,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Hora del siniestro</span>
+                        <span style={RotuloFormulario}>Hora del siniestro<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -389,7 +391,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Comuna</span>
+                        <span style={RotuloFormulario}>Comuna<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <Autocomplete
@@ -423,7 +425,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Región</span>
+                        <span style={RotuloFormulario}>Región<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <Autocomplete
@@ -455,7 +457,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Lugar</span>
+                        <span style={RotuloFormulario}>Lugar<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <TextField
@@ -477,7 +479,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Siniestro</span>
+                        <span style={RotuloFormulario}>Siniestro<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <Autocomplete
@@ -512,7 +514,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Relato</span>
+                        <span style={RotuloFormulario}>Relato<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <TextareaAutosize
@@ -538,7 +540,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Daños del vehículo asegurado</span>
+                        <span style={RotuloFormulario}>Daños del vehículo asegurado<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <TextareaAutosize
@@ -556,7 +558,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Comisaria</span>
+                        <span style={RotuloFormulario}>Comisaria<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <Autocomplete
@@ -590,7 +592,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>N° Parte policial</span>
+                        <span style={RotuloFormulario}>N° Parte policial<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <TextField
@@ -612,7 +614,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>¿Hubo terceros involucrados?</span>
+                        <span style={RotuloFormulario}>¿Hubo terceros involucrados?<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <RadioGroup
@@ -637,7 +639,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                                     &nbsp;
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <span style={RotuloFormulario}>Responsable del siniestro</span>
+                                    <span style={RotuloFormulario}>Responsable del siniestro<AsteriscoCargaObligatoria/></span>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <RadioGroup

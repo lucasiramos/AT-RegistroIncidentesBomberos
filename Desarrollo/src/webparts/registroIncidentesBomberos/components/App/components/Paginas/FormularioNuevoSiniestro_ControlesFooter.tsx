@@ -2,13 +2,16 @@
 
 import * as React from 'react'
 
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import { CambiarVehiculoAsegurado } from '../EstadosRedux/datosCargaSlice'
 import { CambiarConductorAsegurado } from '../EstadosRedux/datosCargaSlice'
 import { CambiarSiniestro } from '../EstadosRedux/datosCargaSlice'
 import { CambiarTercero } from '../EstadosRedux/datosCargaSlice'
 import { CambiarPaginaActual } from '../EstadosRedux/paginaActual'
+import { CambiarAceptoDeclaracionJurada } from '../EstadosRedux/datosCargaSlice'
+
+import { PuedeGuardarFormulario } from './FormularioNuevoSiniestro_DatosValidos'
 
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
@@ -22,7 +25,11 @@ import { BotonAT, ContenedorMensaje, TituloMensaje, CuerpoMensaje } from '../Est
 export const FormularioNuevoSiniestro_ControlesFooter: React.FunctionComponent<{}> = ({children}: any) => {
     const {stPasoActivo, setPasoActivo, RefTituloFormulario} = children
 
+    const rdxDatosCarga = useSelector((state:any) => state.DatosCarga)
+
     const dispatch = useDispatch()
+
+    console.log(rdxDatosCarga)
 
     // ----------------------------------------------------------------------------------------------------
     // useStates
@@ -128,6 +135,8 @@ export const FormularioNuevoSiniestro_ControlesFooter: React.FunctionComponent<{
             Patente: null,
             DaniosVehiculoTercero: null
         }))
+
+        dispatch(CambiarAceptoDeclaracionJurada(false))
     }
 
     const ClickGuardar = () => {
@@ -204,6 +213,16 @@ export const FormularioNuevoSiniestro_ControlesFooter: React.FunctionComponent<{
         CerrarMensaje()
     }
 
+    const SetearNuevoPaso = (pSumaNuevoPaso) => {
+        let NuevoPaso = stPasoActivo + pSumaNuevoPaso
+
+        if(NuevoPaso == 2 && rdxDatosCarga.Siniestro.TercerosInvolucrados != "Sí"){
+            NuevoPaso += pSumaNuevoPaso
+        }
+
+        setPasoActivo(NuevoPaso)
+    }
+
     return (
         <>
             <Box sx={{ flexGrow: 1, mt: '60px', paddingBottom: "10px" }}>
@@ -219,7 +238,7 @@ export const FormularioNuevoSiniestro_ControlesFooter: React.FunctionComponent<{
                             <Button 
                                 style={BotonAT} 
                                 onClick={() => {
-                                    setPasoActivo(stPasoActivo - 1)
+                                    SetearNuevoPaso(-1)
                                     RefTituloFormulario.current.scrollIntoView({behavior: 'smooth'})
                                 }} 
                                 variant="contained" 
@@ -234,7 +253,7 @@ export const FormularioNuevoSiniestro_ControlesFooter: React.FunctionComponent<{
                             <Button 
                                 style={BotonAT} 
                                 onClick={() => {
-                                    setPasoActivo(stPasoActivo + 1)
+                                    SetearNuevoPaso(1)
                                     RefTituloFormulario.current.scrollIntoView({behavior: 'smooth'})
                                 }} 
                                 variant="contained" 
@@ -260,30 +279,7 @@ export const FormularioNuevoSiniestro_ControlesFooter: React.FunctionComponent<{
                                     color="success"
                                     onClick={() => ClickGuardar()} 
                                     endIcon={<SendIcon />}
-                                    disabled={false
-                                        // (MiUsuario.TipoCertificados.Singular == "Certificado" && !DatosCarga.CompaniaEmisora.Id) || 
-                                        // (MiUsuario.TipoCertificados.Singular == "Certificado" && !DatosCarga.Poliza.Id) || 
-                                        // !DatosCarga.Contenedor.BL || 
-                                        // DatosCarga.Contenedor.Contenedores.length == 0 ||
-                                        // (!DatosCarga.Facturante.FacturanteEsConsignatario &&
-                                        //     (!DatosCarga.Facturante.Nombre || !DatosCarga.Facturante.Direccion || !DatosCarga.Facturante.Telefono || (!DatosCarga.Facturante.RUT && !DatosCarga.Facturante.FacturanteExtranjero) || !DatosCarga.Facturante.Email) 
-                                        // ) ||
-                                        // DatosCarga.Contenedor.ContenedoresInvalidos.length > 0 ||
-                                        // (
-                                        //     MiUsuario.TipoCertificados.Singular == "Certificado" && DatosCarga.CompaniaEmisora.Title == "Chubb" && !DatosCarga.Facturante.FacturanteEsConsignatario && !DatosCarga.Facturante.FacturanteExtranjero && !DatosCarga.Facturante.CiudadChubb?.Title
-                                        // ) ||
-                                        // (
-                                        //     DatosCarga.Consignatario.Nombre && !DatosCarga.Consignatario.RUT && !DatosCarga.Consignatario.ConsignatarioSinRUT.RUT
-                                        // ) ||
-                                        // DatosCarga.Consignatario.CartaGlobal ||
-                                        // (
-                                        //     DatosCarga.AgenteDeAduana.CargadoManualmente &&
-                                        //     (!DatosCarga.AgenteDeAduana.Title || !DatosCarga.AgenteDeAduana.RUTCargadoAMano || !DatosCarga.AgenteDeAduana.Direccion || !DatosCarga.AgenteDeAduana.Email || !DatosCarga.AgenteDeAduana.Ciudad || !DatosCarga.AgenteDeAduana.Telefono)
-                                        // ) ||
-                                        // (
-                                        //     !DatosCarga.AgenteDeAduana.CargadoManualmente && !DatosCarga.AgenteDeAduana.Id
-                                        // )
-                                    }
+                                    disabled={ !PuedeGuardarFormulario(rdxDatosCarga) }
                                 >
                                     Informar siniestro
                                 </Button>
