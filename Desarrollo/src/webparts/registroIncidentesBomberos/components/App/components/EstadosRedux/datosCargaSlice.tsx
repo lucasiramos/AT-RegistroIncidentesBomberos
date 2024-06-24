@@ -18,11 +18,11 @@ const initialState = {
         Fecha: null,
         Hora: null,
         Lugar: null,
-        Comuna: {
+        Region: {
             Id: null,
             Nombre: null
         },
-        Region: {
+        Ciudad: {
             Id: null,
             Nombre: null
         },

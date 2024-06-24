@@ -9,8 +9,9 @@ import { ContextSharePoint } from '../../../RegistroIncidentesBomberos'
 
 import { ObtenerDatos } from '../EstructuraApp/Servicio'
 
-import { CambiarComunasDisponibles } from '../EstadosRedux/comunasDisponiblesSlice'
 import { CambiarRegionesDisponibles } from '../EstadosRedux/regionesDisponiblesSlice'
+import { CambiarCiudadesDisponibles } from '../EstadosRedux/ciudadesDisponiblesSlice'
+import { CambiarComisariasDisponibles } from '../EstadosRedux/comisariasDisponiblesSlice'
 
 import styled from 'styled-components'
 
@@ -22,8 +23,9 @@ import { FormularioNuevoSiniestro_3_Terceros } from './FormularioNuevoSiniestro_
 import { FormularioNuevoSiniestro_4_ResumenCarga } from './FormularioNuevoSiniestro_4_ResumenCarga'
 
 export const FormularioNuevoSiniestro: React.FunctionComponent<{}> = ({children}: any) => {
-    const rdxComunasDisponibles = useSelector((state:any) => state.ComunasDisponibles)
     const rdxRegionesDisponibles = useSelector((state:any) => state.RegionesDisponibles)
+    const rdxCiudadesDisponibles = useSelector((state:any) => state.CiudadesDisponibles)
+    const rdxComisariasDisponibles = useSelector((state:any) => state.ComisariasDisponibles)
 
     const { Context }: any = React.useContext<any>(ContextSharePoint)
 
@@ -38,12 +40,15 @@ export const FormularioNuevoSiniestro: React.FunctionComponent<{}> = ({children}
     }, [])
 
     const BuscarDatosParaCargaFormulario:() => Promise<void> = async(Context, dispatch) =>{
-        if(rdxComunasDisponibles.comunas.length == 0){    
-            let dataComunas = await ObtenerDatos("Comunas", `$select=Id, cNombre&$orderby=cNombre`, Context, "SolucionContenedoresProd")
+        if(rdxRegionesDisponibles.regiones.length == 0){
+            let dataRegiones = await ObtenerDatos("Regiones", `$select=Id, Title&$orderby=Title`, Context)
+            dispatch(CambiarRegionesDisponibles(dataRegiones))
 
-            dataComunas.map(x => x.Nombre = x.cNombre)
+            let dataCiudades = await ObtenerDatos("Ciudades", `$select=Id, Title, Region/Id&$expand=Region&$orderby=Title`, Context)
+            dispatch(CambiarCiudadesDisponibles(dataCiudades))
 
-            dispatch(CambiarComunasDisponibles(dataComunas))
+            let dataComisarias = await ObtenerDatos("Comisarias", `$select=Id, Title, Region/Id, Region/Title&$expand=Region&$orderby=Region/Title, Title`, Context)
+            dispatch(CambiarComisariasDisponibles(dataComisarias))
         }
     }
 
@@ -53,7 +58,7 @@ export const FormularioNuevoSiniestro: React.FunctionComponent<{}> = ({children}
     const [stPasoActivo, setPasoActivo] = React.useState(0)
 
     // ------------------------------------------------------------------------------------------------------------------------
-    // Funciones varias
+    // Funciones varias 
 
     const DevolverStepCarga = () => {
         switch (stPasoActivo) {

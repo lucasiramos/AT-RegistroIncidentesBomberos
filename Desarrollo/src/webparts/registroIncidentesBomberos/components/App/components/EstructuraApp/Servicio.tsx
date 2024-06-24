@@ -8,8 +8,6 @@ export function ObtenerDatos(pLista, pParametros, pContexto, pSitio = ""){
     var pObtenerDatos = new Promise(async (resolve, reject) => {
         let ResultadosFinales = []
 
-        console.log(pContexto.pageContext.web)
-
         if(!pSitio){
             pSitio = pContexto.pageContext.web.title
         }
@@ -162,17 +160,21 @@ export const CapitalizarNombre = (pNombre) => {
 	let Nombre = pNombre.toLowerCase()
 	let arrNombre = Nombre.split(" ")
 
-	arrNombre.map(function(item){
+	arrNombre.map(function(Palabra){
 		if(devuelvo != ""){
 			devuelvo += " "
 		}
 
-		if(arrNoCapitalizo.indexOf(item) == -1){
-			devuelvo += item.charAt(0).toUpperCase() + item.slice(1)
+		if(arrNoCapitalizo.indexOf(Palabra) == -1){
+			devuelvo += Palabra.charAt(0).toUpperCase() + Palabra.slice(1)
 		}else{
-			devuelvo += item
+			devuelvo += Palabra
 		}
 	})
+
+    if(devuelvo){
+        return devuelvo.charAt(0).toUpperCase() + devuelvo.slice(1)
+    }
 
 	return devuelvo
 }

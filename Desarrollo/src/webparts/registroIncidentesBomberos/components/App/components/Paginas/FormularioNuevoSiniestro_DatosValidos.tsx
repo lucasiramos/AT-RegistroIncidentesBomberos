@@ -66,7 +66,7 @@ export const InformacionAseguradosValido = (DatosCarga) => {
 
 export const InformacionSiniestroValido = (DatosCarga) => {
 	if(
-        DatosCarga.Siniestro.Fecha && DatosCarga.Siniestro.Hora && DatosCarga.Siniestro.Lugar && DatosCarga.Siniestro.Comuna.Id && DatosCarga.Siniestro.Region.Id && DatosCarga.Siniestro.TipoSiniestro.Id && DatosCarga.Siniestro.Relato && DatosCarga.Siniestro.DaniosVehiculoAsegurado && DatosCarga.Siniestro.NumeroPartePolicial && DatosCarga.Siniestro.Comisaria.Id && DatosCarga.Siniestro.TercerosInvolucrados && ((DatosCarga.Siniestro.TercerosInvolucrados == "Sí" && DatosCarga.Siniestro.ResponsableSiniestro) || DatosCarga.Siniestro.TercerosInvolucrados == "No")
+        DatosCarga.Siniestro.Fecha && DatosCarga.Siniestro.Hora && DatosCarga.Siniestro.Lugar && DatosCarga.Siniestro.Ciudad.Id && DatosCarga.Siniestro.Region.Id && DatosCarga.Siniestro.TipoSiniestro.Id && DatosCarga.Siniestro.Relato && DatosCarga.Siniestro.DaniosVehiculoAsegurado && DatosCarga.Siniestro.NumeroPartePolicial && DatosCarga.Siniestro.Comisaria.Id && DatosCarga.Siniestro.TercerosInvolucrados && ((DatosCarga.Siniestro.TercerosInvolucrados == "Sí" && DatosCarga.Siniestro.ResponsableSiniestro) || DatosCarga.Siniestro.TercerosInvolucrados == "No")
     ){
         return true
     }else{
@@ -85,24 +85,24 @@ export const InformacionTercerosValido = (DatosCarga) => {
 }
 
 export const PuedeGuardarFormulario = (DatosCarga) => {
-    console.log("DatosCarga.AceptoDeclaracionJurada:")
-    console.log(DatosCarga)
-    console.log(DatosCarga.AceptoDeclaracionJurada)
+    // console.log("DatosCarga.AceptoDeclaracionJurada:")
+    // console.log(DatosCarga)
+    // console.log(DatosCarga.AceptoDeclaracionJurada)
 
     //  && DatosCarga.AceptoDeclaracionJurada == true
 
 	if(
         InformacionAseguradosValido(DatosCarga) && InformacionSiniestroValido(DatosCarga) && (DatosCarga.Siniestro.TercerosInvolucrados == "Sí" ? InformacionTercerosValido(DatosCarga) : true) && DatosCarga.AceptoDeclaracionJurada == true
     ){
-        console.log("1 ---")
+        // console.log("1 ---")
 
-        console.log(DatosCarga.AceptoDeclaracionJurada)
+        // console.log(DatosCarga.AceptoDeclaracionJurada)
 
         return true
     }else{
-        console.log("2 ---")
+        // console.log("2 ---")
 
-        console.log(DatosCarga.AceptoDeclaracionJurada)
+        // console.log(DatosCarga.AceptoDeclaracionJurada)
 
         return false
     }

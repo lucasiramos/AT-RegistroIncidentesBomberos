@@ -8,6 +8,8 @@ import { AsteriscoCargaObligatoria } from '../EstructuraApp/AsteriscoCargaObliga
 
 import { CambiarAceptoDeclaracionJurada } from '../EstadosRedux/datosCargaSlice'
 
+import { CapitalizarNombre } from '../EstructuraApp/Servicio'
+
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Dialog from '@mui/material/Dialog'
@@ -70,7 +72,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Marca vehículo asegurado<AsteriscoCargaObligatoria/></span>
+                        <span style={RotuloFormulario}>Marca vehículo<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.VehiculoAsegurado.Marca ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.VehiculoAsegurado.Marca || "-Sin dato-"}</span>
@@ -83,7 +85,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Modelo vehículo asegurado<AsteriscoCargaObligatoria/></span>
+                        <span style={RotuloFormulario}>Modelo vehículo<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.VehiculoAsegurado.Modelo ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.VehiculoAsegurado.Modelo || "-Sin dato-"}</span>
@@ -96,7 +98,20 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Nombre conductor asegurado<AsteriscoCargaObligatoria/></span>
+                        <span style={RotuloFormulario}>Patente vehículo<AsteriscoCargaObligatoria/></span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <span style={rdxDatosCarga.VehiculoAsegurado.Patente ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.VehiculoAsegurado.Patente || "-Sin dato-"}</span>
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
+                        <span style={RotuloFormulario}>Nombre conductor<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.ConductorAsegurado.Nombre ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.ConductorAsegurado.Nombre || "-Sin dato-"}</span>
@@ -109,7 +124,7 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>RUT conductor asegurado<AsteriscoCargaObligatoria/></span>
+                        <span style={RotuloFormulario}>RUT conductor<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <span style={rdxDatosCarga.ConductorAsegurado.RUT ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.ConductorAsegurado.RUT || "-Sin dato-"}</span>
@@ -175,10 +190,10 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Comuna<AsteriscoCargaObligatoria/></span>
+                        <span style={RotuloFormulario}>Región<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
-                        <span style={rdxDatosCarga.Siniestro.Comuna.Nombre ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Siniestro.Comuna.Nombre || "-Sin dato-"}</span>
+                        <span style={rdxDatosCarga.Siniestro.Region.Title ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Siniestro.Region.Title || "-Sin dato-"}</span>
                     </Grid>
                     <Grid item xs={1}>
                         &nbsp;
@@ -188,10 +203,10 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Región<AsteriscoCargaObligatoria/></span>
+                        <span style={RotuloFormulario}>Ciudad<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
-                        <span style={rdxDatosCarga.Siniestro.Region.Nombre ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Siniestro.Region.Nombre || "-Sin dato-"}</span>
+                        <span style={rdxDatosCarga.Siniestro.Ciudad.Title ? ResumenFormulario : SpAmarillo}>{rdxDatosCarga.Siniestro.Ciudad.Title || "-Sin dato-"}</span>
                     </Grid>
                     <Grid item xs={1}>
                         &nbsp;
@@ -265,9 +280,9 @@ export const FormularioNuevoSiniestro_4_ResumenCarga: React.FunctionComponent<{}
                         <span style={RotuloFormulario}>Comisaria<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
-                        <span style={rdxDatosCarga.Siniestro.Comisaria.Nombre ? ResumenFormulario : SpAmarillo}>
-                            {rdxDatosCarga.Siniestro.Comisaria.Nombre ? 
-                                rdxDatosCarga.Siniestro.Comisaria.Nombre
+                        <span style={rdxDatosCarga.Siniestro.Comisaria.Title ? ResumenFormulario : SpAmarillo}>
+                            {rdxDatosCarga.Siniestro.Comisaria.Title ? 
+                                `${CapitalizarNombre(rdxDatosCarga.Siniestro.Comisaria.Region.Title)} - ${rdxDatosCarga.Siniestro.Comisaria.Title}`
                             : 
                                 "-Sin dato-"
                             }

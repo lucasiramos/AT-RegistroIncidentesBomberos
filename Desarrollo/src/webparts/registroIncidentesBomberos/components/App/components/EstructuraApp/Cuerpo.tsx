@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { CambiarSiniestro } from '../EstadosRedux/datosCargaSlice'
 
 import { ObtenerDatos, ModificarDatos } from './Servicio'
-import { ContextSharePoint } from '../../../RegistroIncidentesBomberos'
 
 import styled from 'styled-components'
 
@@ -42,15 +41,9 @@ const StyledContenidoDinamico = styled.div`
 `
 
 export const Cuerpo: React.FunctionComponent<{}> = () => {
-    const { Context }: any = React.useContext<any>(ContextSharePoint)
-
     const rdxDatosCarga = useSelector((state:any) => state.DatosCarga)
 
     const dispatch = useDispatch()
-
-    // console.log("*************************************************")
-    // console.log(rdxDatosCarga)
-    // console.log("*************************************************")
 
     // -------------------------------------------------------------------------------------------
     // Verificar micrófono
@@ -60,6 +53,8 @@ export const Cuerpo: React.FunctionComponent<{}> = () => {
     }, [])
 
     const VerificarMicrofono:() => Promise<void> = async(dispatch) =>{
+        // ----------------------------------------------------------------
+
         // Intento verificar permisos del micrófono
 
         var vPuedeGrabar = false
@@ -67,8 +62,8 @@ export const Cuerpo: React.FunctionComponent<{}> = () => {
         try{
             var PermisosMicrofono = await navigator.permissions.query({name: 'microphone'})
 
-            console.log("OK")
-            console.log(PermisosMicrofono)
+            // console.log("OK")
+            // console.log(PermisosMicrofono)
 
             if(PermisosMicrofono?.state == "granted" || PermisosMicrofono?.state == "prompt"){
                 vPuedeGrabar = true

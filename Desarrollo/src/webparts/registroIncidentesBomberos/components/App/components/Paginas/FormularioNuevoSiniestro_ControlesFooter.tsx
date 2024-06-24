@@ -85,7 +85,7 @@ export const FormularioNuevoSiniestro_ControlesFooter: React.FunctionComponent<{
             Fecha: null,
             Hora: null,
             Lugar: null,
-            Comuna: {
+            Ciudad: {
                 Id: null,
                 Nombre: null
             },

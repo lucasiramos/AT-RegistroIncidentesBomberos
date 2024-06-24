@@ -1,3 +1,31 @@
+Moni nos envía URL, usuario y contraseña para hacer comparativas
+	https://eventos.seguros.sura.cl/denuncio/inicio
+	8963492-k
+
+	https://sitio.consorcio.cl/denuncia-tu-siniestro/
+	rut.4690974-7, patente SGJH25
+
+Investigar si es factible agregar geolocalización
+
+Agregar campo para adjuntar archivos
+
+Cambiar acceso a datos para desarrollo (Sharepoint) y producción (SQL) // <--- Ver si hace falta, o si puedo tener una BD de desarrollo
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+LISTOS:
+
+LISTO // Comunas vinculadas con regiones? Hoy no tenemos ese campo que las une
+	Usar Región y Ciudad
+LISTO // Primero región y después Ciudad?
+	SI
+LISTO // Comisarías
+	Ver de filtrar por Región o comuna (Ver en el Excel)
+	* Región en la descripción
+LISTO // Armar sitio nuevo
+LISTO // Armar listas en sitio nuevo
+LISTO // Agregar confirmación final (responsabilidad de datos ingresados. Ver imagen que mando Diego)
 LISTO // Validar que no se pueda ingresar fecha y hora posterior a la actual
 LISTO // Agregar campo "Región" (desplegable)
 LISTO // Buscar y agregar iconos en los steps del formulario
@@ -6,35 +34,12 @@ LISTO // Buscar y agregar iconos en los steps del formulario
 		2 - import MinorCrashIcon from '@mui/icons-material/MinorCrash'
 		3 - import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 		4 - import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl'
-	
 
-Investigar si es factible agregar geolocalización
-Moni nos envía URL, usuario y contraseña para hacer comparativas
-	https://eventos.seguros.sura.cl/denuncio/inicio
-	8963492-k
-
-	https://sitio.consorcio.cl/denuncia-tu-siniestro/
-	rut.4690974-7, patente SGJH25
-
-LISTO // Agregar confirmación final (responsabilidad de datos ingresados. Ver imagen que mando Diego)
-Agregar campo para adjuntar archivos
-
-///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 PREGUNTAS:
-	Comunas vinculadas con regiones? Hoy no tenemos ese campo que las une
-		Usar Región y Ciudad
-	Primero región y después Ciudad?
-		SI
-	Comisarías
-		Ver de filtrar por Región o comuna (Ver en el Excel)
-		* Región en la descripción
-
 
 _______________________________________________________________________
 
 Diego: ¿Agregar para Chubb 40FQ?
 40FQ
-
-
-

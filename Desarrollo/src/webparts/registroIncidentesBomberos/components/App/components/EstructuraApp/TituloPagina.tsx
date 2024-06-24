@@ -18,7 +18,7 @@ export const TituloPagina: React.FunctionComponent<{}> = ({children}: any) => {
 
 const StyledTitulo = styled.p`
     color: #333;
-    font-family: "Segoe UI Semibold", Arial;
+    font-family: "Segoe UI Semibold"
     font-size: 25px;
     margin-top: 0;
     margin-bottom: 20px;

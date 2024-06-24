@@ -62,14 +62,17 @@ const TextareaAutosize = styled(BaseTextareaAutosize)(
 
 export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> = () => {
     const rdxDatosCarga = useSelector((state:any) => state.DatosCarga)
-    const rdxComunasDisponibles = useSelector((state:any) => state.ComunasDisponibles)
+    const rdxCiudadesDisponibles = useSelector((state:any) => state.CiudadesDisponibles)
     const rdxRegionesDisponibles = useSelector((state:any) => state.RegionesDisponibles)
     const rdxTiposSiniestrosDisponibles = useSelector((state:any) => state.TiposSiniestrosDisponibles)
     const rdxComisariasDisponibles = useSelector((state:any) => state.ComisariasDisponibles)
 
     const dispatch = useDispatch()
 
-    console.log(rdxDatosCarga)
+    // console.log(rdxDatosCarga)
+    // console.log(rdxCiudadesDisponibles)
+    // console.log(rdxRegionesDisponibles)
+    // console.log(rdxComisariasDisponibles)
 
     // ------------------------------------------------------------------------------------------------------------
     // useStates
@@ -121,7 +124,7 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
         }))
     }
 
-    /* 
+
     const AbrirGrabarRelato = () => {
         setModalGrabarAbierto(true)
 
@@ -274,7 +277,6 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
         console.log("______________________________________")
 
     }
-    */ 
 
     // ------------------------------------------------------------------------------------------------------------
     // Render
@@ -391,27 +393,29 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Comuna<AsteriscoCargaObligatoria/></span>
+                        <span style={RotuloFormulario}>Región<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <Autocomplete
                             disablePortal
-                            value={rdxDatosCarga.Siniestro.Comuna.Id ? rdxDatosCarga.Siniestro.Comuna : null}
+                            value={rdxDatosCarga.Siniestro.Region.Id ? rdxDatosCarga.Siniestro.Region : null}
                             fullWidth
                             id="cboComuna"
-                            options={rdxComunasDisponibles.comunas}
-                            getOptionLabel={comuna => comuna.Nombre}
-                            renderInput={(params) => <TextField {...params} label="Seleccione una comuna" />}
+                            options={rdxRegionesDisponibles.regiones}
+                            getOptionLabel={region => CapitalizarNombre(region.Title)}
+                            renderInput={(params) => <TextField {...params} label="Seleccione una región" />}
                             size="small"
                             sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
-                            onChange={(event, ComunaSeleccionada) => {
-                                console.log(ComunaSeleccionada)
-
+                            onChange={(event, RegionSeleccionada) => {
                                 dispatch(CambiarSiniestro({
                                     ...rdxDatosCarga.Siniestro,
-                                    Comuna: {
-                                        Id: ComunaSeleccionada?.Id || null,
-                                        Nombre: ComunaSeleccionada?.cNombre || null
+                                    Region: {
+                                        Id: RegionSeleccionada?.Id || null,
+                                        Title: RegionSeleccionada?.Title ? CapitalizarNombre(RegionSeleccionada.Title) : null
+                                    },
+                                    Ciudad: {
+                                        Id: null,
+                                        Title: null
                                     }
                                 }))
                             }}
@@ -425,25 +429,28 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
-                        <span style={RotuloFormulario}>Región<AsteriscoCargaObligatoria/></span>
+                        <span style={RotuloFormulario}>Ciudad<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
                         <Autocomplete
                             disablePortal
-                            value={rdxDatosCarga.Siniestro.Region.Id ? rdxDatosCarga.Siniestro.Region : null}
+                            value={rdxDatosCarga.Siniestro.Ciudad.Id ? rdxDatosCarga.Siniestro.Ciudad : null}
                             fullWidth
-                            id="cboComuna"
-                            options={rdxRegionesDisponibles.regiones}
-                            getOptionLabel={region => CapitalizarNombre(region.Nombre)}
-                            renderInput={(params) => <TextField {...params} label="Seleccione una región" />}
+                            id="cboCiudad"
+                            options={rdxDatosCarga.Siniestro.Region.Id ? rdxCiudadesDisponibles.ciudades.filter(x => x.Region.Id == rdxDatosCarga.Siniestro.Region.Id) : []}
+                            getOptionLabel={ciudad => CapitalizarNombre(ciudad.Title)}
+                            renderInput={(params) => <TextField {...params} label={rdxDatosCarga.Siniestro.Region.Id ? "Seleccione una ciudad" : "Seleccione una Región para ver sus ciudades"} />}
                             size="small"
                             sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
-                            onChange={(event, RegionSeleccionada) => {
+                            disabled={!rdxDatosCarga.Siniestro.Region.Id}
+                            onChange={(event, CiudadSeleccionada) => {
+                                console.log(CiudadSeleccionada)
+
                                 dispatch(CambiarSiniestro({
                                     ...rdxDatosCarga.Siniestro,
-                                    Region: {
-                                        Id: RegionSeleccionada?.Id || null,
-                                        Nombre: RegionSeleccionada?.Nombre ? CapitalizarNombre(RegionSeleccionada.Nombre) : null
+                                    Ciudad: {
+                                        Id: CiudadSeleccionada?.Id || null,
+                                        Title: CiudadSeleccionada?.Title? CapitalizarNombre(CiudadSeleccionada?.Title) : null
                                     }
                                 }))
                             }}
@@ -567,18 +574,21 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                             fullWidth
                             id="cboComisaria"
                             options={rdxComisariasDisponibles.comisarias}
-                            getOptionLabel={comisaria => comisaria.Nombre}
+                            getOptionLabel={comisaria => {
+                                return `${CapitalizarNombre(comisaria.Region?.Title || "reg")} - ${comisaria?.Title || "com"}`
+                            }}
                             renderInput={(params) => <TextField {...params} label="Seleccione una comisaria" />}
                             size="small"
                             sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
                             onChange={(event, ComisariaSeleccionada) => {
-                                console.log(ComisariaSeleccionada)
-
                                 dispatch(CambiarSiniestro({
                                     ...rdxDatosCarga.Siniestro,
                                     Comisaria: {
                                         Id: ComisariaSeleccionada?.Id || null,
-                                        Nombre: ComisariaSeleccionada?.Nombre || null
+                                        Title: ComisariaSeleccionada?.Title || null,
+                                        Region: {
+                                            Title: ComisariaSeleccionada?.Region?.Title || null
+                                        }
                                     }
                                 }))
                             }}
