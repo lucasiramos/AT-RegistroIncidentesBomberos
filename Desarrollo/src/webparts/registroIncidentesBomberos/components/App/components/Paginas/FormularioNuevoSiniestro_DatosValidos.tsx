@@ -1,7 +1,10 @@
 // @ts-nocheck
 
+import * as dayjs from 'dayjs'
+
 const RGBIconoVerde = "rgb(11, 122, 18)"
 const RGBIconoAzul = "rgb(0, 38, 99)"
+const RGBIconoRojo = "rgb(204, 33, 33)"
 
 export const DevolverColorIcono = (NumeroIcono, DatosCarga) => {
     let ColorDevuelvo = ""
@@ -18,7 +21,13 @@ export const DevolverColorIcono = (NumeroIcono, DatosCarga) => {
             InformacionSiniestroValido(DatosCarga) ? 
                 ColorDevuelvo = RGBIconoVerde
             :
-                ColorDevuelvo = RGBIconoAzul
+                (
+                    DatosCarga.Siniestro.Fecha && DatosCarga.Siniestro.Fecha.isAfter(dayjs()) ||
+                    DatosCarga.Siniestro.Hora && DatosCarga.Siniestro.Hora.isAfter(dayjs())
+                ) ? 
+                    ColorDevuelvo = RGBIconoRojo
+                :
+                    ColorDevuelvo = RGBIconoAzul
 
             break
         
@@ -66,7 +75,13 @@ export const InformacionAseguradosValido = (DatosCarga) => {
 
 export const InformacionSiniestroValido = (DatosCarga) => {
 	if(
-        DatosCarga.Siniestro.Fecha && DatosCarga.Siniestro.Hora && DatosCarga.Siniestro.Lugar && DatosCarga.Siniestro.Ciudad.Id && DatosCarga.Siniestro.Region.Id && DatosCarga.Siniestro.TipoSiniestro.Id && DatosCarga.Siniestro.Relato && DatosCarga.Siniestro.DaniosVehiculoAsegurado && DatosCarga.Siniestro.NumeroPartePolicial && DatosCarga.Siniestro.Comisaria.Id && DatosCarga.Siniestro.TercerosInvolucrados && ((DatosCarga.Siniestro.TercerosInvolucrados == "Sí" && DatosCarga.Siniestro.ResponsableSiniestro) || DatosCarga.Siniestro.TercerosInvolucrados == "No")
+        DatosCarga.Siniestro.Fecha && DatosCarga.Siniestro.Hora && DatosCarga.Siniestro.Lugar && DatosCarga.Siniestro.Ciudad.Id && DatosCarga.Siniestro.Region.Id && DatosCarga.Siniestro.TipoSiniestro.Id && DatosCarga.Siniestro.Relato && DatosCarga.Siniestro.DaniosVehiculoAsegurado && DatosCarga.Siniestro.NumeroPartePolicial && DatosCarga.Siniestro.Comisaria.Id && DatosCarga.Siniestro.TercerosInvolucrados && ((DatosCarga.Siniestro.TercerosInvolucrados == "Sí" && DatosCarga.Siniestro.ResponsableSiniestro) || DatosCarga.Siniestro.TercerosInvolucrados == "No") &&
+        (
+            DatosCarga.Siniestro.Fecha ? (DatosCarga.Siniestro.Fecha.isAfter(dayjs()) ? false : true) : false
+        ) &&
+        (
+            DatosCarga.Siniestro.Hora ? (DatosCarga.Siniestro.Hora.isAfter(dayjs()) || !DatosCarga.Siniestro.Hora.isValid() ? false : true) : false
+        )
     ){
         return true
     }else{
@@ -85,25 +100,11 @@ export const InformacionTercerosValido = (DatosCarga) => {
 }
 
 export const PuedeGuardarFormulario = (DatosCarga) => {
-    // console.log("DatosCarga.AceptoDeclaracionJurada:")
-    // console.log(DatosCarga)
-    // console.log(DatosCarga.AceptoDeclaracionJurada)
-
-    //  && DatosCarga.AceptoDeclaracionJurada == true
-
 	if(
         InformacionAseguradosValido(DatosCarga) && InformacionSiniestroValido(DatosCarga) && (DatosCarga.Siniestro.TercerosInvolucrados == "Sí" ? InformacionTercerosValido(DatosCarga) : true) && DatosCarga.AceptoDeclaracionJurada == true
     ){
-        // console.log("1 ---")
-
-        // console.log(DatosCarga.AceptoDeclaracionJurada)
-
         return true
     }else{
-        // console.log("2 ---")
-
-        // console.log(DatosCarga.AceptoDeclaracionJurada)
-
         return false
     }
 }

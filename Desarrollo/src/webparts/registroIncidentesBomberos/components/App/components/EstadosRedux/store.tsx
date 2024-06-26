@@ -12,6 +12,11 @@ import modelosDisponibles from "./modelosDisponiblesSlice"
 import comisariasDisponibles from "./comisariasDisponiblesSlice"
 import regionesDisponibles from "./regionesDisponiblesSlice"
 import ciudadesDisponibles from "./ciudadesDisponiblesSlice"
+import idEditando from "./idEditandoSlice"
+import marcasVehiculosAsegurados from "./marcasVehiculosAseguradosSlice"
+import modelosVehiculosAsegurados from "./modelosVehiculosAseguradosSlice"
+import tiposVehiculosAsegurados from "./tiposVehiculosAseguradosSlice"
+import cuerposBomberosDisponibles from "./cuerposBomberosDisponiblesSlice"
 
 export const store = configureStore({
     reducer: {
@@ -26,6 +31,11 @@ export const store = configureStore({
         ModelosDisponibles: modelosDisponibles,
         ComisariasDisponibles: comisariasDisponibles,
         RegionesDisponibles: regionesDisponibles,
-        CiudadesDisponibles: ciudadesDisponibles
+        CiudadesDisponibles: ciudadesDisponibles,
+        IdEditando: idEditando,
+        MarcasVehiculosAseguradosDisponibles: marcasVehiculosAsegurados,
+        ModelosVehiculosAseguradosDisponibles: modelosVehiculosAsegurados,
+        TiposVehiculosAseguradosDisponibles: tiposVehiculosAsegurados,
+        CuerposBomberosDisponibles: cuerposBomberosDisponibles
     }
 })

@@ -10,6 +10,7 @@ import styled, { css } from 'styled-components'
 
 import CarCrashRoundedIcon from '@mui/icons-material/CarCrashRounded'
 import NoCrashRoundedIcon from '@mui/icons-material/NoCrashRounded'
+import StorageIcon from '@mui/icons-material/Storage'
 
 export const MenuLateral: React.FunctionComponent<{}> = ({children}: any) => {
     const dispatch = useDispatch()
@@ -38,6 +39,10 @@ export const MenuLateral: React.FunctionComponent<{}> = ({children}: any) => {
                 <OpcionMenu opcionElegida={rdxPaginaActual == "Mis siniestros cerrados"} onClick={() => ClickMenuLateral("Mis siniestros cerrados")}>
                     <NoCrashRoundedIcon /> 
                     <TextoBoton>Mis siniestros cerrados</TextoBoton>
+                </OpcionMenu>
+                <OpcionMenu opcionElegida={rdxPaginaActual == "Carga de Vehículos"} onClick={() => ClickMenuLateral("Carga de Vehículos")}>
+                    <StorageIcon /> 
+                    <TextoBoton>Carga de Vehículos</TextoBoton>
                 </OpcionMenu>
             </StackOpcionesMenu>
         </StyledMenuLateral>

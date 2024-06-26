@@ -78,16 +78,6 @@ export const FormularioNuevoSiniestro_3_Terceros: React.FunctionComponent<{}> = 
         <>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
-                    <Grid item xs={4}>
-                        &nbsp;
-                    </Grid>
-                    <Grid item xs={7}>
-                        <h2 style={{...H2AT, marginTop: "0px", marginBottom: "10px"}}>Información de Terceros</h2>
-                    </Grid>
-                    <Grid item xs={1}>
-                        &nbsp;
-                    </Grid>
-
                     <Grid item xs={1}>
                         &nbsp;
                     </Grid>

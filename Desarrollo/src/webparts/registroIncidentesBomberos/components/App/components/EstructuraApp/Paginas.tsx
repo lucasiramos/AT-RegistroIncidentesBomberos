@@ -7,6 +7,8 @@ import { useSelector } from "react-redux"
 import { BomberosMisCasosCerrados } from '../Paginas/Bomberos/BomberosMisCasosCerrados'
 import { BomberosMisSiniestrosEnCurso } from '../Paginas/Bomberos/BomberosMisSiniestrosEnCurso'
 import { FormularioNuevoSiniestro } from '../Paginas/FormularioNuevoSiniestro'
+import { BomberosAdmin_CargaVehiculos } from '../Paginas/BomberosAdmin/BomberosAdmin_CargaVehiculos'
+import { BomberosAdmin_CargaVehiculos_Formulario } from '../Paginas/BomberosAdmin/BomberosAdmin_CargaVehiculos_Formulario'
 
 import { BotonRegistrarNuevoIncidente } from './BotonRegistrarNuevoIncidente'
 import { TituloPagina } from './TituloPagina'
@@ -47,6 +49,19 @@ export const Paginas: React.FunctionComponent<{}> = ({children}: any) => {
                 return <>
                     <TituloPagina/>
                     <FormularioNuevoSiniestro/>
+                </>
+
+            case "Carga de Vehículos":
+                return <>
+                    <TituloPagina/>
+                    <BomberosAdmin_CargaVehiculos/>
+                </>
+
+            case "Carga de nuevo vehículo":
+            case "Modificar información de vehículo":
+                return <>
+                    <TituloPagina/>
+                    <BomberosAdmin_CargaVehiculos_Formulario/>
                 </>
         }
     }

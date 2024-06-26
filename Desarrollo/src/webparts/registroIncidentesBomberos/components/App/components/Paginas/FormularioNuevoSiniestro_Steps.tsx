@@ -9,19 +9,22 @@ import { InformacionAseguradosValido } from './FormularioNuevoSiniestro_DatosVal
 import { InformacionSiniestroValido } from './FormularioNuevoSiniestro_DatosValidos'
 import { InformacionTercerosValido } from './FormularioNuevoSiniestro_DatosValidos'
 
+import * as dayjs from 'dayjs'
+
 import styled from 'styled-components'
 
 import Stepper from '@mui/material/Stepper'
+import StepConnector from '@mui/material/StepConnector';
 import Step from '@mui/material/Step'
 import StepButton from '@mui/material/StepButton'
 import { StepLabel } from '@mui/material'
 import StepIcon from '@mui/material'
-import { Html, FireTruck, MinorCrash, PeopleAlt, ChecklistRtl, Check } from '@mui/icons-material'
+import { Html, FireTruck, MinorCrash, PeopleAlt, ChecklistRtl, Check, Close } from '@mui/icons-material'
 
 import { FontSegoe } from '../EstructuraApp/EstilosGlobales'
 
 const EstilosIconoStep = {
-    padding: "8px 9px",
+    padding: "7px 9px",
     borderRadius: "20px",
     position: "relative",
     top: "-8px",
@@ -56,6 +59,8 @@ export const FormularioNuevoSiniestro_Steps: React.FunctionComponent<{}> = ({chi
     // Funciones varias
 
     const ClickBotonPaso = (step: number) => () => {
+        console.log(step)
+
         setPasoActivo(step)
     }
 
@@ -64,7 +69,16 @@ export const FormularioNuevoSiniestro_Steps: React.FunctionComponent<{}> = ({chi
 
         const icons: { [index: string]: React.ReactElement } = {
           1: InformacionAseguradosValido(rdxDatosCarga) ? <Check sx={sxIcono} /> : <FireTruck sx={sxIcono} />,
-          2: InformacionSiniestroValido(rdxDatosCarga) ? <Check sx={sxIcono} /> : <MinorCrash sx={sxIcono} />,
+          2: InformacionSiniestroValido(rdxDatosCarga) ? 
+                <Check sx={sxIcono} /> 
+             : 
+                (
+                    rdxDatosCarga.Siniestro.Fecha && rdxDatosCarga.Siniestro.Fecha.isAfter(dayjs()) ||
+                    rdxDatosCarga.Siniestro.Hora && rdxDatosCarga.Siniestro.Hora.isAfter(dayjs())
+                ) ? 
+                    <Close sx={{...sxIcono, position: "relative", top: "1px"}} />
+                :
+                    <MinorCrash sx={sxIcono} />,
           3: rdxDatosCarga.Siniestro.TercerosInvolucrados == "Sí" ? 
                 InformacionTercerosValido(rdxDatosCarga) ?
                     <Check sx={sxIcono} />
@@ -83,14 +97,17 @@ export const FormularioNuevoSiniestro_Steps: React.FunctionComponent<{}> = ({chi
     }
 
     return (
-        <div style={{marginBottom: "20px", marginTop: "40px", maxWidth: "95%"}}>
-            <Stepper nonLinear alternativeLabel activeStep={stPasoActivo}>
+        <div style={{marginBottom: "50px", marginTop: "40px"}}>
+            <Stepper nonLinear alternativeLabel activeStep={stPasoActivo}
+                connector={<StepConnector sx={{zIndex: "50"}}/>}
+            >
                 {steps.map((step, index) => (
                     <Step key={step.Texto} completed={false} style={{...FontSegoe, display: (index != 2 || rdxDatosCarga.Siniestro.TercerosInvolucrados == "Sí") ? "block" : "none"}}>
                         <StepButton 
                             color="inherit" 
                             onClick={ClickBotonPaso(index)}
                             icon={index != 3 ? (index+1) : (rdxDatosCarga.Siniestro.TercerosInvolucrados == "Sí" ? 4 : 3)}
+                            sx={{backgroundColor: index == stPasoActivo ? "#c8d0d4" : "rgba(0, 0, 0, 0)"}}
                         >
                             <StepLabel StepIconComponent={ObtenerIconoStep}>
                                 {step.Texto}

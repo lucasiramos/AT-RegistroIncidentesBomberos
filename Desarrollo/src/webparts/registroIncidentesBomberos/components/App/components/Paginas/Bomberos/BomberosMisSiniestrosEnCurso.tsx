@@ -9,14 +9,14 @@ import VerSiniestro from '../VerSiniestro'
 
 import { DataMisSiniestrosEnCurso } from '../../EstructuraApp/DatosPrueba/Datos'
 
-import 'primeicons/primeicons.css'
 import { App } from './App/App'
+
+import 'primeicons/primeicons.css'
 import { PrimeReactProvider } from 'primereact/api'
 import 'primeflex/primeflex.css'
 import 'primereact/resources/primereact.css'
 import 'primereact/resources/themes/lara-light-indigo/theme.css'
 
-import Button from '@mui/material/Button'
 import { IconButton } from '@mui/material'
 import { Search } from '@mui/icons-material'
 

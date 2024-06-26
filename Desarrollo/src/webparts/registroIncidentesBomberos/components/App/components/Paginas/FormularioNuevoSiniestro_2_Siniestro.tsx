@@ -10,6 +10,9 @@ import { CapitalizarNombre } from '../EstructuraApp/Servicio'
 
 import { AsteriscoCargaObligatoria } from '../EstructuraApp/AsteriscoCargaObligatoria'
 
+import "dayjs/locale/es"
+import * as dayjs from 'dayjs'
+
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Autocomplete from '@mui/material/Autocomplete'
@@ -20,8 +23,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { esES } from '@mui/x-date-pickers'
-import "dayjs/locale/es"
-import * as dayjs from 'dayjs'
 import { TimeField } from '@mui/x-date-pickers/TimeField'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
@@ -285,16 +286,19 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
         <>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
+                    {/* //////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+                    {/* Cómo y dónde */}
+
                     <Grid item xs={4}>
                         &nbsp;
                     </Grid>
                     <Grid item xs={7}>
-                        <h2 style={{...H2AT, marginTop: "0px", marginBottom: "10px"}}>Información del siniestro</h2>
+                        <h2 style={{...H2AT, marginTop: "0px", marginBottom: "10px"}}>¿Cómo y donde?</h2>
                     </Grid>
                     <Grid item xs={1}>
                         &nbsp;
                     </Grid>
-                
+
                     <Grid item xs={1}>
                         &nbsp;
                     </Grid>
@@ -482,6 +486,19 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
 
+                    {/* //////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+                    {/* Detalles del siniestro */}
+
+                    <Grid item xs={4}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={7}>
+                        <h2 style={{...H2AT, marginTop: "40px", marginBottom: "10px"}}>Detalles del siniestro</h2>
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
                     <Grid item xs={1}>
                         &nbsp;
                     </Grid>
@@ -565,6 +582,68 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
+                        <span style={RotuloFormulario}>¿Hubo terceros involucrados?<AsteriscoCargaObligatoria/></span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <RadioGroup
+                            row
+                            aria-labelledby="demo-row-radio-buttons-group-label"
+                            name="TercerosInvolucrados"
+                            value={rdxDatosCarga.Siniestro.TercerosInvolucrados}
+                            onChange={ChangeOpt}
+                        >
+                            <FormControlLabel value="Sí" control={<Radio />} label="Sí" />
+                            <FormControlLabel value="No" control={<Radio />} label="No" />
+                        </RadioGroup>
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    {
+                        rdxDatosCarga.Siniestro.TercerosInvolucrados == "Sí" && 
+                            <>
+                                <Grid item xs={1}>
+                                    &nbsp;
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <span style={RotuloFormulario}>Responsable del siniestro<AsteriscoCargaObligatoria/></span>
+                                </Grid>
+                                <Grid item xs={7}>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="ResponsableSiniestro"
+                                        value={rdxDatosCarga.Siniestro.ResponsableSiniestro}
+                                        onChange={ChangeOpt}
+                                    >
+                                        <FormControlLabel value="Tercero" control={<Radio />} label="Tercero" />
+                                        <FormControlLabel value="Bomberos" control={<Radio />} label="Bomberos" />
+                                    </RadioGroup>
+                                </Grid>
+                                <Grid item xs={1}>
+                                    &nbsp;
+                                </Grid>
+                            </>
+                    }
+
+                    {/* //////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+                    {/* Constancia policial */}
+
+                    <Grid item xs={4}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={7}>
+                        <h2 style={{...H2AT, marginTop: "40px", marginBottom: "10px"}}>Constancia policial</h2>
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Comisaria<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
@@ -619,55 +698,6 @@ export const FormularioNuevoSiniestro_2_Siniestro: React.FunctionComponent<{}> =
                     <Grid item xs={1}>
                         &nbsp;
                     </Grid>
-
-                    <Grid item xs={1}>
-                        &nbsp;
-                    </Grid>
-                    <Grid item xs={3}>
-                        <span style={RotuloFormulario}>¿Hubo terceros involucrados?<AsteriscoCargaObligatoria/></span>
-                    </Grid>
-                    <Grid item xs={7}>
-                        <RadioGroup
-                            row
-                            aria-labelledby="demo-row-radio-buttons-group-label"
-                            name="TercerosInvolucrados"
-                            value={rdxDatosCarga.Siniestro.TercerosInvolucrados}
-                            onChange={ChangeOpt}
-                        >
-                            <FormControlLabel value="Sí" control={<Radio />} label="Sí" />
-                            <FormControlLabel value="No" control={<Radio />} label="No" />
-                        </RadioGroup>
-                    </Grid>
-                    <Grid item xs={1}>
-                        &nbsp;
-                    </Grid>
-
-                    {
-                        rdxDatosCarga.Siniestro.TercerosInvolucrados == "Sí" && 
-                            <>
-                                <Grid item xs={1}>
-                                    &nbsp;
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <span style={RotuloFormulario}>Responsable del siniestro<AsteriscoCargaObligatoria/></span>
-                                </Grid>
-                                <Grid item xs={7}>
-                                    <RadioGroup
-                                        row
-                                        aria-labelledby="demo-row-radio-buttons-group-label"
-                                        name="ResponsableSiniestro"
-                                        value={rdxDatosCarga.Siniestro.ResponsableSiniestro}
-                                        onChange={ChangeOpt}
-                                    >
-                                        <FormControlLabel value="Tercero" control={<Radio />} label="Tercero" />
-                                        <FormControlLabel value="Bomberos" control={<Radio />} label="Bomberos" />
-                                    </RadioGroup>
-                                </Grid>
-                                <Grid item xs={1}>
-                                    &nbsp;
-                                </Grid>
-                            </>
-                    }
                 </Grid>
             </Box>
 

@@ -11,6 +11,27 @@ Agregar campo para adjuntar archivos
 
 Cambiar acceso a datos para desarrollo (Sharepoint) y producción (SQL) // <--- Ver si hace falta, o si puedo tener una BD de desarrollo
 
+Agregar Mantenedorrr!
+
+Andy
+	¿Se debe completar cada paso para pasar al siguiente?
+
+	Regiones y ciudades
+		Leer de CNTs, traer originalmente las regiones de chile y hacer un postback por cada selección del combo trayendo las ciudades de la región
+
+	Ver de adaptar para mobile, ¿para una versión 2.0?
+
+	Geolocalización de Maps, ver implementación
+		A partir de la región/ciudad/lugar, poner un pin en el mapa
+
+	¿Cuántas BDs tenemos en esta contratación?
+		Es una sola Base, podemos armar tablas "DESA_xxx" y "xxx" y apuntar API UAT a "DESA_xxx"
+
+	¿Armar alguna aplicación genérica para Aseguradoras (saliendo de bomberos)?
+
+	Para terceros:
+		Poner un check de si es extranjero o no
+			Si es extranjero, NO validar RUT
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,6 +55,23 @@ LISTO // Buscar y agregar iconos en los steps del formulario
 		2 - import MinorCrashIcon from '@mui/icons-material/MinorCrash'
 		3 - import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 		4 - import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl'
+
+LISTO // Ver diseños de plataformas
+	LISTO // No dejar guardar si día/hora es mayor
+
+	LISTO // En step actual poner fondito de color al step, para identificar que estas ahi
+		Con esto se podría sacar el título de la sección
+
+	LISTO // Paso 4: Datos de Asegurados / Información de asegurados ... 
+
+	LISTO // Agrupar en siniestro con
+		Como y donde
+		Detalles del siniestro
+		Constancia policial
+
+	LISTO // Agrupar en información de terceros con
+		Datos personales
+		Datos del vehículo
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
