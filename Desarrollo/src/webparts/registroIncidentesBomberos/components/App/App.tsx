@@ -54,37 +54,37 @@ export const App: React.FunctionComponent<{}> = () => {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 const InicializarFormulario:() => Promise<void> = async(Context, setUrlConEmbedded, stUrlConEmbedded) =>{
-    setUrlConEmbedded(true)
+    // setUrlConEmbedded(true)
 
     // -----------------------------------------------------------------------------------------------
 
-    // const sp = spfi().using(SPFx(Context));
+    const sp = spfi().using(SPFx(Context));
 
-    // if(ValorParametro("env") == "Embedded"){
-    //     setUrlConEmbedded(true)
+    if(ValorParametro("env") == "Embedded"){
+        setUrlConEmbedded(true)
 
-    //     //--------------------------------------------------------------------
-    //     // Quito la barra superior
+        //--------------------------------------------------------------------
+        // Quito la barra superior
 
-    //     const [batchedSP, execute] = sp.batched();
-    //     batchedSP.using(Caching());
+        const [batchedSP, execute] = sp.batched();
+        batchedSP.using(Caching());
 
-    //     var suiteBar = document.getElementById("SuiteNavWrapper");
-    //     suiteBar.setAttribute("style", "display: none !important");
+        var suiteBar = document.getElementById("SuiteNavWrapper");
+        suiteBar.setAttribute("style", "display: none !important");
 
-    //     document.getElementById("SuiteNavWrapper").style.display = "none";
+        document.getElementById("SuiteNavWrapper").style.display = "none";
 
-    //     //--------------------------------------------------------------------
-    //     // Limpio la url
+        //--------------------------------------------------------------------
+        // Limpio la url
 
-    //     window.history.replaceState({}, document.title, Context.pageContext.web.absoluteUrl + "/SitePages/Siniestros-bomberos.aspx")
-    // }else{
-    //     // No tiene el parámetro de Embedded, lo redirijo a ese parámetro para quitar los elementos sobrantes
+        window.history.replaceState({}, document.title, Context.pageContext.web.absoluteUrl + "/SitePages/Siniestros-bomberos.aspx")
+    }else{
+        // No tiene el parámetro de Embedded, lo redirijo a ese parámetro para quitar los elementos sobrantes
 
-    //     window.location.replace(Context.pageContext.web.absoluteUrl + "/SitePages/Siniestros-bomberos.aspx?env=Embedded");
-    // }
+        window.location.replace(Context.pageContext.web.absoluteUrl + "/SitePages/Siniestros-bomberos.aspx?env=Embedded");
+    }
 
-    // console.log("24/06/24 15:05")
+    console.log("24/06/24 21:00")
 }
 
 function ValorParametro(name) {

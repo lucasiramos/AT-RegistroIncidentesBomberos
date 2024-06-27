@@ -18,7 +18,7 @@ export const TituloPrincipal: React.FunctionComponent<{}> = ({children}: any) =>
 }
 
 const StyledTitulo = styled.div`
-    height: 105px;
+    height: 125px;
     margin-bottom: 20px;
     display: flex;
     background-image: url(${ImgHeader});

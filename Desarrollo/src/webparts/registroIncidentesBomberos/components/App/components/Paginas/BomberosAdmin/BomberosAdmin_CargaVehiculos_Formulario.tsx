@@ -162,8 +162,16 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
             dispatch(CambiarModelosVehiculosAseguradosDisponibles(dataModelos))
     
             setMensaje({
-                ...stMensaje,
-                Abierto: false
+                Abierto: false,
+                Titulo: "Buscando modelos de la marca elegida...",
+                Texto: "",
+                Spinner: true,
+                MuestroPorcentaje: false,
+                Porcentaje: 0,
+                BotonEntendido: false,
+                BotonesCancelarCarga: false,
+                BotonesConfirmarGuardado: false,
+                BotonesPostgrabacion: false
             })
         }
     }

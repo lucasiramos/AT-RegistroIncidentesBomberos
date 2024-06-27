@@ -13,17 +13,18 @@ import { ContextSharePoint } from '../../../../RegistroIncidentesBomberos'
 import { ObtenerDatos } from '../../EstructuraApp/Servicio'
 
 import 'primeicons/primeicons.css'
-import { PrimeReactProvider } from 'primereact/api'
+import { PrimeReactProvider, FilterMatchMode, FilterOperator } from 'primereact/api'
 import 'primeflex/primeflex.css'
 import 'primereact/resources/primereact.css'
 import 'primereact/resources/themes/lara-light-indigo/theme.css'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 
-import { Backdrop, CircularProgress, IconButton, Skeleton, Stack, Button } from '@mui/material'
-import { Search, AddCircle } from '@mui/icons-material'
+import { Backdrop, CircularProgress, IconButton, Skeleton, Stack, Button, TextField, Dialog, DialogTitle, DialogContent, DialogActions, IconButton, Typography, Box, Grid } from '@mui/material'
+import { Search, AddCircle, Close } from '@mui/icons-material'
+import { styled } from '@mui/material/styles'
 
-import { ContenedorMensaje, TituloMensaje } from '../../EstructuraApp/EstilosGlobales'
+import { ContenedorMensaje, TituloMensaje, H3AT, SpAmarillo, RotuloVerCertificado, ResumenFormulario } from '../../EstructuraApp/EstilosGlobales'
 
 export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
     const dispatch = useDispatch()
@@ -39,7 +40,20 @@ export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
 
     const [stVehiculos, setVehiculos] = React.useState([])
 
-    console.log(stVehiculos)
+    const [stFiltrosTabla, setFiltrosTabla] = React.useState({
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        Patente: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'Marca.Title': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'Modelo.Title': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'TipoVehiculo.Title': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'CuerpoBomberos.Title': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        Compania: { value: null, matchMode: FilterMatchMode.CONTAINS }
+    })
+
+    const [stMostrarDatosVehiculo, setMostrarDatosVehiculo] = React.useState({
+        Abierto: false,
+        Vehiculo: {}
+    })
 
     // ---------------------------------------------------------------------------------------------
     // Inicializar formulario
@@ -49,7 +63,7 @@ export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
     }, [])
 
     const BuscarVehiculos:() => Promise<void> = async(Context) =>{
-        let dataVehiculos = await ObtenerDatos("VehiculosBomberos", `$select=Id, Patente, Marca/Id, Marca/Title, Modelo/Id, Modelo/Title, TipoVehiculo/Title, CuerpoBomberos/Title, Compania&$expand=Marca, Modelo, TipoVehiculo, CuerpoBomberos&$orderby=Patente, Title`, Context)
+        let dataVehiculos = await ObtenerDatos("VehiculosBomberos", `$select=Id, Patente, Marca/Id, Marca/Title, Modelo/Id, Modelo/Title, TipoVehiculo/Title, CuerpoBomberos/Title, Compania, Chasis, Motor, Anio, Region/Title, Propietarios&$expand=Marca, Modelo, TipoVehiculo, CuerpoBomberos, Region&$orderby=Patente, Title`, Context)
 
         setVehiculos(dataVehiculos)
 
@@ -66,13 +80,29 @@ export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
         dispatch(CambiarIdEditando(0))
         dispatch(CambiarPaginaActual("Carga de nuevo vehículo"))
     }
+    
+    const MostrarDatosVehiculo = (pVehiculo) => {
+        let dataVehiculoMuestro = stVehiculos.find(x => x.Id == pVehiculo.Id)
+
+        setMostrarDatosVehiculo({
+            Abierto: true,
+            Vehiculo: dataVehiculoMuestro
+        })
+    }
+
+    const CerrarMostrarDatosVehiculo = () => {
+        setMostrarDatosVehiculo({
+            ...stMostrarDatosVehiculo,
+            Abierto: false,
+        })
+    }
 
     // ---------------------------------------------------------------------------------------------
     // Render
 
-    const accionesBodyTemplate = (siniestro) => {
+    const accionesBodyTemplate = (pVehiculo) => {
         return <>
-            <IconButton aria-label="Ver más" onClick={ () => {alert("Muestro vehículo")} }>
+            <IconButton aria-label="Ver más" onClick={ () => MostrarDatosVehiculo(pVehiculo) }>
                 <Search />
             </IconButton>
         </>
@@ -84,6 +114,18 @@ export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
         }
     }
 
+    /*
+    const ArmarHeaderTabla = () => {
+        return (
+            <div className="flex justify-content-end">
+                <span>Aca iria el buscadorcin...</span>
+            </div>
+        );
+    };
+
+    const HeaderTabla = ArmarHeaderTabla()
+    */ 
+
     return (
         <>
             <Button variant="contained" startIcon={<AddCircle />} sx={{textTransform: "none", marginBottom: "20px"}} size="large" onClick={() => ClickNuevoVehiculo()}>
@@ -94,14 +136,14 @@ export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
                 stVehiculos.length > 0 ? 
                     <>
                         <PrimeReactProvider>
-                            <DataTable value={stVehiculos} size="small" paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50, 100]} tableStyle={{ minWidth: '50rem' }} sortMode="multiple">
+                            <DataTable value={stVehiculos} size="small" paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50, 100]} tableStyle={{ minWidth: '50rem' }} sortMode="multiple" filters={stFiltrosTabla} filterDisplay="row" globalFilterFields={['Patente', 'Marca.Title', 'Modelo.Title', 'TipoVehiculo.Title', 'CuerpoBomberos.Title', 'Compania']} emptyMessage="No se encontraron vehículos...">
                                 <Column header="Acciones" body={accionesBodyTemplate} bodyStyle={{ textAlign: 'center' }}></Column>
-                                <Column header="Patente" field="Patente" sortable></Column>
-                                <Column header="Marca" field="Marca.Title" sortable></Column>
-                                <Column header="Modelo" field="Modelo.Title" sortable></Column>
-                                <Column header="Tipo vehículo" field="TipoVehiculo.Title" sortable></Column>
-                                <Column header="Cuerpo Bomberos" field="CuerpoBomberos.Title" sortable></Column>
-                                <Column header="Compañía" field="Compania" sortable></Column>
+                                <Column header="Patente" field="Patente" sortable filter filterPlaceholder="Buscar"></Column>
+                                <Column header="Marca" field="Marca.Title" sortable filter filterPlaceholder="Buscar"></Column>
+                                <Column header="Modelo" field="Modelo.Title" sortable filter filterPlaceholder="Buscar"></Column>
+                                <Column header="Tipo vehículo" field="TipoVehiculo.Title" sortable filter filterPlaceholder="Buscar"></Column>
+                                <Column header="Cuerpo Bomberos" field="CuerpoBomberos.Title" sortable filter filterPlaceholder="Buscar"></Column>
+                                <Column header="Compañía" field="Compania" sortable filter filterPlaceholder="Buscar"></Column>
                             </DataTable>
                         </PrimeReactProvider>
                     </>
@@ -137,6 +179,120 @@ export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
                     }
                 </div>
             </Backdrop>
+
+            {/* ///////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+
+            <BootstrapDialog
+                onClose={CerrarMostrarDatosVehiculo}
+                aria-labelledby="customized-dialog-title"
+                open={stMostrarDatosVehiculo.Abierto}
+                fullWidth={true}
+                maxWidth={"lg"}
+                scroll={"paper"}
+            >
+                <DialogTitle sx={{ m: 0, p: 2, fontFamily: "Segoe UI Semibold" }} id="customized-dialog-title">
+                    {`${stMostrarDatosVehiculo.Vehiculo.Marca?.Title || ""} ${stMostrarDatosVehiculo.Vehiculo.Modelo?.Title || ""} - Patente ${stMostrarDatosVehiculo.Vehiculo.Patente || "-"}`}
+                </DialogTitle>
+                <IconButton
+                    aria-label="close"
+                    onClick={CerrarMostrarDatosVehiculo}
+                    sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }}
+                >
+                    <Close />
+                </IconButton>
+
+                <DialogContent dividers>
+                    <Typography gutterBottom sx={{fontFamily: "Segoe UI"}}>
+                        <Box sx={{ flexGrow: 1 }}>
+                            <Grid container spacing={1}>
+                                {/* --------------------------------------------------------------------------------------------------- */}
+                                {/* Información del vehículo */}
+
+                                <Grid item xs={12}>
+                                    <h3 style={{...H3AT, marginTop: "0px", marginBottom: "0px", textDecoration: "underline"}}>Información del vehículo</h3>
+                                </Grid>
+
+                                <Grid item xs={3}>
+                                    <div style={RotuloVerCertificado}>Marca</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Marca?.Title ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Marca?.Title || "-Sin dato-"}</span>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <div style={RotuloVerCertificado}>Modelo</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Modelo?.Title ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Modelo?.Title || "-Sin dato-"}</span>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <div style={RotuloVerCertificado}>Tipo</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.TipoVehiculo?.Title ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.TipoVehiculo?.Title || "-Sin dato-"}</span>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <div style={RotuloVerCertificado}>Año</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Anio ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Anio || "-Sin dato-"}</span>
+                                </Grid>
+
+                                <Grid item xs={3}>
+                                    <div style={RotuloVerCertificado}>Patente</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Patente ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Patente || "-Sin dato-"}</span>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <div style={RotuloVerCertificado}>N° Chasis</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Chasis ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Chasis || "-Sin dato-"}</span>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <div style={RotuloVerCertificado}>N° Motor</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Motor ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Motor || "-Sin dato-"}</span>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    &nbsp;
+                                </Grid>
+
+                                {/* --------------------------------------------------------------------------------------------------- */}
+                                {/* Pertenece a */}
+
+                                <Grid item xs={12}>
+                                    <h3 style={{...H3AT, marginTop: "30px" , marginBottom: "0px", textDecoration: "underline"}}>Pertenece a</h3>
+                                </Grid>
+
+                                <Grid item xs={3}>
+                                    <div style={RotuloVerCertificado}>Región</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Region?.Title ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Region?.Title || "-Sin dato-"}</span>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <div style={RotuloVerCertificado}>Cuerpo de Bomberos</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.CuerpoBomberos?.Title ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.CuerpoBomberos?.Title || "-Sin dato-"}</span>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <div style={RotuloVerCertificado}>Propietarios</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Propietarios ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Propietarios || "-Sin dato-"}</span>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <div style={RotuloVerCertificado}>Compañía</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Compania ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Compania || "-Sin dato-"}</span>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    </Typography>
+                </DialogContent>
+
+                <DialogActions>
+                    <Button autoFocus variant='contained' onClick={CerrarMostrarDatosVehiculo}>
+                        Cerrar
+                    </Button>
+                </DialogActions>
+            </BootstrapDialog>
         </>
     )
 }
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogContent-root': {
+        padding: theme.spacing(2),
+    },
+    '& .MuiDialogActions-root': {
+        padding: theme.spacing(1),
+    },
+}))
