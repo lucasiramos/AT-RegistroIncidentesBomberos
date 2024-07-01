@@ -26,10 +26,10 @@ export const RotuloFormulario = {
   marginTop: "8px"
 }
 
-export const RotuloVerCertificado = {
+export const RotuloVerDatosPopup = {
   fontSize: "18px",
   display: "block",
-  marginTop: "8px"
+  marginTop: "8px",
 }
 
 export const ResumenFormulario = {

@@ -1,37 +1,32 @@
-Moni nos envía URL, usuario y contraseña para hacer comparativas
-	https://eventos.seguros.sura.cl/denuncio/inicio
-	8963492-k
+	Para terceros:
+		Poner un check de si es extranjero o no
+			Si es extranjero, NO validar RUT
 
-	https://sitio.consorcio.cl/denuncia-tu-siniestro/
-	rut.4690974-7, patente SGJH25
+ramosilucas@gmail.com
+	cmFtb3NpbHVjYXNAZ21haWwuY29t
+
+serviciosandestool@andestool.com
+	c2VydmljaW9zYW5kZXN0b29sQGFuZGVzdG9vbC5jb20=
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+POSIBLES/A FUTURO:
 
 Investigar si es factible agregar geolocalización
 
 Agregar campo para adjuntar archivos
 
-Cambiar acceso a datos para desarrollo (Sharepoint) y producción (SQL) // <--- Ver si hace falta, o si puedo tener una BD de desarrollo
+Geolocalización de Maps, ver implementación
+	A partir de la región/ciudad/lugar, poner un pin en el mapa
 
-Agregar Mantenedorrr!
 
-Andy
-	¿Se debe completar cada paso para pasar al siguiente?
+Regiones y ciudades
+	Leer de CNTs, traer originalmente las regiones de chile y hacer un postback por cada selección del combo trayendo las ciudades de la región
 
-	Regiones y ciudades
-		Leer de CNTs, traer originalmente las regiones de chile y hacer un postback por cada selección del combo trayendo las ciudades de la región
 
-	Ver de adaptar para mobile, ¿para una versión 2.0?
 
-	Geolocalización de Maps, ver implementación
-		A partir de la región/ciudad/lugar, poner un pin en el mapa
-
-	¿Cuántas BDs tenemos en esta contratación?
-		Es una sola Base, podemos armar tablas "DESA_xxx" y "xxx" y apuntar API UAT a "DESA_xxx"
-
-	¿Armar alguna aplicación genérica para Aseguradoras (saliendo de bomberos)?
-
-	Para terceros:
-		Poner un check de si es extranjero o no
-			Si es extranjero, NO validar RUT
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -76,6 +71,33 @@ LISTO // Ver diseños de plataformas
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 PREGUNTAS:
+	Preguntas Datos Excel Carga masiva:
+		* ¿Cuál es la diferencia entre Tipo padrón y Tipo RC?
+		* ¿Marca Chasis y Modelo chasis deberían ser datos normalizados?
+			* Si es normalizado, ¿puede un usuario que registra siniestro agregar Marca/Modelo Chasis?
+		* ¿Marcas y Modelos de vehículos de bomberos deberían ser distintos a Marcas y Modelos Autos terceros?
+		* ¿Columna Vehículos Emergencia serían las Regiones?
+		* ¿Campo Propietarios es dato normalizado?
+		* ¿Creamos mantenedor para estas columnas?
+			- Marca RC 
+			- Modelo RC
+			- Marca Chasis
+			- Modelo Chasis
+			- Tipo Padrón
+			- Tipo RC (si es que es distinto a Tipo Padrón)
+			- Cuerpo Bomberos
+			- Propietarios
+			- Compañía
+		* Inconsistencias en Datos Excel
+
+-----------------------------------------------------------------------
+
+Moni nos envía URL, usuario y contraseña para hacer comparativas
+	https://eventos.seguros.sura.cl/denuncio/inicio
+	8963492-k
+
+	https://sitio.consorcio.cl/denuncia-tu-siniestro/
+	rut.4690974-7, patente SGJH25
 
 _______________________________________________________________________
 

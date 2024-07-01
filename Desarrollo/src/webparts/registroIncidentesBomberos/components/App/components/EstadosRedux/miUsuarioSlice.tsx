@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     Email: null,
-    IdUsuario: null,
-    NombreUsuario: null,
-    Administrador: null,
-    TipoUsuario: "Bomberos"
+    UsuariosId: null,
+    Nombre: null,
+    Apellido: null,
+    Telefono: null,
+    RolId: null,
+    Habilitado: null
 }
 
 export const miUsuarioSlice = createSlice({
@@ -14,10 +16,12 @@ export const miUsuarioSlice = createSlice({
     reducers: {
         CambiarMiUsuario: (state, action) => {
             state.Email = action.payload.Email
-            state.IdUsuario = action.payload.IdUsuario
-            state.NombreUsuario = action.payload.NombreUsuario
-            state.Administrador = action.payload.Administrador
-            state.TipoUsuario = action.payload.TipoUsuario
+            state.UsuariosId = action.payload.UsuariosId
+            state.Nombre = action.payload.Nombre
+            state.Apellido = action.payload.Apellido
+            state.Telefono = action.payload.Telefono
+            state.RolId = action.payload.RolId
+            state.Habilitado = action.payload.Habilitado
         }
     }
 })

@@ -4,15 +4,18 @@ import { SPHttpClient } from '@microsoft/sp-http'
 
 import "@pnp/sp/sites"
 
-export function ObtenerDatos(pLista, pParametros, pContexto, pSitio = ""){
+export function ObtenerDatosSharePoint(pLista, pParametros, pContexto, pSitio = ""){
     var pObtenerDatos = new Promise(async (resolve, reject) => {
         let ResultadosFinales = []
+
+        console.log(pContexto)
+        console.log(pContexto.pageContext.web.absoluteUrl)
 
         if(!pSitio){
             pSitio = pContexto.pageContext.web.title
         }
 
-        const vSitio = `${window.location.protocol}//${window.location.host}/sites/${pSitio}` // pContexto.pageContext.web.absoluteUrl // 
+        const vSitio = pContexto.pageContext.web.absoluteUrl // `${window.location.protocol}//${window.location.host}/sites/${pSitio}` // 
 
         function RealizarQuery(pConsulta){
             pContexto.spHttpClient.get(pConsulta, SPHttpClient.configurations.v1)
@@ -42,6 +45,56 @@ export function ObtenerDatos(pLista, pParametros, pContexto, pSitio = ""){
 
     return pObtenerDatos
 }
+
+export const ObtenerDatos:() => Promise<void> = async(pUrl) =>{
+    try{
+        const respuesta = await fetch(`${pUrl}`)
+        return await respuesta.json()
+    }catch(err){
+        console.log("ERROR API")
+
+        console.log(err);
+    }
+}
+
+// export function ObtenerDatos(pLista, pParametros, pContexto, pSitio = ""){
+//     var pObtenerDatos = new Promise(async (resolve, reject) => {
+//         let ResultadosFinales = []
+
+//         if(!pSitio){
+//             pSitio = pContexto.pageContext.web.title
+//         }
+
+//         const vSitio = `${window.location.protocol}//${window.location.host}/sites/${pSitio}` // pContexto.pageContext.web.absoluteUrl // 
+
+//         function RealizarQuery(pConsulta){
+//             pContexto.spHttpClient.get(pConsulta, SPHttpClient.configurations.v1)
+//                 .then(response => {
+//                     return response.json()
+//                 })
+//                 .then(json => {
+//                     let dataResultadoQuery = json.value
+
+//                     ResultadosFinales = [...ResultadosFinales, ...dataResultadoQuery]
+
+//                     if(json["@odata.nextLink"]){
+//                         RealizarQuery(json["@odata.nextLink"])
+//                     }else{
+//                         resolve(ResultadosFinales)
+//                     }                    
+//                 })
+//         }
+
+//         if(pParametros.indexOf("$top") == -1){
+//             pParametros += "&$top=5000"
+//         }
+
+//         const urlPrimeraConsulta:string = `${vSitio}/_api/web/lists/getbytitle('${pLista}')/items/?${pParametros}`
+//         RealizarQuery(urlPrimeraConsulta)
+//     })
+
+//     return pObtenerDatos
+// }
 
 export function AgregarDatos(pLista, pDatos, pContexto){
     var pAgregarDatos = new Promise(async (resolve, reject) => {

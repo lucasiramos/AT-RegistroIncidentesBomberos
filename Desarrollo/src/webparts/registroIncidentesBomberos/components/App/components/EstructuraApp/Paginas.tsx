@@ -13,6 +13,8 @@ import { BomberosAdmin_CargaVehiculos_Formulario } from '../Paginas/BomberosAdmi
 import { BotonRegistrarNuevoIncidente } from './BotonRegistrarNuevoIncidente'
 import { TituloPagina } from './TituloPagina'
 
+import { Skeleton, Stack } from '@mui/material'
+
 import styled from 'styled-components'
 
 const StyledContenedorPagina = styled.div`
@@ -25,6 +27,7 @@ const StyledContenedorPagina = styled.div`
 export const Paginas: React.FunctionComponent<{}> = ({children}: any) => {
     const rdxPaginaActual = useSelector((state:any) => state.PaginaActual.pagina)
     const rdxMiUsuario = useSelector((state:any) => state.MiUsuario)
+    const rdxConfiguracion = useSelector((state:any) => state.Configuracion)
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     // Funciones
@@ -51,7 +54,7 @@ export const Paginas: React.FunctionComponent<{}> = ({children}: any) => {
                     <FormularioNuevoSiniestro/>
                 </>
 
-            case "Carga de Vehículos":
+            case "Mantenimiento de Vehículos":
                 return <>
                     <TituloPagina/>
                     <BomberosAdmin_CargaVehiculos/>
@@ -69,9 +72,41 @@ export const Paginas: React.FunctionComponent<{}> = ({children}: any) => {
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     // Render
 
+    const Estilos = {
+        Skeleton100: {
+            width: "100px"
+        },
+        SkeletonBoton: {
+            width: "150px"
+        },
+        SkeletonTitulo: {
+            width: "300px"
+        }
+    }
+
     return (
         <StyledContenedorPagina>
-            {BuscarPagina()}
+            {
+                rdxConfiguracion.UrlAPI && rdxMiUsuario.UsuariosId ? 
+                    BuscarPagina()
+                :
+                    <>
+                        <Stack spacing={2}>
+                            <Skeleton variant="rounded" width={250} height={40} />
+                            <Skeleton variant="rounded" width={250} height={40} />
+                            <Skeleton variant="rounded" className={Estilos.Skeleton} height={45} />
+                            <Skeleton variant="rounded" className={Estilos.Skeleton} height={45} />
+                            <Skeleton variant="rounded" className={Estilos.Skeleton} height={45} />
+                            <Skeleton variant="rounded" className={Estilos.Skeleton} height={45} />
+                            <Skeleton variant="rounded" className={Estilos.Skeleton} height={45} />
+                            <Skeleton variant="rounded" className={Estilos.Skeleton} height={45} />
+                            <Skeleton variant="rounded" className={Estilos.Skeleton} height={45} />
+                            <Skeleton variant="rounded" className={Estilos.Skeleton} height={45} />
+                            <Skeleton variant="rounded" className={Estilos.Skeleton} height={45} />
+                            <Skeleton variant="rounded" className={Estilos.Skeleton} height={45} />
+                        </Stack>
+                    </>
+            }
         </StyledContenedorPagina>
     )
 }

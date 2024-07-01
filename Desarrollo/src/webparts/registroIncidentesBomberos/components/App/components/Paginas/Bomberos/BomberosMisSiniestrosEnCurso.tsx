@@ -2,6 +2,10 @@
 
 import * as React from 'react'
 
+import { useEffect } from 'react'
+
+import { useSelector } from 'react-redux'
+
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 
@@ -23,6 +27,18 @@ import { Search } from '@mui/icons-material'
 import { SpVerde, SpRojo } from '../../EstructuraApp/EstilosGlobales'
 
 export const BomberosMisSiniestrosEnCurso: React.FunctionComponent<{}> = ({children}: any) => {
+    const rdxConfiguracion = useSelector((state:any) => state.Configuracion)
+    // --------------------------------------------------------------------------------------------------
+    // Inicializar aplicación
+
+    useEffect(() =>{
+        PruebaAccesoBD()
+    }, [])
+
+    const PruebaAccesoBD:() => Promise<void> = async() =>{
+        console.log(rdxConfiguracion)
+    }
+
     // --------------------------------------------------------------------------------------------------
     // useStates
 

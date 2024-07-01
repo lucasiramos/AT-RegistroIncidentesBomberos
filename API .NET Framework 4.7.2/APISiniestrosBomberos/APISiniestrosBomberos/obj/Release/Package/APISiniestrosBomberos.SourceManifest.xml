@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\Users\lucas\Desktop\Andes Tool\Registro Incidentes Bomberos\API .NET Framework 4.7.2\APISiniestrosBomberos\APISiniestrosBomberos\obj\Release\Package\PackageTmp" />
+  <setAcl path="C:\Users\lucas\Desktop\Andes Tool\Registro Incidentes Bomberos\API .NET Framework 4.7.2\APISiniestrosBomberos\APISiniestrosBomberos\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="C:\Users\lucas\Desktop\Andes Tool\Registro Incidentes Bomberos\API .NET Framework 4.7.2\APISiniestrosBomberos\APISiniestrosBomberos\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>

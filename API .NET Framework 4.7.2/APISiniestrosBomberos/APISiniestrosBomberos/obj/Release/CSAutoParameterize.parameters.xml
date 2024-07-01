@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="CnBomberosDesa-Web.config Connection String" description="CnBomberosDesa Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="Data Source=localhost\SQLEXPRESS; Integrated Security=true;Initial Catalog=Bomberos" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\lucas\\Desktop\\Andes\ Tool\\Registro\ Incidentes\ Bomberos\\API\ \.NET\ Framework\ 4\.7\.2\\APISiniestrosBomberos\\APISiniestrosBomberos\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CnBomberosDesa']/@connectionString" />
+  </parameter>
+  <parameter name="CnBomberosAzure-Web.config Connection String" description="CnBomberosAzure Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="Server=tcp:andestool-bd.database.windows.net,1433;Initial Catalog=andestool-bd;Persist Security Info=False;User ID=andestool-bd-user;Password=4nd3s.,2k.,.,;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\lucas\\Desktop\\Andes\ Tool\\Registro\ Incidentes\ Bomberos\\API\ \.NET\ Framework\ 4\.7\.2\\APISiniestrosBomberos\\APISiniestrosBomberos\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CnBomberosAzure']/@connectionString" />
+  </parameter>
+</parameters>

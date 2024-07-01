@@ -13,7 +13,7 @@ import { ContextSharePoint } from '../../../../RegistroIncidentesBomberos'
 import { ObtenerDatos } from '../../EstructuraApp/Servicio'
 
 import 'primeicons/primeicons.css'
-import { PrimeReactProvider, FilterMatchMode, FilterOperator } from 'primereact/api'
+import { PrimeReactProvider, FilterMatchMode, FilterOperator, locale, addLocale, updateLocaleOption, updateLocaleOptions, localeOption, localeOptions } from 'primereact/api'
 import 'primeflex/primeflex.css'
 import 'primereact/resources/primereact.css'
 import 'primereact/resources/themes/lara-light-indigo/theme.css'
@@ -21,10 +21,10 @@ import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 
 import { Backdrop, CircularProgress, IconButton, Skeleton, Stack, Button, TextField, Dialog, DialogTitle, DialogContent, DialogActions, IconButton, Typography, Box, Grid } from '@mui/material'
-import { Search, AddCircle, Close } from '@mui/icons-material'
+import { Search, AddCircle, Close, Edit } from '@mui/icons-material'
 import { styled } from '@mui/material/styles'
 
-import { ContenedorMensaje, TituloMensaje, H3AT, SpAmarillo, RotuloVerCertificado, ResumenFormulario } from '../../EstructuraApp/EstilosGlobales'
+import { ContenedorMensaje, TituloMensaje, H3AT, SpAmarillo, RotuloVerDatosPopup, ResumenFormulario } from '../../EstructuraApp/EstilosGlobales'
 
 export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
     const dispatch = useDispatch()
@@ -97,6 +97,11 @@ export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
         })
     }
 
+    const ClickEditarVehiculo = (pVehiculo) => {
+        dispatch(CambiarIdEditando(pVehiculo.Id))
+        dispatch(CambiarPaginaActual("Modificar información de vehículo"))
+    }
+
     // ---------------------------------------------------------------------------------------------
     // Render
 
@@ -104,6 +109,9 @@ export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
         return <>
             <IconButton aria-label="Ver más" onClick={ () => MostrarDatosVehiculo(pVehiculo) }>
                 <Search />
+            </IconButton>
+            <IconButton aria-label="Ver más" onClick={ () => ClickEditarVehiculo(pVehiculo) }>
+                <Edit />
             </IconButton>
         </>
     }
@@ -137,7 +145,7 @@ export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
                     <>
                         <PrimeReactProvider>
                             <DataTable value={stVehiculos} size="small" paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50, 100]} tableStyle={{ minWidth: '50rem' }} sortMode="multiple" filters={stFiltrosTabla} filterDisplay="row" globalFilterFields={['Patente', 'Marca.Title', 'Modelo.Title', 'TipoVehiculo.Title', 'CuerpoBomberos.Title', 'Compania']} emptyMessage="No se encontraron vehículos...">
-                                <Column header="Acciones" body={accionesBodyTemplate} bodyStyle={{ textAlign: 'center' }}></Column>
+                                <Column header="Acciones" body={accionesBodyTemplate} bodyStyle={{ textAlign: 'center', width: "125px" }}></Column>
                                 <Column header="Patente" field="Patente" sortable filter filterPlaceholder="Buscar"></Column>
                                 <Column header="Marca" field="Marca.Title" sortable filter filterPlaceholder="Buscar"></Column>
                                 <Column header="Modelo" field="Modelo.Title" sortable filter filterPlaceholder="Buscar"></Column>
@@ -218,33 +226,33 @@ export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
                                 </Grid>
 
                                 <Grid item xs={3}>
-                                    <div style={RotuloVerCertificado}>Marca</div>
-                                    <span style={stMostrarDatosVehiculo.Vehiculo.Marca?.Title ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Marca?.Title || "-Sin dato-"}</span>
+                                    <div style={RotuloVerDatosPopup}>Marca</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Marca?.Title ? ResumenFormulario : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Marca?.Title || "-Sin dato-"}</span>
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <div style={RotuloVerCertificado}>Modelo</div>
-                                    <span style={stMostrarDatosVehiculo.Vehiculo.Modelo?.Title ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Modelo?.Title || "-Sin dato-"}</span>
+                                    <div style={RotuloVerDatosPopup}>Modelo</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Modelo?.Title ? ResumenFormulario : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Modelo?.Title || "-Sin dato-"}</span>
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <div style={RotuloVerCertificado}>Tipo</div>
-                                    <span style={stMostrarDatosVehiculo.Vehiculo.TipoVehiculo?.Title ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.TipoVehiculo?.Title || "-Sin dato-"}</span>
+                                    <div style={RotuloVerDatosPopup}>Tipo</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.TipoVehiculo?.Title ? ResumenFormulario : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.TipoVehiculo?.Title || "-Sin dato-"}</span>
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <div style={RotuloVerCertificado}>Año</div>
-                                    <span style={stMostrarDatosVehiculo.Vehiculo.Anio ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Anio || "-Sin dato-"}</span>
+                                    <div style={RotuloVerDatosPopup}>Año</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Anio ? ResumenFormulario : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Anio || "-Sin dato-"}</span>
                                 </Grid>
 
                                 <Grid item xs={3}>
-                                    <div style={RotuloVerCertificado}>Patente</div>
-                                    <span style={stMostrarDatosVehiculo.Vehiculo.Patente ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Patente || "-Sin dato-"}</span>
+                                    <div style={RotuloVerDatosPopup}>Patente</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Patente ? ResumenFormulario : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Patente || "-Sin dato-"}</span>
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <div style={RotuloVerCertificado}>N° Chasis</div>
-                                    <span style={stMostrarDatosVehiculo.Vehiculo.Chasis ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Chasis || "-Sin dato-"}</span>
+                                    <div style={RotuloVerDatosPopup}>N° Chasis</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Chasis ? ResumenFormulario : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Chasis || "-Sin dato-"}</span>
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <div style={RotuloVerCertificado}>N° Motor</div>
-                                    <span style={stMostrarDatosVehiculo.Vehiculo.Motor ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Motor || "-Sin dato-"}</span>
+                                    <div style={RotuloVerDatosPopup}>N° Motor</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Motor ? ResumenFormulario : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Motor || "-Sin dato-"}</span>
                                 </Grid>
                                 <Grid item xs={3}>
                                     &nbsp;
@@ -258,20 +266,20 @@ export const BomberosAdmin_CargaVehiculos: React.FunctionComponent<{}> = () => {
                                 </Grid>
 
                                 <Grid item xs={3}>
-                                    <div style={RotuloVerCertificado}>Región</div>
-                                    <span style={stMostrarDatosVehiculo.Vehiculo.Region?.Title ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Region?.Title || "-Sin dato-"}</span>
+                                    <div style={RotuloVerDatosPopup}>Región</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Region?.Title ? ResumenFormulario : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Region?.Title || "-Sin dato-"}</span>
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <div style={RotuloVerCertificado}>Cuerpo de Bomberos</div>
-                                    <span style={stMostrarDatosVehiculo.Vehiculo.CuerpoBomberos?.Title ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.CuerpoBomberos?.Title || "-Sin dato-"}</span>
+                                    <div style={RotuloVerDatosPopup}>Cuerpo de Bomberos</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.CuerpoBomberos?.Title ? ResumenFormulario : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.CuerpoBomberos?.Title || "-Sin dato-"}</span>
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <div style={RotuloVerCertificado}>Propietarios</div>
-                                    <span style={stMostrarDatosVehiculo.Vehiculo.Propietarios ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Propietarios || "-Sin dato-"}</span>
+                                    <div style={RotuloVerDatosPopup}>Propietarios</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Propietarios ? ResumenFormulario : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Propietarios || "-Sin dato-"}</span>
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <div style={RotuloVerCertificado}>Compañía</div>
-                                    <span style={stMostrarDatosVehiculo.Vehiculo.Compania ? RotuloVerCertificado : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Compania || "-Sin dato-"}</span>
+                                    <div style={RotuloVerDatosPopup}>Compañía</div>
+                                    <span style={stMostrarDatosVehiculo.Vehiculo.Compania ? ResumenFormulario : SpAmarillo}>{stMostrarDatosVehiculo.Vehiculo.Compania || "-Sin dato-"}</span>
                                 </Grid>
                             </Grid>
                         </Box>

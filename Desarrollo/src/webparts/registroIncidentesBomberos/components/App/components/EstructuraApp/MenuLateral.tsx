@@ -40,9 +40,9 @@ export const MenuLateral: React.FunctionComponent<{}> = ({children}: any) => {
                     <NoCrashRoundedIcon /> 
                     <TextoBoton>Mis siniestros cerrados</TextoBoton>
                 </OpcionMenu>
-                <OpcionMenu opcionElegida={rdxPaginaActual == "Carga de Vehículos"} onClick={() => ClickMenuLateral("Carga de Vehículos")}>
+                <OpcionMenu opcionElegida={rdxPaginaActual == "Mantenimiento de Vehículos"} onClick={() => ClickMenuLateral("Mantenimiento de Vehículos")}>
                     <StorageIcon /> 
-                    <TextoBoton>Carga de Vehículos</TextoBoton>
+                    <TextoBoton>Mantenimiento de vehículos</TextoBoton>
                 </OpcionMenu>
             </StackOpcionesMenu>
         </StyledMenuLateral>
@@ -51,7 +51,7 @@ export const MenuLateral: React.FunctionComponent<{}> = ({children}: any) => {
 
 const StyledMenuLateral = styled.div`
     color: black;
-    padding: 20px 25px;
+    padding: 20px 10px;
     font-family: "Segoe UI Semibold";
     font-size: 10px;
     flex: 0 0 280px;
@@ -75,7 +75,7 @@ const StackOpcionesMenu = styled.div`
 
 const OpcionMenu = styled.div`
     color: #333;
-    padding: 10px 15px;
+    padding: 10px;
     border-radius: 10px;
     &:hover{
         background-color: #E5E5E5;

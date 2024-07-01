@@ -5,9 +5,13 @@ import * as React from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
+import { ContextSharePoint } from '../../../RegistroIncidentesBomberos'
+
+import { CambiarUrlAPI } from '../EstadosRedux/configuracionSlice'
+import { CambiarMiUsuario } from '../EstadosRedux/miUsuarioSlice'
 import { CambiarSiniestro } from '../EstadosRedux/datosCargaSlice'
 
-import { ObtenerDatos, ModificarDatos } from './Servicio'
+import { ObtenerDatosSharePoint, ObtenerDatos } from './Servicio'
 
 import styled from 'styled-components'
 
@@ -41,20 +45,43 @@ const StyledContenidoDinamico = styled.div`
 `
 
 export const Cuerpo: React.FunctionComponent<{}> = () => {
+    const rdxMiUsuario = useSelector((state:any) => state.MiUsuario)
     const rdxDatosCarga = useSelector((state:any) => state.DatosCarga)
+    const rdxConfiguracion = useSelector((state:any) => state.Configuracion)
+
+    console.log(rdxConfiguracion)
+    console.log(rdxMiUsuario)
+
+    const { Context }: any = React.useContext<any>(ContextSharePoint)
 
     const dispatch = useDispatch()
 
     // -------------------------------------------------------------------------------------------
-    // Verificar micrófono
+    // Inicializar aplicación
 
     useEffect(() =>{
-        VerificarMicrofono(dispatch)
+        InicializarAplicacion(dispatch)
     }, [])
 
-    const VerificarMicrofono:() => Promise<void> = async(dispatch) =>{
+    const InicializarAplicacion:() => Promise<void> = async(dispatch) =>{
         // ----------------------------------------------------------------
+        // Buscar Url API
+        
+        let dataConfiguracion = await ObtenerDatosSharePoint("Configuracion", `$select=Id, UrlAPI`, Context)
 
+        dispatch(CambiarUrlAPI(dataConfiguracion[0].UrlAPI))
+
+        // ----------------------------------------------------------------
+        // Buscar mi usuario
+        // console.log("Mail mi usuario: " + Context.pageContext.user.email.toLowerCase())
+
+        // console.log(`${dataConfiguracion[0].UrlAPI}usuarios/${btoa(Context.pageContext.user.email.toLowerCase())}`)
+
+        const dataMiUsuario = await ObtenerDatos(`${dataConfiguracion[0].UrlAPI}usuarios/${btoa(Context.pageContext.user.email.toLowerCase())}`)
+
+        dispatch(CambiarMiUsuario(dataMiUsuario))
+
+        // ----------------------------------------------------------------
         // Intento verificar permisos del micrófono
 
         var vPuedeGrabar = false
@@ -94,7 +121,9 @@ export const Cuerpo: React.FunctionComponent<{}> = () => {
                     <MenuLateral/>
                     <StyledContenidoDinamico>
                         <TituloPrincipal/>
-                        <Paginas/>
+                        {
+                            <Paginas/>
+                        }
                     </StyledContenidoDinamico>
                 </StyledCuerpo>
             </StyledMarcoGrisContenedor>

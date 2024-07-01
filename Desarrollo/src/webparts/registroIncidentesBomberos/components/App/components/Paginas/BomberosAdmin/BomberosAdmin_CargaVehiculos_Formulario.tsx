@@ -8,7 +8,9 @@ import { ContextSharePoint } from '../../../../RegistroIncidentesBomberos'
 
 import { ObtenerDatos } from '../../EstructuraApp/Servicio'
 import { AgregarDatos } from '../../EstructuraApp/Servicio'
+import { ModificarDatos } from '../../EstructuraApp/Servicio'
 
+import { CambiarRegionesDisponibles } from '../../EstadosRedux/regionesDisponiblesSlice'
 import { CambiarMarcasVehiculosAseguradosDisponibles } from '../../EstadosRedux/marcasVehiculosAseguradosSlice'
 import { CambiarModelosVehiculosAseguradosDisponibles } from '../../EstadosRedux/modelosVehiculosAseguradosSlice'
 import { CambiarTiposVehiculosAseguradosDisponibles } from '../../EstadosRedux/tiposVehiculosAseguradosSlice'
@@ -23,6 +25,7 @@ import { AsteriscoCargaObligatoria } from '../../EstructuraApp/AsteriscoCargaObl
 import { RotuloFormulario, ContenedorMensaje, TituloMensaje, CuerpoMensaje } from '../../EstructuraApp/EstilosGlobales'
 
 export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}> = () => {
+    const rdxRegionesDisponibles = useSelector((state:any) => state.RegionesDisponibles)
     const rdxMarcasVehiculosAseguradosDisponibles = useSelector((state:any) => state.MarcasVehiculosAseguradosDisponibles)
     const rdxModelosVehiculosAseguradosDisponibles = useSelector((state:any) => state.ModelosVehiculosAseguradosDisponibles)
     const rdxTiposVehiculosAseguradosDisponibles = useSelector((state:any) => state.TiposVehiculosAseguradosDisponibles)
@@ -38,6 +41,8 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
 
     const [stCarga, setCarga] = React.useState({
         Patente: "",
+        Chasis: "",
+        Motor: "",
         Marca: {
             Id: null,
             Title: null
@@ -50,10 +55,16 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
             Id: null,
             Title: null
         },
+        Anio: null,
+        Region: {
+            Id: null,
+            Title: null
+        },
         CuerpoBomberos: {
             Id: null,
             Title: null
         },
+        Propietarios: null,
         Compania: ""
     })
 
@@ -88,6 +99,19 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
             Porcentaje: 0
         })
 
+        if(rdxRegionesDisponibles.regiones.length == 0){
+            let dataRegiones = await ObtenerDatos("Regiones", `$select=Id, Title&$orderby=Title`, Context)
+            dispatch(CambiarRegionesDisponibles(dataRegiones))
+
+            setMensaje({
+                ...stMensaje,
+                Abierto: true,
+                Titulo: "Iniciando carga del formulario...",
+                MuestroPorcentaje: true,
+                Porcentaje: 15
+            })
+        }
+
         let dataMarcas = await ObtenerDatos("MarcasVehiculosBomberos", `$select=Id, Title&$orderby=Title`, Context)
         dispatch(CambiarMarcasVehiculosAseguradosDisponibles(dataMarcas))
 
@@ -112,6 +136,39 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
 
         let dataCuerposBomberos = await ObtenerDatos("CuerposBomberos", `$select=Id, Title&$orderby=Title`, Context)
         dispatch(CambiarCuerposBomberosDisponibles(dataCuerposBomberos))
+
+        if(rdxIdEditando != 0){
+            let dataVehiculoEditando = await ObtenerDatos("VehiculosBomberos", `$select=Id, Patente, Chasis, Motor, Anio, TipoVehiculo/Id, TipoVehiculo/Title, Marca/Id, Marca/Title, Modelo/Id, Modelo/Title, Region/Id, Region/Title, CuerpoBomberos/Id, CuerpoBomberos/Title, Propietarios, Compania&$expand=TipoVehiculo, Marca, Modelo, Region, CuerpoBomberos&$filter=Id eq ${rdxIdEditando}`, Context)
+
+            setCarga({
+                Patente: dataVehiculoEditando[0].Patente || "",
+                Chasis: dataVehiculoEditando[0].Chasis || "",
+                Motor: dataVehiculoEditando[0].Motor || "",
+                Marca: {
+                    Id: dataVehiculoEditando[0].Marca?.Id || null,
+                    Title: dataVehiculoEditando[0].Marca?.Title || null
+                },
+                Modelo: {
+                    Id: dataVehiculoEditando[0].Modelo?.Id || null,
+                    Title: dataVehiculoEditando[0].Modelo?.Title || null
+                },
+                TipoVehiculo: {
+                    Id: dataVehiculoEditando[0].TipoVehiculo?.Id || null,
+                    Title: dataVehiculoEditando[0].TipoVehiculo?.Title || null
+                },
+                Anio: dataVehiculoEditando[0].Anio || null,
+                Region: {
+                    Id: dataVehiculoEditando[0].Region?.Id || null,
+                    Title: dataVehiculoEditando[0].Region?.Title || null
+                },
+                CuerpoBomberos: {
+                    Id: dataVehiculoEditando[0].CuerpoBomberos?.Id || null,
+                    Title: dataVehiculoEditando[0].CuerpoBomberos?.Title || null
+                },
+                Propietarios: dataVehiculoEditando[0].Propietarios || null,
+                Compania: dataVehiculoEditando[0].Compania || ""
+            })
+        }
 
         setMensaje({
             ...stMensaje,
@@ -199,7 +256,7 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
     }
 
     const CancelarCarga = () => {
-        dispatch(CambiarPaginaActual("Carga de Vehículos"))
+        dispatch(CambiarPaginaActual("Mantenimiento de Vehículos"))
     }
 
     const ClickGuardarCarga = () => {
@@ -236,12 +293,19 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
             MarcaId: stCarga.Marca.Id,
             ModeloId: stCarga.Modelo.Id,
             TipoVehiculoId: stCarga.TipoVehiculo.Id,
+            Anio: stCarga.Anio,
+            RegionId: stCarga.Region.Id,
             CuerpoBomberosId: stCarga.CuerpoBomberos.Id,
+            Propietarios: stCarga.Propietarios,
             Compania: stCarga.Compania,
+            Chasis: stCarga.Chasis,
+            Motor: stCarga.Motor,
         }
 
         if(rdxIdEditando == 0){
             await AgregarDatos("VehiculosBomberos", DatosCarga, Context)
+        }else{
+            await ModificarDatos("VehiculosBomberos", rdxIdEditando, DatosCarga, Context)
         }
 
         setMensaje({
@@ -261,6 +325,8 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
     const ClickCargarNuevoVehiculo = () => {
         setCarga({
             Patente: "",
+            Chasis: "",
+            Motor: "",
             Marca: {
                 Id: null,
                 Title: null
@@ -273,10 +339,16 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
                 Id: null,
                 Title: null
             },
+            Anio: null,
+            Region: {
+                Id: null,
+                Title: null
+            },
             CuerpoBomberos: {
                 Id: null,
                 Title: null
             },
+            Propietarios: null,
             Compania: ""
         })
 
@@ -408,6 +480,107 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
                         &nbsp;
                     </Grid>
                     <Grid item xs={3}>
+                        <span style={RotuloFormulario}>Año<AsteriscoCargaObligatoria/></span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <TextField
+                            value={stCarga.Anio || ""} 
+                            defaultValuevalue={stCarga.Anio || ""} 
+                            fullWidth 
+                            name="Anio"
+                            size="small"
+                            type="number"
+                            InputProps={{ inputProps: { min: 0 } }} 
+                            variant="outlined" 
+                            sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
+                            onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
+                        />
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
+                        <span style={RotuloFormulario}>Chasis<AsteriscoCargaObligatoria/></span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <TextField
+                            value={stCarga.Chasis || ""} 
+                            defaultValuevalue={stCarga.Chasis || ""} 
+                            fullWidth 
+                            name="Chasis"
+                            size="small" 
+                            variant="outlined" 
+                            sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
+                            onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
+                        />
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
+                        <span style={RotuloFormulario}>Motor<AsteriscoCargaObligatoria/></span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <TextField
+                            value={stCarga.Motor || ""} 
+                            defaultValuevalue={stCarga.Motor || ""} 
+                            fullWidth 
+                            name="Motor"
+                            size="small" 
+                            variant="outlined" 
+                            sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
+                            onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
+                        />
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
+                        <span style={RotuloFormulario}>Región<AsteriscoCargaObligatoria/></span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <Autocomplete
+                            disablePortal
+                            value={stCarga.Region?.Id ? stCarga.Region : null}
+                            fullWidth
+                            id="cboCuerpoBomberos"
+                            name="Region"
+                            options={rdxRegionesDisponibles.regiones}
+                            getOptionLabel={x => x.Title}
+                            renderInput={(params) => <TextField {...params} label="Seleccione una región" />}
+                            size="small"
+                            sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
+                            onChange={(event: React.FocusEvent<HTMLSelectElement>, RegionSeleccionada) => {
+                                setCarga({
+                                    ...stCarga,
+                                    Region: {
+                                        Id: RegionSeleccionada?.Id || null,
+                                        Title: RegionSeleccionada?.Title || null
+                                    }
+                                })
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
                         <span style={RotuloFormulario}>Cuerpo Bomberos<AsteriscoCargaObligatoria/></span>
                     </Grid>
                     <Grid item xs={7}>
@@ -431,6 +604,28 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
                                     }
                                 })
                             }}
+                        />
+                    </Grid>
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+
+                    <Grid item xs={1}>
+                        &nbsp;
+                    </Grid>
+                    <Grid item xs={3}>
+                        <span style={RotuloFormulario}>Propietarios<AsteriscoCargaObligatoria/></span>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <TextField
+                            value={stCarga.Propietarios || ""} 
+                            defaultValuevalue={stCarga.Propietarios || ""} 
+                            fullWidth 
+                            name="Propietarios"
+                            size="small" 
+                            variant="outlined" 
+                            sx={{ fontFamily: "Segoe UI !important", backgroundColor: '#ffffff' }}
+                            onChange={(event: React.FocusEvent<HTMLInputElement>) => ChangeTxt(event.target)}
                         />
                     </Grid>
                     <Grid item xs={1}>
@@ -483,7 +678,7 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
                             onClick={() => ClickGuardarCarga()} 
                             endIcon={<Send />}
                             disabled={
-                                !stCarga.Patente || !stCarga.Marca.Id || !stCarga.Modelo.Id || !stCarga.TipoVehiculo.Id || !stCarga.CuerpoBomberos.Id || !stCarga.Compania
+                                !stCarga.Patente || !stCarga.Marca.Id || !stCarga.Modelo.Id || !stCarga.TipoVehiculo.Id || !stCarga.CuerpoBomberos.Id || !stCarga.Region.Id || !stCarga.Propietarios || !stCarga.Compania || !stCarga.Anio || !stCarga.Chasis || !stCarga.Motor
                             }
                         >
                             Guardar vehículo
@@ -570,16 +765,33 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
                     {/* Botones Postgrabacion */}
                     {
                         stMensaje.BotonesPostgrabacion &&
-                            <div>
-                                <Button 
-                                    style={{backgroundColor: "rgb(226 226 226)", color: "#454545"}}
-                                    variant="contained"
-                                    onClick={() => {
-                                        dispatch(CambiarPaginaActual("Carga de Vehículos"))
-                                    }}
-                                >
-                                    Volver a listado de vehículos
-                                </Button>
+                            (rdxIdEditando == 0 ?
+                                <div>
+                                    <Button 
+                                        style={{backgroundColor: "rgb(226 226 226)", color: "#454545"}}
+                                        variant="contained"
+                                        onClick={() => {
+                                            dispatch(CambiarPaginaActual("Carga de Vehículos"))
+                                        }}
+                                    >
+                                        Volver a listado de vehículos
+                                    </Button>
+                                    <Button 
+                                        sx={{
+                                            fontSize: "14px",
+                                            marginLeft: "20px",
+                                            fontFamily: "Segoe UI Semibold",
+                                        }}
+                                        variant="contained"
+                                        color="success"
+                                        onClick={() => {
+                                            ClickCargarNuevoVehiculo()
+                                        }}
+                                    >
+                                        Cargar un nuevo vehículo
+                                    </Button>
+                                </div>
+                            :
                                 <Button 
                                     sx={{
                                         fontSize: "14px",
@@ -589,12 +801,11 @@ export const BomberosAdmin_CargaVehiculos_Formulario: React.FunctionComponent<{}
                                     variant="contained"
                                     color="success"
                                     onClick={() => {
-                                        ClickCargarNuevoVehiculo()
+                                        dispatch(CambiarPaginaActual("Carga de Vehículos"))
                                     }}
                                 >
-                                    Cargar un nuevo vehículo
-                                </Button>
-                            </div>
+                                    Aceptar
+                                </Button>)
                     }
                 </div>
             </Backdrop>

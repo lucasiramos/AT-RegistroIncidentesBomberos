@@ -15,7 +15,7 @@ import {Typography} from '@mui/material'
 import {Tab} from '@mui/material'
 import {Tabs} from '@mui/material'
 
-import { H3AT, RotuloVerCertificado, ResumenFormulario, SpRojo, SpVerde } from '../EstructuraApp/EstilosGlobales'
+import { H3AT, RotuloVerDatosPopup, ResumenFormulario, SpRojo, SpVerde } from '../EstructuraApp/EstilosGlobales'
 
 export default function VerSiniestro({children}: any) {
     const {stVerSiniestro, CerrarVerSiniestro} = children
@@ -78,15 +78,15 @@ export default function VerSiniestro({children}: any) {
                                         </Grid>
 
                                         <Grid item xs={4}>
-                                            <div style={RotuloVerCertificado}>Marca</div>
+                                            <div style={RotuloVerDatosPopup}>Marca</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.VehiculoAsegurado.Marca}</span>
                                         </Grid>
                                         <Grid item xs={4}>
-                                            <div style={RotuloVerCertificado}>Modelo</div>
+                                            <div style={RotuloVerDatosPopup}>Modelo</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.VehiculoAsegurado.Modelo}</span>
                                         </Grid>
                                         <Grid item xs={4}>
-                                            <div style={RotuloVerCertificado}>Patente</div>
+                                            <div style={RotuloVerDatosPopup}>Patente</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.VehiculoAsegurado.Patente}</span>
                                         </Grid>
 
@@ -98,11 +98,11 @@ export default function VerSiniestro({children}: any) {
                                         </Grid>
 
                                         <Grid item xs={4}>
-                                            <div style={RotuloVerCertificado}>Nombre</div>
+                                            <div style={RotuloVerDatosPopup}>Nombre</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.ConductorAsegurado.Nombre}</span>
                                         </Grid>
                                         <Grid item xs={4}>
-                                            <div style={RotuloVerCertificado}>RUT</div>
+                                            <div style={RotuloVerDatosPopup}>RUT</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.ConductorAsegurado.RUT}</span>
                                         </Grid>
                                         <Grid item xs={4}>
@@ -117,38 +117,38 @@ export default function VerSiniestro({children}: any) {
                                     <Grid container spacing={1}>
                                         <Grid container spacing={1}>
                                             <Grid item xs={4}>
-                                                <div style={RotuloVerCertificado}>Fecha y hora</div>
+                                                <div style={RotuloVerDatosPopup}>Fecha y hora</div>
                                                 <span style={ResumenFormulario}>{stVerSiniestro.Datos.Siniestro.Fecha} {stVerSiniestro.Datos.Siniestro.Hora}</span>
                                             </Grid>
                                             <Grid item xs={4}>
-                                                <div style={RotuloVerCertificado}>Comuna</div>
+                                                <div style={RotuloVerDatosPopup}>Comuna</div>
                                                 <span style={ResumenFormulario}>{stVerSiniestro.Datos.Siniestro.Comuna.Nombre}</span>
                                             </Grid>
                                             <Grid item xs={4}>
-                                                <div style={RotuloVerCertificado}>Lugar</div>
+                                                <div style={RotuloVerDatosPopup}>Lugar</div>
                                                 <span style={ResumenFormulario}>{stVerSiniestro.Datos.Siniestro.Lugar}</span>
                                             </Grid>
                                         </Grid>
 
                                         <Grid container spacing={1} sx={{marginTop: "20px"}}>
                                             <Grid item xs={4}>
-                                                <div style={RotuloVerCertificado}>Tipo siniestro</div>
+                                                <div style={RotuloVerDatosPopup}>Tipo siniestro</div>
                                                 <span style={ResumenFormulario}>{stVerSiniestro.Datos.Siniestro.TipoSiniestro.Nombre}
                                                 </span>
                                             </Grid>
                                             <Grid item xs={4}>
-                                                <div style={RotuloVerCertificado}>Daño del vehículo asegurado</div>
+                                                <div style={RotuloVerDatosPopup}>Daño del vehículo asegurado</div>
                                                 <span style={ResumenFormulario}>{stVerSiniestro.Datos.Siniestro.DaniosVehiculoAsegurado}</span>
                                             </Grid>
                                             <Grid item xs={4}>
-                                                <div style={RotuloVerCertificado}>Comisaría y N° de Parte policial</div>
+                                                <div style={RotuloVerDatosPopup}>Comisaría y N° de Parte policial</div>
                                                 <span style={ResumenFormulario}>{stVerSiniestro.Datos.Siniestro.Comisaria}, n° parte: {stVerSiniestro.Datos.Siniestro.NumeroPartePolicial}</span>
                                             </Grid>
                                         </Grid>
 
                                         <Grid container spacing={1} sx={{marginTop: "20px"}}>
                                             <Grid item xs={4}>
-                                                <div style={RotuloVerCertificado}>¿Hubo terceros involucrados?</div>
+                                                <div style={RotuloVerDatosPopup}>¿Hubo terceros involucrados?</div>
                                                 <span style={stVerSiniestro.Datos.Siniestro.TercerosInvolucrados ? SpRojo : SpVerde}>{stVerSiniestro.Datos.Siniestro.TercerosInvolucrados ? "Sí" : "No"}</span>
                                             </Grid>
 
@@ -156,7 +156,7 @@ export default function VerSiniestro({children}: any) {
                                                 stVerSiniestro.Datos.Siniestro.TercerosInvolucrados && 
                                                     <>
                                                         <Grid item xs={4}>
-                                                            <div style={RotuloVerCertificado}>Responsable del siniestro</div>
+                                                            <div style={RotuloVerDatosPopup}>Responsable del siniestro</div>
                                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.Siniestro.ResponsableSiniestro}</span>
                                                         </Grid>
                                                     </>
@@ -165,7 +165,7 @@ export default function VerSiniestro({children}: any) {
 
                                         <Grid container spacing={1} sx={{marginTop: "20px"}}>
                                             <Grid item xs={12}>
-                                                <div style={RotuloVerCertificado}>Relato</div>
+                                                <div style={RotuloVerDatosPopup}>Relato</div>
                                                 <span style={ResumenFormulario}>
                                                     {stVerSiniestro.Datos.Siniestro.Relato}
                                                 </span>
@@ -186,19 +186,19 @@ export default function VerSiniestro({children}: any) {
                                         </Grid>
 
                                         <Grid item xs={3}>
-                                            <div style={RotuloVerCertificado}>Nombre</div>
+                                            <div style={RotuloVerDatosPopup}>Nombre</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.Tercero.Nombre}</span>
                                         </Grid>
                                         <Grid item xs={3}>
-                                            <div style={RotuloVerCertificado}>RUT</div>
+                                            <div style={RotuloVerDatosPopup}>RUT</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.Tercero.RUT}-{stVerSiniestro.Datos.Tercero.RUTDigitoVerificador}</span>
                                         </Grid>
                                         <Grid item xs={3}>
-                                            <div style={RotuloVerCertificado}>Teléfono</div>
+                                            <div style={RotuloVerDatosPopup}>Teléfono</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.Tercero.Telefono}</span>
                                         </Grid>
                                         <Grid item xs={3}>
-                                            <div style={RotuloVerCertificado}>Email</div>
+                                            <div style={RotuloVerDatosPopup}>Email</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.Tercero.Email}</span>
                                         </Grid>
 
@@ -210,15 +210,15 @@ export default function VerSiniestro({children}: any) {
                                         </Grid>
 
                                         <Grid item xs={3}>
-                                            <div style={RotuloVerCertificado}>Marca</div>
+                                            <div style={RotuloVerDatosPopup}>Marca</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.Tercero.Marca.Nombre}</span>
                                         </Grid>
                                         <Grid item xs={3}>
-                                            <div style={RotuloVerCertificado}>Modelo</div>
+                                            <div style={RotuloVerDatosPopup}>Modelo</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.Tercero.Modelo.Nombre}</span>
                                         </Grid>
                                         <Grid item xs={3}>
-                                            <div style={RotuloVerCertificado}>Patente</div>
+                                            <div style={RotuloVerDatosPopup}>Patente</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.Tercero.Patente}</span>
                                         </Grid>
                                         <Grid item xs={3}>
@@ -226,7 +226,7 @@ export default function VerSiniestro({children}: any) {
                                         </Grid>
 
                                         <Grid item xs={12}>
-                                            <div style={RotuloVerCertificado}>Daños al vehículo</div>
+                                            <div style={RotuloVerDatosPopup}>Daños al vehículo</div>
                                             <span style={ResumenFormulario}>{stVerSiniestro.Datos.Tercero.DaniosVehiculoTercero}</span>
                                         </Grid>
                                     </Grid>

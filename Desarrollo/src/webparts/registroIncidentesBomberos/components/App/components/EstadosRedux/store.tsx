@@ -17,6 +17,7 @@ import marcasVehiculosAsegurados from "./marcasVehiculosAseguradosSlice"
 import modelosVehiculosAsegurados from "./modelosVehiculosAseguradosSlice"
 import tiposVehiculosAsegurados from "./tiposVehiculosAseguradosSlice"
 import cuerposBomberosDisponibles from "./cuerposBomberosDisponiblesSlice"
+import configuracion from "./configuracionSlice"
 
 export const store = configureStore({
     reducer: {
@@ -36,6 +37,7 @@ export const store = configureStore({
         MarcasVehiculosAseguradosDisponibles: marcasVehiculosAsegurados,
         ModelosVehiculosAseguradosDisponibles: modelosVehiculosAsegurados,
         TiposVehiculosAseguradosDisponibles: tiposVehiculosAsegurados,
-        CuerposBomberosDisponibles: cuerposBomberosDisponibles
+        CuerposBomberosDisponibles: cuerposBomberosDisponibles,
+        Configuracion: configuracion
     }
 })
